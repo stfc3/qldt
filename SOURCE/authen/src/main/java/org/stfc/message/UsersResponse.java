@@ -14,7 +14,7 @@ import org.stfc.dto.Users;
  */
 public class UsersResponse {
 
-    @SerializedName("list_users")
+    @SerializedName("listUsers")
     private List<Users> listUsers;
 
     public List<Users> getListUsers() {

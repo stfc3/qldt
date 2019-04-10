@@ -6,7 +6,6 @@ package org.stfc.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,11 +21,11 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.stfc.business.BusinessException;
-import org.stfc.dto.UserRole;
-import org.stfc.dto.Users;
-import org.stfc.repository.UserRolesRepository;
-import org.stfc.repository.UsersRepository;
-import org.stfc.repository.impl.UsersRepositoryImpl;
+import org.stfc.dto.RoleObject;
+import org.stfc.dto.Roles;
+import org.stfc.repository.RoleObjectsRepository;
+import org.stfc.repository.RolesRepository;
+import org.stfc.repository.impl.RolesRepositoryImpl;
 import org.stfc.utils.Comparator;
 import org.stfc.utils.IntrospectorUtils;
 
@@ -35,45 +34,32 @@ import org.stfc.utils.IntrospectorUtils;
  *
  */
 @RestController
-public class UsersController {
+public class RolesController {
 
-    private static final Logger logger = LoggerFactory.getLogger(UsersController.class);
+    private static final Logger logger = LoggerFactory.getLogger(RolesController.class);
     @Autowired
-    UsersRepository usersRepository;
+    RolesRepository rolesRepository;
     @Autowired
-    UserRolesRepository userRolesRepository;
+    RoleObjectsRepository roleObjectsRepository;
     @Autowired
-    UsersRepositoryImpl usersRepositoryImpl;
+    RolesRepositoryImpl rolesRepositoryImpl;
     @Autowired
     FormatMessage formatMessage;
 
-    @RequestMapping(value = Constants.PATH.API_LOGIN, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public String login(HttpEntity<String> httpEntity) {
-        String body = httpEntity.getBody();
-        logger.debug("Body request: {}", body);
+    @RequestMapping(value = Constants.PATH.API_ROLES, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public String saveRole(@RequestBody List<Roles> roles) {
         Gson gson = new GsonBuilder().disableHtmlEscaping().create();
-        BaseResponse response = BaseResponse.parse(Constants.ERROR_INTERNAL, formatMessage);
-        try {
-        } catch (Exception e) {
-            logger.error(e.getMessage(), e);
-        }
-        return gson.toJson(response);
-    }
-
-    @RequestMapping(value = Constants.PATH.API_USERS, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public String saveUser(@RequestBody List<Users> users) {
-        Gson gson = new GsonBuilder().disableHtmlEscaping().create();
-        logger.debug("Body request: {}", gson.toJson(users));
+        logger.debug("Body request: {}", gson.toJson(roles));
         String lang = "vi";
         BaseResponse response = BaseResponse.parse(Constants.ERROR_INTERNAL, formatMessage, lang);
         try {
-            if (Comparator.isEqualNullOrEmpty(users)) {
+            if (Comparator.isEqualNullOrEmpty(roles)) {
                 throw new BusinessException(Constants.ERROR_INVALID_FORMAT);
             }
-            for (Users user : users) {
-                user.setCreatedDate(new Date());
-                user.setUpdatedDate(new Date());
-                usersRepository.save(user);
+            for (Roles role : roles) {
+                role.setCreatedDate(new Date());
+                role.setUpdatedDate(new Date());
+                rolesRepository.save(role);
             }
             response = BaseResponse.parse(Constants.SUCCESS, formatMessage, lang);
         } catch (BusinessException be) {
@@ -83,20 +69,20 @@ public class UsersController {
         }
         return gson.toJson(response);
     }
-    @RequestMapping(value = Constants.PATH.API_USERROLES, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public String saveUserRole(@RequestBody List<UserRole> userRoles) {
+    @RequestMapping(value = Constants.PATH.API_ROLEOBJECTS, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public String saveRoleObject(@RequestBody List<RoleObject> roleObjects) {
         Gson gson = new GsonBuilder().disableHtmlEscaping().create();
-        logger.debug("Body request: {}", gson.toJson(userRoles));
+        logger.debug("Body request: {}", gson.toJson(roleObjects));
         String lang = "vi";
         BaseResponse response = BaseResponse.parse(Constants.ERROR_INTERNAL, formatMessage, lang);
         try {
-            if (Comparator.isEqualNullOrEmpty(userRoles)) {
+            if (Comparator.isEqualNullOrEmpty(roleObjects)) {
                 throw new BusinessException(Constants.ERROR_INVALID_FORMAT);
             }
-            for (UserRole userRole : userRoles) {
-                userRole.setCreatedDate(new Date());
-                userRole.setUpdatedDate(new Date());
-                userRolesRepository.save(userRole);
+            for (RoleObject roleObject : roleObjects) {
+                roleObject.setCreatedDate(new Date());
+                roleObject.setUpdatedDate(new Date());
+                roleObjectsRepository.save(roleObject);
             }
             response = BaseResponse.parse(Constants.SUCCESS, formatMessage, lang);
         } catch (BusinessException be) {
@@ -107,23 +93,23 @@ public class UsersController {
         return gson.toJson(response);
     }
 
-    @RequestMapping(value = Constants.PATH.API_USERS, method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
-    public String updateUser(@RequestBody Users user) {
+    @RequestMapping(value = Constants.PATH.API_ROLES, method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+    public String updateRole(@RequestBody Roles role) {
         Gson gson = new GsonBuilder().disableHtmlEscaping().create();
-        logger.debug("Body request: {}", gson.toJson(user));
+        logger.debug("Body request: {}", gson.toJson(role));
         String lang = "vi";
         BaseResponse response = BaseResponse.parse(Constants.ERROR_INTERNAL, formatMessage, lang);
         try {
-            if (Comparator.isEqualNull(user) || Comparator.isEqualNull(user.getUserId())) {
+            if (Comparator.isEqualNull(role) || Comparator.isEqualNull(role.getRoleId())) {
                 throw new BusinessException(Constants.ERROR_INVALID_FORMAT);
             }
-            Users userCurrent = usersRepository.getOne(user.getUserId());
-            if (Comparator.isEqualNull(userCurrent)) {
+            Roles roleCurrent = rolesRepository.getOne(role.getRoleId());
+            if (Comparator.isEqualNull(roleCurrent)) {
                 throw new BusinessException(Constants.ERROR_INTERNAL);
             } else {
-                IntrospectorUtils.cloneEntity(userCurrent, user);
-                userCurrent.setUpdatedDate(new Date());
-                usersRepository.save(userCurrent);
+                IntrospectorUtils.cloneEntity(roleCurrent, role);
+                roleCurrent.setUpdatedDate(new Date());
+                rolesRepository.save(roleCurrent);
                 response = BaseResponse.parse(Constants.SUCCESS, formatMessage, lang);
             }
         } catch (BusinessException be) {
@@ -134,22 +120,22 @@ public class UsersController {
         return gson.toJson(response);
     }
 
-    @RequestMapping(value = Constants.PATH.API_USERS + "/{userId}/{status}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
-    public String lockOrUnlockUser(@PathVariable("userId") Long userId, @PathVariable("status") Integer status) {
+    @RequestMapping(value = Constants.PATH.API_ROLES + "/{roleId}/{status}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+    public String lockOrUnlockRole(@PathVariable("roleId") Long roleId, @PathVariable("status") Integer status) {
         Gson gson = new GsonBuilder().disableHtmlEscaping().create();
         String lang = "vi";
         BaseResponse response = BaseResponse.parse(Constants.ERROR_INTERNAL, formatMessage, lang);
         try {
-            if (Comparator.isEqualNull(userId) || Comparator.isEqualNull(status)) {
+            if (Comparator.isEqualNull(roleId) || Comparator.isEqualNull(status)) {
                 throw new BusinessException(Constants.ERROR_INVALID_FORMAT);
             }
-            Users userCurrent = usersRepository.getOne(userId);
-            if (Comparator.isEqualNull(userCurrent)) {
+            Roles roleCurrent = rolesRepository.getOne(roleId);
+            if (Comparator.isEqualNull(roleCurrent)) {
                 throw new BusinessException(Constants.ERROR_INTERNAL);
             } else {
-                userCurrent.setStatus(status);
-                userCurrent.setUpdatedDate(new Date());
-                usersRepository.save(userCurrent);
+                roleCurrent.setStatus(status);
+                roleCurrent.setUpdatedDate(new Date());
+                rolesRepository.save(roleCurrent);
                 response = BaseResponse.parse(Constants.SUCCESS, formatMessage, lang);
             }
         } catch (BusinessException be) {
@@ -159,22 +145,22 @@ public class UsersController {
         }
         return gson.toJson(response);
     }
-    @RequestMapping(value = Constants.PATH.API_USERROLES + "/{userRoleId}/{status}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
-    public String lockOrUnlockUserRole(@PathVariable("userRoleId") Long userRoleId, @PathVariable("status") Integer status) {
+    @RequestMapping(value = Constants.PATH.API_ROLEOBJECTS + "/{roleObjectId}/{status}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+    public String lockOrUnlockRoleObject(@PathVariable("roleObjectId") Long roleObjectId, @PathVariable("status") Integer status) {
         Gson gson = new GsonBuilder().disableHtmlEscaping().create();
         String lang = "vi";
         BaseResponse response = BaseResponse.parse(Constants.ERROR_INTERNAL, formatMessage, lang);
         try {
-            if (Comparator.isEqualNull(userRoleId) || Comparator.isEqualNull(status)) {
+            if (Comparator.isEqualNull(roleObjectId) || Comparator.isEqualNull(status)) {
                 throw new BusinessException(Constants.ERROR_INVALID_FORMAT);
             }
-            UserRole userRoleCurrent = userRolesRepository.getOne(userRoleId);
-            if (Comparator.isEqualNull(userRoleCurrent)) {
+            RoleObject roleObjectCurrent = roleObjectsRepository.getOne(roleObjectId);
+            if (Comparator.isEqualNull(roleObjectCurrent)) {
                 throw new BusinessException(Constants.ERROR_INTERNAL);
             } else {
-                userRoleCurrent.setStatus(status);
-                userRoleCurrent.setUpdatedDate(new Date());
-                userRolesRepository.save(userRoleCurrent);
+                roleObjectCurrent.setStatus(status);
+                roleObjectCurrent.setUpdatedDate(new Date());
+                roleObjectsRepository.save(roleObjectCurrent);
                 response = BaseResponse.parse(Constants.SUCCESS, formatMessage, lang);
             }
         } catch (BusinessException be) {
@@ -185,21 +171,21 @@ public class UsersController {
         return gson.toJson(response);
     }
 
-    @RequestMapping(value = Constants.PATH.API_USERS_SEARCH, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public String searchUser(@RequestBody Users user) {
+    @RequestMapping(value = Constants.PATH.API_ROLES_SEARCH, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public String searchRole(@RequestBody Roles role) {
         Gson gson = new GsonBuilder().disableHtmlEscaping().create();
-        logger.debug("Body request: {}", gson.toJson(user));
+        logger.debug("Body request: {}", gson.toJson(role));
         String lang = "vi";
         BaseResponse response = BaseResponse.parse(Constants.ERROR_INTERNAL, formatMessage, lang);
         try {
-            if (Comparator.isEqualNull(user)) {
+            if (Comparator.isEqualNull(role)) {
                 throw new BusinessException(Constants.ERROR_INVALID_FORMAT);
             }
-            List<Users> listUsers = usersRepositoryImpl.onSearch(user);
+            List<Roles> listRoles = rolesRepositoryImpl.onSearch(role);
             response = BaseResponse.parse(Constants.SUCCESS, formatMessage, lang);
-            if(!Comparator.isEqualNull(listUsers)){
-                response.setTotal(listUsers.size());
-                response.setRows(listUsers);
+            if(!Comparator.isEqualNull(listRoles)){
+                response.setTotal(listRoles.size());
+                response.setRows(listRoles);
             }
             
         } catch (BusinessException be) {

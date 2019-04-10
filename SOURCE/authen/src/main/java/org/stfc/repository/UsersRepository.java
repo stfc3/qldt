@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package org.stfc.repository;
 
@@ -14,7 +14,12 @@ import org.stfc.dto.Users;
  * @author dongdv
  *
  */
-public interface UsersRepository extends JpaRepository<Users, Long>{
-	@Query("select a from Users a")
-	List<Users> findAllUser();
+public interface UsersRepository extends JpaRepository<Users, Long> {
+
+    @Query("select a from Users a")
+    List<Users> findAllUser();
+
+    @Query("SELECT u FROM Users u WHERE u.userName = :userName AND u.status = 1")
+    List<Users> findUserByUserName(@Param("userName") String userName);
+
 }

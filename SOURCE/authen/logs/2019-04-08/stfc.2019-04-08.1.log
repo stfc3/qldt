@@ -1,0 +1,691 @@
+[INFO ] 2019-04-08 20:27:16.385 [restartedMain] org.stfc.StfcApplication: Starting StfcApplication on dmin-PC with PID 920 (E:\DONG\STFC\qldt\SOURCE\authen\target\classes started by dmin in E:\DONG\STFC\qldt\SOURCE\authen)
+[DEBUG] 2019-04-08 20:27:16.395 [restartedMain] org.stfc.StfcApplication: Running with Spring Boot v2.1.0.RELEASE, Spring v5.1.2.RELEASE
+[INFO ] 2019-04-08 20:27:16.396 [restartedMain] org.stfc.StfcApplication: No active profile set, falling back to default profiles: default
+[INFO ] 2019-04-08 20:27:18.681 [restartedMain] org.apache.coyote.http11.Http11NioProtocol: Initializing ProtocolHandler ["http-nio-9000"]
+[INFO ] 2019-04-08 20:27:18.690 [restartedMain] org.apache.catalina.core.StandardService: Starting service [Tomcat]
+[INFO ] 2019-04-08 20:27:18.690 [restartedMain] org.apache.catalina.core.StandardEngine: Starting Servlet Engine: Apache Tomcat/9.0.12
+[INFO ] 2019-04-08 20:27:18.704 [restartedMain] org.apache.catalina.core.AprLifecycleListener: The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_121\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Java\jdk1.8.0_121\bin;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Program Files\TortoiseGit\bin;C:\Users\dmin\AppData\Local\GitHubDesktop\bin;C:\Users\dmin\AppData\Roaming\npm;.]
+[INFO ] 2019-04-08 20:27:18.875 [restartedMain] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]: Initializing Spring embedded WebApplicationContext
+[WARN ] 2019-04-08 20:27:22.966 [restartedMain] org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration: spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[INFO ] 2019-04-08 20:27:23.611 [restartedMain] org.apache.coyote.http11.Http11NioProtocol: Starting ProtocolHandler ["http-nio-9000"]
+[INFO ] 2019-04-08 20:27:23.623 [restartedMain] org.apache.tomcat.util.net.NioSelectorPool: Using a shared selector for servlet write/read
+[INFO ] 2019-04-08 20:27:23.647 [restartedMain] org.stfc.StfcApplication: Started StfcApplication in 7.539 seconds (JVM running for 8.227)
+[INFO ] 2019-04-08 20:28:16.099 [http-nio-9000-exec-1] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]: Initializing Spring DispatcherServlet 'dispatcherServlet'
+[WARN ] 2019-04-08 20:28:16.141 [http-nio-9000-exec-1] org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver: Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' not supported]
+[DEBUG] 2019-04-08 20:28:24.173 [http-nio-9000-exec-2] org.stfc.controller.UsersController: Body request: {"userName":"dongdv","password":"123456","fullName":"Dang Van Dong","userType":1,"status":1}
+[DEBUG] 2019-04-08 20:29:38.616 [http-nio-9000-exec-4] org.stfc.controller.UsersController: Body request: {"userId":2,"password":"123456thd"}
+[INFO ] 2019-04-08 20:30:20.162 [restartedMain] org.stfc.StfcApplication: Starting StfcApplication on dmin-PC with PID 920 (E:\DONG\STFC\qldt\SOURCE\authen\target\classes started by dmin in E:\DONG\STFC\qldt\SOURCE\authen)
+[DEBUG] 2019-04-08 20:30:20.163 [restartedMain] org.stfc.StfcApplication: Running with Spring Boot v2.1.0.RELEASE, Spring v5.1.2.RELEASE
+[INFO ] 2019-04-08 20:30:20.163 [restartedMain] org.stfc.StfcApplication: No active profile set, falling back to default profiles: default
+[INFO ] 2019-04-08 20:30:20.669 [restartedMain] org.apache.coyote.http11.Http11NioProtocol: Initializing ProtocolHandler ["http-nio-9000"]
+[INFO ] 2019-04-08 20:30:20.669 [restartedMain] org.apache.catalina.core.StandardService: Starting service [Tomcat]
+[INFO ] 2019-04-08 20:30:20.670 [restartedMain] org.apache.catalina.core.StandardEngine: Starting Servlet Engine: Apache Tomcat/9.0.12
+[INFO ] 2019-04-08 20:30:20.680 [restartedMain] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]: Initializing Spring embedded WebApplicationContext
+[INFO ] 2019-04-08 20:30:45.003 [restartedMain] org.stfc.StfcApplication: Starting StfcApplication on dmin-PC with PID 4132 (E:\DONG\STFC\qldt\SOURCE\authen\target\classes started by dmin in E:\DONG\STFC\qldt\SOURCE\authen)
+[DEBUG] 2019-04-08 20:30:45.008 [restartedMain] org.stfc.StfcApplication: Running with Spring Boot v2.1.0.RELEASE, Spring v5.1.2.RELEASE
+[INFO ] 2019-04-08 20:30:45.008 [restartedMain] org.stfc.StfcApplication: No active profile set, falling back to default profiles: default
+[INFO ] 2019-04-08 20:30:47.093 [restartedMain] org.apache.coyote.http11.Http11NioProtocol: Initializing ProtocolHandler ["http-nio-9000"]
+[INFO ] 2019-04-08 20:30:47.101 [restartedMain] org.apache.catalina.core.StandardService: Starting service [Tomcat]
+[INFO ] 2019-04-08 20:30:47.101 [restartedMain] org.apache.catalina.core.StandardEngine: Starting Servlet Engine: Apache Tomcat/9.0.12
+[INFO ] 2019-04-08 20:30:47.111 [restartedMain] org.apache.catalina.core.AprLifecycleListener: The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_121\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Java\jdk1.8.0_121\bin;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Program Files\TortoiseGit\bin;C:\Users\dmin\AppData\Local\GitHubDesktop\bin;C:\Users\dmin\AppData\Roaming\npm;.]
+[INFO ] 2019-04-08 20:30:47.215 [restartedMain] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]: Initializing Spring embedded WebApplicationContext
+[WARN ] 2019-04-08 20:30:50.783 [restartedMain] org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration: spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[INFO ] 2019-04-08 20:30:51.457 [restartedMain] org.apache.coyote.http11.Http11NioProtocol: Starting ProtocolHandler ["http-nio-9000"]
+[INFO ] 2019-04-08 20:30:51.465 [restartedMain] org.apache.tomcat.util.net.NioSelectorPool: Using a shared selector for servlet write/read
+[INFO ] 2019-04-08 20:30:51.480 [restartedMain] org.stfc.StfcApplication: Started StfcApplication in 6.754 seconds (JVM running for 7.414)
+[INFO ] 2019-04-08 20:31:50.019 [http-nio-9000-exec-1] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]: Initializing Spring DispatcherServlet 'dispatcherServlet'
+[DEBUG] 2019-04-08 20:31:50.146 [http-nio-9000-exec-1] org.stfc.controller.UsersController: Body request: {"userName":"dongdv","password":"123456","fullName":"Dang Van Dong","userType":1,"status":1}
+[DEBUG] 2019-04-08 20:32:09.869 [http-nio-9000-exec-2] org.stfc.controller.UsersController: Body request: {"userId":2,"password":"123456thd"}
+[ERROR] 2019-04-08 20:32:10.317 [http-nio-9000-exec-2] org.stfc.controller.UsersController: Unable to find org.stfc.dto.Users with id 2
+javax.persistence.EntityNotFoundException: Unable to find org.stfc.dto.Users with id 2
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl$JpaEntityNotFoundDelegate.handleEntityNotFound(EntityManagerFactoryBuilderImpl.java:162) ~[hibernate-core-5.3.7.Final.jar:5.3.7.Final]
+	at org.hibernate.proxy.AbstractLazyInitializer.checkTargetState(AbstractLazyInitializer.java:285) ~[hibernate-core-5.3.7.Final.jar:5.3.7.Final]
+	at org.hibernate.proxy.AbstractLazyInitializer.initialize(AbstractLazyInitializer.java:184) ~[hibernate-core-5.3.7.Final.jar:5.3.7.Final]
+	at org.hibernate.proxy.AbstractLazyInitializer.getImplementation(AbstractLazyInitializer.java:309) ~[hibernate-core-5.3.7.Final.jar:5.3.7.Final]
+	at org.hibernate.proxy.pojo.bytebuddy.ByteBuddyInterceptor.intercept(ByteBuddyInterceptor.java:45) ~[hibernate-core-5.3.7.Final.jar:5.3.7.Final]
+	at org.hibernate.proxy.ProxyConfiguration$InterceptorDispatcher.intercept(ProxyConfiguration.java:95) ~[hibernate-core-5.3.7.Final.jar:5.3.7.Final]
+	at org.stfc.dto.Users$HibernateProxy$ThfgPi9t.setUpdatedDate(Unknown Source) ~[classes/:?]
+	at org.stfc.controller.UsersController.updateUser(UsersController.java:100) [classes/:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_121]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_121]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_121]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_121]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:215) [spring-web-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:142) [spring-web-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102) [spring-webmvc-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895) [spring-webmvc-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:800) [spring-webmvc-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) [spring-webmvc-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1038) [spring-webmvc-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:942) [spring-webmvc-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:998) [spring-webmvc-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.doPut(FrameworkServlet.java:912) [spring-webmvc-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:663) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:875) [spring-webmvc-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) [tomcat-embed-websocket-9.0.12.jar:9.0.12]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99) [spring-web-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:92) [spring-web-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:93) [spring-web-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200) [spring-web-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:199) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:770) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1415) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142) [?:1.8.0_121]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617) [?:1.8.0_121]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_121]
+[DEBUG] 2019-04-08 20:32:25.234 [http-nio-9000-exec-3] org.stfc.controller.UsersController: Body request: {"userId":3,"password":"123456thd"}
+[DEBUG] 2019-04-08 20:33:38.016 [http-nio-9000-exec-5] org.stfc.controller.UsersController: Body request: {"userId":3,"password":"123456"}
+[DEBUG] 2019-04-08 20:34:57.068 [http-nio-9000-exec-7] org.stfc.controller.UsersController: Body request: {"userId":3,"password":"123456"}
+[INFO ] 2019-04-08 20:36:17.681 [restartedMain] org.stfc.StfcApplication: Starting StfcApplication on dmin-PC with PID 4132 (E:\DONG\STFC\qldt\SOURCE\authen\target\classes started by dmin in E:\DONG\STFC\qldt\SOURCE\authen)
+[DEBUG] 2019-04-08 20:36:17.681 [restartedMain] org.stfc.StfcApplication: Running with Spring Boot v2.1.0.RELEASE, Spring v5.1.2.RELEASE
+[INFO ] 2019-04-08 20:36:17.682 [restartedMain] org.stfc.StfcApplication: No active profile set, falling back to default profiles: default
+[INFO ] 2019-04-08 20:36:18.127 [restartedMain] org.apache.coyote.http11.Http11NioProtocol: Initializing ProtocolHandler ["http-nio-9000"]
+[INFO ] 2019-04-08 20:36:18.128 [restartedMain] org.apache.catalina.core.StandardService: Starting service [Tomcat]
+[INFO ] 2019-04-08 20:36:18.128 [restartedMain] org.apache.catalina.core.StandardEngine: Starting Servlet Engine: Apache Tomcat/9.0.12
+[INFO ] 2019-04-08 20:36:18.138 [restartedMain] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]: Initializing Spring embedded WebApplicationContext
+[WARN ] 2019-04-08 20:36:19.164 [restartedMain] org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration: spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[INFO ] 2019-04-08 20:36:19.326 [restartedMain] org.apache.coyote.http11.Http11NioProtocol: Starting ProtocolHandler ["http-nio-9000"]
+[INFO ] 2019-04-08 20:36:19.328 [restartedMain] org.apache.tomcat.util.net.NioSelectorPool: Using a shared selector for servlet write/read
+[INFO ] 2019-04-08 20:36:19.332 [restartedMain] org.stfc.StfcApplication: Started StfcApplication in 1.682 seconds (JVM running for 335.263)
+[INFO ] 2019-04-08 20:36:29.693 [restartedMain] org.stfc.StfcApplication: Starting StfcApplication on dmin-PC with PID 4132 (E:\DONG\STFC\qldt\SOURCE\authen\target\classes started by dmin in E:\DONG\STFC\qldt\SOURCE\authen)
+[DEBUG] 2019-04-08 20:36:29.693 [restartedMain] org.stfc.StfcApplication: Running with Spring Boot v2.1.0.RELEASE, Spring v5.1.2.RELEASE
+[INFO ] 2019-04-08 20:36:29.693 [restartedMain] org.stfc.StfcApplication: No active profile set, falling back to default profiles: default
+[INFO ] 2019-04-08 20:36:30.289 [restartedMain] org.apache.coyote.http11.Http11NioProtocol: Initializing ProtocolHandler ["http-nio-9000"]
+[INFO ] 2019-04-08 20:36:30.289 [restartedMain] org.apache.catalina.core.StandardService: Starting service [Tomcat]
+[INFO ] 2019-04-08 20:36:30.289 [restartedMain] org.apache.catalina.core.StandardEngine: Starting Servlet Engine: Apache Tomcat/9.0.12
+[INFO ] 2019-04-08 20:36:30.301 [restartedMain] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]: Initializing Spring embedded WebApplicationContext
+[WARN ] 2019-04-08 20:36:31.304 [restartedMain] org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration: spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[INFO ] 2019-04-08 20:36:31.405 [restartedMain] org.apache.coyote.http11.Http11NioProtocol: Starting ProtocolHandler ["http-nio-9000"]
+[INFO ] 2019-04-08 20:36:31.406 [restartedMain] org.apache.tomcat.util.net.NioSelectorPool: Using a shared selector for servlet write/read
+[INFO ] 2019-04-08 20:36:31.409 [restartedMain] org.stfc.StfcApplication: Started StfcApplication in 1.769 seconds (JVM running for 347.341)
+[INFO ] 2019-04-08 20:41:29.525 [restartedMain] org.stfc.StfcApplication: Starting StfcApplication on dmin-PC with PID 4328 (E:\DONG\STFC\qldt\SOURCE\authen\target\classes started by dmin in E:\DONG\STFC\qldt\SOURCE\authen)
+[DEBUG] 2019-04-08 20:41:29.530 [restartedMain] org.stfc.StfcApplication: Running with Spring Boot v2.1.0.RELEASE, Spring v5.1.2.RELEASE
+[INFO ] 2019-04-08 20:41:29.530 [restartedMain] org.stfc.StfcApplication: No active profile set, falling back to default profiles: default
+[INFO ] 2019-04-08 20:41:31.583 [restartedMain] org.apache.coyote.http11.Http11NioProtocol: Initializing ProtocolHandler ["http-nio-9000"]
+[INFO ] 2019-04-08 20:41:31.590 [restartedMain] org.apache.catalina.core.StandardService: Starting service [Tomcat]
+[INFO ] 2019-04-08 20:41:31.591 [restartedMain] org.apache.catalina.core.StandardEngine: Starting Servlet Engine: Apache Tomcat/9.0.12
+[INFO ] 2019-04-08 20:41:31.602 [restartedMain] org.apache.catalina.core.AprLifecycleListener: The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_121\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Java\jdk1.8.0_121\bin;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Program Files\TortoiseGit\bin;C:\Users\dmin\AppData\Local\GitHubDesktop\bin;C:\Users\dmin\AppData\Roaming\npm;.]
+[INFO ] 2019-04-08 20:41:31.706 [restartedMain] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]: Initializing Spring embedded WebApplicationContext
+[WARN ] 2019-04-08 20:41:35.303 [restartedMain] org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration: spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[INFO ] 2019-04-08 20:41:35.947 [restartedMain] org.apache.coyote.http11.Http11NioProtocol: Starting ProtocolHandler ["http-nio-9000"]
+[INFO ] 2019-04-08 20:41:35.954 [restartedMain] org.apache.tomcat.util.net.NioSelectorPool: Using a shared selector for servlet write/read
+[INFO ] 2019-04-08 20:41:35.966 [restartedMain] org.stfc.StfcApplication: Started StfcApplication in 6.721 seconds (JVM running for 7.408)
+[INFO ] 2019-04-08 20:42:07.274 [http-nio-9000-exec-1] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]: Initializing Spring DispatcherServlet 'dispatcherServlet'
+[DEBUG] 2019-04-08 20:42:26.248 [http-nio-9000-exec-2] org.stfc.controller.UsersController: Body request: [{"userName":"dongdv","password":"123456","fullName":"Dang Van Dong","userType":1,"status":1}]
+[DEBUG] 2019-04-08 20:43:00.429 [http-nio-9000-exec-3] org.stfc.controller.UsersController: Body request: {"userId":3,"password":"123456sd"}
+[ERROR] 2019-04-08 20:43:00.835 [http-nio-9000-exec-3] org.stfc.controller.UsersController: Unable to find org.stfc.dto.Users with id 3
+javax.persistence.EntityNotFoundException: Unable to find org.stfc.dto.Users with id 3
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl$JpaEntityNotFoundDelegate.handleEntityNotFound(EntityManagerFactoryBuilderImpl.java:162) ~[hibernate-core-5.3.7.Final.jar:5.3.7.Final]
+	at org.hibernate.proxy.AbstractLazyInitializer.checkTargetState(AbstractLazyInitializer.java:285) ~[hibernate-core-5.3.7.Final.jar:5.3.7.Final]
+	at org.hibernate.proxy.AbstractLazyInitializer.initialize(AbstractLazyInitializer.java:184) ~[hibernate-core-5.3.7.Final.jar:5.3.7.Final]
+	at org.hibernate.proxy.AbstractLazyInitializer.getImplementation(AbstractLazyInitializer.java:309) ~[hibernate-core-5.3.7.Final.jar:5.3.7.Final]
+	at org.hibernate.proxy.pojo.bytebuddy.ByteBuddyInterceptor.intercept(ByteBuddyInterceptor.java:45) ~[hibernate-core-5.3.7.Final.jar:5.3.7.Final]
+	at org.hibernate.proxy.ProxyConfiguration$InterceptorDispatcher.intercept(ProxyConfiguration.java:95) ~[hibernate-core-5.3.7.Final.jar:5.3.7.Final]
+	at org.stfc.dto.Users$HibernateProxy$eC41e7Gx.setUpdatedDate(Unknown Source) ~[classes/:?]
+	at org.stfc.controller.UsersController.updateUser(UsersController.java:100) [classes/:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_121]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_121]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_121]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_121]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:215) [spring-web-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:142) [spring-web-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102) [spring-webmvc-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895) [spring-webmvc-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:800) [spring-webmvc-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) [spring-webmvc-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1038) [spring-webmvc-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:942) [spring-webmvc-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:998) [spring-webmvc-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.doPut(FrameworkServlet.java:912) [spring-webmvc-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:663) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:875) [spring-webmvc-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) [tomcat-embed-websocket-9.0.12.jar:9.0.12]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99) [spring-web-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:92) [spring-web-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:93) [spring-web-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200) [spring-web-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:199) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:770) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1415) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142) [?:1.8.0_121]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617) [?:1.8.0_121]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_121]
+[DEBUG] 2019-04-08 20:43:08.610 [http-nio-9000-exec-4] org.stfc.controller.UsersController: Body request: {"userId":4,"password":"123456sd"}
+[INFO ] 2019-04-08 20:43:40.230 [restartedMain] org.stfc.StfcApplication: Starting StfcApplication on dmin-PC with PID 4328 (E:\DONG\STFC\qldt\SOURCE\authen\target\classes started by dmin in E:\DONG\STFC\qldt\SOURCE\authen)
+[DEBUG] 2019-04-08 20:43:40.231 [restartedMain] org.stfc.StfcApplication: Running with Spring Boot v2.1.0.RELEASE, Spring v5.1.2.RELEASE
+[INFO ] 2019-04-08 20:43:40.231 [restartedMain] org.stfc.StfcApplication: No active profile set, falling back to default profiles: default
+[INFO ] 2019-04-08 20:43:40.758 [restartedMain] org.apache.coyote.http11.Http11NioProtocol: Initializing ProtocolHandler ["http-nio-9000"]
+[INFO ] 2019-04-08 20:43:40.758 [restartedMain] org.apache.catalina.core.StandardService: Starting service [Tomcat]
+[INFO ] 2019-04-08 20:43:40.758 [restartedMain] org.apache.catalina.core.StandardEngine: Starting Servlet Engine: Apache Tomcat/9.0.12
+[INFO ] 2019-04-08 20:43:40.772 [restartedMain] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]: Initializing Spring embedded WebApplicationContext
+[WARN ] 2019-04-08 20:43:41.723 [restartedMain] org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration: spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[INFO ] 2019-04-08 20:43:41.845 [restartedMain] org.apache.coyote.http11.Http11NioProtocol: Starting ProtocolHandler ["http-nio-9000"]
+[INFO ] 2019-04-08 20:43:41.846 [restartedMain] org.apache.tomcat.util.net.NioSelectorPool: Using a shared selector for servlet write/read
+[INFO ] 2019-04-08 20:43:41.850 [restartedMain] org.stfc.StfcApplication: Started StfcApplication in 1.657 seconds (JVM running for 133.29)
+[INFO ] 2019-04-08 20:43:43.522 [http-nio-9000-exec-1] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]: Initializing Spring DispatcherServlet 'dispatcherServlet'
+[INFO ] 2019-04-08 20:52:41.454 [restartedMain] org.stfc.StfcApplication: Starting StfcApplication on dmin-PC with PID 4308 (E:\DONG\STFC\qldt\SOURCE\authen\target\classes started by dmin in E:\DONG\STFC\qldt\SOURCE\authen)
+[DEBUG] 2019-04-08 20:52:41.458 [restartedMain] org.stfc.StfcApplication: Running with Spring Boot v2.1.0.RELEASE, Spring v5.1.2.RELEASE
+[INFO ] 2019-04-08 20:52:41.459 [restartedMain] org.stfc.StfcApplication: No active profile set, falling back to default profiles: default
+[INFO ] 2019-04-08 20:52:43.575 [restartedMain] org.apache.coyote.http11.Http11NioProtocol: Initializing ProtocolHandler ["http-nio-9000"]
+[INFO ] 2019-04-08 20:52:43.582 [restartedMain] org.apache.catalina.core.StandardService: Starting service [Tomcat]
+[INFO ] 2019-04-08 20:52:43.583 [restartedMain] org.apache.catalina.core.StandardEngine: Starting Servlet Engine: Apache Tomcat/9.0.12
+[INFO ] 2019-04-08 20:52:43.594 [restartedMain] org.apache.catalina.core.AprLifecycleListener: The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_121\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Java\jdk1.8.0_121\bin;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Program Files\TortoiseGit\bin;C:\Users\dmin\AppData\Local\GitHubDesktop\bin;C:\Users\dmin\AppData\Roaming\npm;.]
+[INFO ] 2019-04-08 20:52:43.691 [restartedMain] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]: Initializing Spring embedded WebApplicationContext
+[WARN ] 2019-04-08 20:52:47.197 [restartedMain] org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration: spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[INFO ] 2019-04-08 20:52:47.760 [restartedMain] org.apache.coyote.http11.Http11NioProtocol: Starting ProtocolHandler ["http-nio-9000"]
+[INFO ] 2019-04-08 20:52:47.768 [restartedMain] org.apache.tomcat.util.net.NioSelectorPool: Using a shared selector for servlet write/read
+[INFO ] 2019-04-08 20:52:47.781 [restartedMain] org.stfc.StfcApplication: Started StfcApplication in 6.622 seconds (JVM running for 7.29)
+[INFO ] 2019-04-08 20:53:00.609 [http-nio-9000-exec-1] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]: Initializing Spring DispatcherServlet 'dispatcherServlet'
+[INFO ] 2019-04-08 21:13:54.275 [restartedMain] org.stfc.StfcApplication: Starting StfcApplication on dmin-PC with PID 4308 (E:\DONG\STFC\qldt\SOURCE\authen\target\classes started by dmin in E:\DONG\STFC\qldt\SOURCE\authen)
+[DEBUG] 2019-04-08 21:13:54.275 [restartedMain] org.stfc.StfcApplication: Running with Spring Boot v2.1.0.RELEASE, Spring v5.1.2.RELEASE
+[INFO ] 2019-04-08 21:13:54.275 [restartedMain] org.stfc.StfcApplication: No active profile set, falling back to default profiles: default
+[INFO ] 2019-04-08 21:13:54.946 [restartedMain] org.apache.coyote.http11.Http11NioProtocol: Initializing ProtocolHandler ["http-nio-9000"]
+[INFO ] 2019-04-08 21:13:54.947 [restartedMain] org.apache.catalina.core.StandardService: Starting service [Tomcat]
+[INFO ] 2019-04-08 21:13:54.947 [restartedMain] org.apache.catalina.core.StandardEngine: Starting Servlet Engine: Apache Tomcat/9.0.12
+[INFO ] 2019-04-08 21:13:54.962 [restartedMain] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]: Initializing Spring embedded WebApplicationContext
+[WARN ] 2019-04-08 21:13:56.014 [restartedMain] org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration: spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[INFO ] 2019-04-08 21:13:56.149 [restartedMain] org.apache.coyote.http11.Http11NioProtocol: Starting ProtocolHandler ["http-nio-9000"]
+[INFO ] 2019-04-08 21:13:56.150 [restartedMain] org.apache.tomcat.util.net.NioSelectorPool: Using a shared selector for servlet write/read
+[INFO ] 2019-04-08 21:13:56.155 [restartedMain] org.stfc.StfcApplication: Started StfcApplication in 1.918 seconds (JVM running for 1275.654)
+[INFO ] 2019-04-08 21:17:50.783 [restartedMain] org.stfc.StfcApplication: Starting StfcApplication on dmin-PC with PID 4308 (E:\DONG\STFC\qldt\SOURCE\authen\target\classes started by dmin in E:\DONG\STFC\qldt\SOURCE\authen)
+[DEBUG] 2019-04-08 21:17:50.783 [restartedMain] org.stfc.StfcApplication: Running with Spring Boot v2.1.0.RELEASE, Spring v5.1.2.RELEASE
+[INFO ] 2019-04-08 21:17:50.783 [restartedMain] org.stfc.StfcApplication: No active profile set, falling back to default profiles: default
+[INFO ] 2019-04-08 21:17:51.252 [restartedMain] org.apache.coyote.http11.Http11NioProtocol: Initializing ProtocolHandler ["http-nio-9000"]
+[INFO ] 2019-04-08 21:17:51.253 [restartedMain] org.apache.catalina.core.StandardService: Starting service [Tomcat]
+[INFO ] 2019-04-08 21:17:51.253 [restartedMain] org.apache.catalina.core.StandardEngine: Starting Servlet Engine: Apache Tomcat/9.0.12
+[INFO ] 2019-04-08 21:17:51.266 [restartedMain] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]: Initializing Spring embedded WebApplicationContext
+[WARN ] 2019-04-08 21:17:52.264 [restartedMain] org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration: spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[INFO ] 2019-04-08 21:17:52.390 [restartedMain] org.apache.coyote.http11.Http11NioProtocol: Starting ProtocolHandler ["http-nio-9000"]
+[INFO ] 2019-04-08 21:17:52.391 [restartedMain] org.apache.tomcat.util.net.NioSelectorPool: Using a shared selector for servlet write/read
+[INFO ] 2019-04-08 21:17:52.394 [restartedMain] org.stfc.StfcApplication: Started StfcApplication in 1.644 seconds (JVM running for 1511.893)
+[INFO ] 2019-04-08 21:23:21.340 [restartedMain] org.stfc.StfcApplication: Starting StfcApplication on dmin-PC with PID 4308 (E:\DONG\STFC\qldt\SOURCE\authen\target\classes started by dmin in E:\DONG\STFC\qldt\SOURCE\authen)
+[DEBUG] 2019-04-08 21:23:21.341 [restartedMain] org.stfc.StfcApplication: Running with Spring Boot v2.1.0.RELEASE, Spring v5.1.2.RELEASE
+[INFO ] 2019-04-08 21:23:21.341 [restartedMain] org.stfc.StfcApplication: No active profile set, falling back to default profiles: default
+[INFO ] 2019-04-08 21:23:21.691 [restartedMain] org.apache.coyote.http11.Http11NioProtocol: Initializing ProtocolHandler ["http-nio-9000"]
+[INFO ] 2019-04-08 21:23:21.692 [restartedMain] org.apache.catalina.core.StandardService: Starting service [Tomcat]
+[INFO ] 2019-04-08 21:23:21.692 [restartedMain] org.apache.catalina.core.StandardEngine: Starting Servlet Engine: Apache Tomcat/9.0.12
+[INFO ] 2019-04-08 21:23:21.703 [restartedMain] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]: Initializing Spring embedded WebApplicationContext
+[WARN ] 2019-04-08 21:23:22.722 [restartedMain] org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration: spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[INFO ] 2019-04-08 21:23:22.819 [restartedMain] org.apache.coyote.http11.Http11NioProtocol: Starting ProtocolHandler ["http-nio-9000"]
+[INFO ] 2019-04-08 21:23:22.820 [restartedMain] org.apache.tomcat.util.net.NioSelectorPool: Using a shared selector for servlet write/read
+[INFO ] 2019-04-08 21:23:22.823 [restartedMain] org.stfc.StfcApplication: Started StfcApplication in 1.508 seconds (JVM running for 1842.319)
+[INFO ] 2019-04-08 21:24:06.778 [restartedMain] org.stfc.StfcApplication: Starting StfcApplication on dmin-PC with PID 4308 (E:\DONG\STFC\qldt\SOURCE\authen\target\classes started by dmin in E:\DONG\STFC\qldt\SOURCE\authen)
+[DEBUG] 2019-04-08 21:24:06.779 [restartedMain] org.stfc.StfcApplication: Running with Spring Boot v2.1.0.RELEASE, Spring v5.1.2.RELEASE
+[INFO ] 2019-04-08 21:24:06.779 [restartedMain] org.stfc.StfcApplication: No active profile set, falling back to default profiles: default
+[INFO ] 2019-04-08 21:24:07.336 [restartedMain] org.apache.coyote.http11.Http11NioProtocol: Initializing ProtocolHandler ["http-nio-9000"]
+[INFO ] 2019-04-08 21:24:07.337 [restartedMain] org.apache.catalina.core.StandardService: Starting service [Tomcat]
+[INFO ] 2019-04-08 21:24:07.337 [restartedMain] org.apache.catalina.core.StandardEngine: Starting Servlet Engine: Apache Tomcat/9.0.12
+[INFO ] 2019-04-08 21:24:07.361 [restartedMain] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]: Initializing Spring embedded WebApplicationContext
+[INFO ] 2019-04-08 21:24:44.535 [restartedMain] org.stfc.StfcApplication: Starting StfcApplication on dmin-PC with PID 1556 (E:\DONG\STFC\qldt\SOURCE\authen\target\classes started by dmin in E:\DONG\STFC\qldt\SOURCE\authen)
+[DEBUG] 2019-04-08 21:24:44.540 [restartedMain] org.stfc.StfcApplication: Running with Spring Boot v2.1.0.RELEASE, Spring v5.1.2.RELEASE
+[INFO ] 2019-04-08 21:24:44.540 [restartedMain] org.stfc.StfcApplication: No active profile set, falling back to default profiles: default
+[INFO ] 2019-04-08 21:24:46.517 [restartedMain] org.apache.coyote.http11.Http11NioProtocol: Initializing ProtocolHandler ["http-nio-9000"]
+[INFO ] 2019-04-08 21:24:46.523 [restartedMain] org.apache.catalina.core.StandardService: Starting service [Tomcat]
+[INFO ] 2019-04-08 21:24:46.524 [restartedMain] org.apache.catalina.core.StandardEngine: Starting Servlet Engine: Apache Tomcat/9.0.12
+[INFO ] 2019-04-08 21:24:46.534 [restartedMain] org.apache.catalina.core.AprLifecycleListener: The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_121\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Java\jdk1.8.0_121\bin;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Program Files\TortoiseGit\bin;C:\Users\dmin\AppData\Local\GitHubDesktop\bin;C:\Users\dmin\AppData\Roaming\npm;.]
+[INFO ] 2019-04-08 21:24:46.641 [restartedMain] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]: Initializing Spring embedded WebApplicationContext
+[WARN ] 2019-04-08 21:24:49.524 [restartedMain] org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext: Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'usersController': Unsatisfied dependency expressed through field 'usersRepository'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'usersRepository': Invocation of init method failed; nested exception is java.lang.IllegalArgumentException: Failed to create query for method public abstract java.util.List org.stfc.repository.UsersRepository.onSearch(org.stfc.dto.Users)! No property onSearch found for type Users!
+[INFO ] 2019-04-08 21:24:49.771 [restartedMain] org.apache.catalina.core.StandardService: Stopping service [Tomcat]
+[ERROR] 2019-04-08 21:24:49.793 [restartedMain] org.springframework.boot.SpringApplication: Application run failed
+org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'usersController': Unsatisfied dependency expressed through field 'usersRepository'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'usersRepository': Invocation of init method failed; nested exception is java.lang.IllegalArgumentException: Failed to create query for method public abstract java.util.List org.stfc.repository.UsersRepository.onSearch(org.stfc.dto.Users)! No property onSearch found for type Users!
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:596) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:90) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:374) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1378) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:575) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:498) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:846) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:863) ~[spring-context-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:546) ~[spring-context-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:140) ~[spring-boot-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:775) [spring-boot-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397) [spring-boot-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:316) [spring-boot-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1260) [spring-boot-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1248) [spring-boot-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at org.stfc.StfcApplication.main(StfcApplication.java:16) [classes/:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_121]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_121]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_121]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_121]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49) [spring-boot-devtools-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'usersRepository': Invocation of init method failed; nested exception is java.lang.IllegalArgumentException: Failed to create query for method public abstract java.util.List org.stfc.repository.UsersRepository.onSearch(org.stfc.dto.Users)! No property onSearch found for type Users!
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1745) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:576) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:498) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:273) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1239) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1166) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:593) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	... 24 more
+Caused by: java.lang.IllegalArgumentException: Failed to create query for method public abstract java.util.List org.stfc.repository.UsersRepository.onSearch(org.stfc.dto.Users)! No property onSearch found for type Users!
+	at org.springframework.data.jpa.repository.query.PartTreeJpaQuery.<init>(PartTreeJpaQuery.java:82) ~[spring-data-jpa-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.jpa.repository.query.JpaQueryLookupStrategy$CreateQueryLookupStrategy.resolveQuery(JpaQueryLookupStrategy.java:103) ~[spring-data-jpa-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.jpa.repository.query.JpaQueryLookupStrategy$CreateIfNotFoundQueryLookupStrategy.resolveQuery(JpaQueryLookupStrategy.java:208) ~[spring-data-jpa-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.jpa.repository.query.JpaQueryLookupStrategy$AbstractQueryLookupStrategy.resolveQuery(JpaQueryLookupStrategy.java:79) ~[spring-data-jpa-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$QueryExecutorMethodInterceptor.lookupQuery(RepositoryFactorySupport.java:566) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$QueryExecutorMethodInterceptor.lambda$mapMethodsToQuery$1(RepositoryFactorySupport.java:559) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193) ~[?:1.8.0_121]
+	at java.util.Iterator.forEachRemaining(Iterator.java:116) ~[?:1.8.0_121]
+	at java.util.Collections$UnmodifiableCollection$1.forEachRemaining(Collections.java:1049) ~[?:1.8.0_121]
+	at java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1801) ~[?:1.8.0_121]
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:481) ~[?:1.8.0_121]
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:471) ~[?:1.8.0_121]
+	at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708) ~[?:1.8.0_121]
+	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234) ~[?:1.8.0_121]
+	at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:499) ~[?:1.8.0_121]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$QueryExecutorMethodInterceptor.mapMethodsToQuery(RepositoryFactorySupport.java:561) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$QueryExecutorMethodInterceptor.lambda$new$0(RepositoryFactorySupport.java:551) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at java.util.Optional.map(Optional.java:215) ~[?:1.8.0_121]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$QueryExecutorMethodInterceptor.<init>(RepositoryFactorySupport.java:551) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport.getRepository(RepositoryFactorySupport.java:324) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactoryBeanSupport.lambda$afterPropertiesSet$5(RepositoryFactoryBeanSupport.java:297) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.util.Lazy.getNullable(Lazy.java:211) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.util.Lazy.get(Lazy.java:94) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactoryBeanSupport.afterPropertiesSet(RepositoryFactoryBeanSupport.java:300) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.jpa.repository.support.JpaRepositoryFactoryBean.afterPropertiesSet(JpaRepositoryFactoryBean.java:119) ~[spring-data-jpa-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1804) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1741) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:576) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:498) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:273) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1239) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1166) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:593) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	... 24 more
+Caused by: org.springframework.data.mapping.PropertyReferenceException: No property onSearch found for type Users!
+	at org.springframework.data.mapping.PropertyPath.<init>(PropertyPath.java:94) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.mapping.PropertyPath.create(PropertyPath.java:382) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.mapping.PropertyPath.create(PropertyPath.java:358) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.mapping.PropertyPath.lambda$from$0(PropertyPath.java:311) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at java.util.concurrent.ConcurrentMap.computeIfAbsent(ConcurrentMap.java:324) ~[?:1.8.0_121]
+	at org.springframework.data.mapping.PropertyPath.from(PropertyPath.java:293) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.mapping.PropertyPath.from(PropertyPath.java:276) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.repository.query.parser.Part.<init>(Part.java:81) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.repository.query.parser.PartTree$OrPart.lambda$new$0(PartTree.java:250) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193) ~[?:1.8.0_121]
+	at java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:175) ~[?:1.8.0_121]
+	at java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:948) ~[?:1.8.0_121]
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:481) ~[?:1.8.0_121]
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:471) ~[?:1.8.0_121]
+	at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708) ~[?:1.8.0_121]
+	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234) ~[?:1.8.0_121]
+	at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:499) ~[?:1.8.0_121]
+	at org.springframework.data.repository.query.parser.PartTree$OrPart.<init>(PartTree.java:251) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.repository.query.parser.PartTree$Predicate.lambda$new$0(PartTree.java:380) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193) ~[?:1.8.0_121]
+	at java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:175) ~[?:1.8.0_121]
+	at java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:948) ~[?:1.8.0_121]
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:481) ~[?:1.8.0_121]
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:471) ~[?:1.8.0_121]
+	at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708) ~[?:1.8.0_121]
+	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234) ~[?:1.8.0_121]
+	at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:499) ~[?:1.8.0_121]
+	at org.springframework.data.repository.query.parser.PartTree$Predicate.<init>(PartTree.java:381) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.repository.query.parser.PartTree.<init>(PartTree.java:93) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.jpa.repository.query.PartTreeJpaQuery.<init>(PartTreeJpaQuery.java:76) ~[spring-data-jpa-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.jpa.repository.query.JpaQueryLookupStrategy$CreateQueryLookupStrategy.resolveQuery(JpaQueryLookupStrategy.java:103) ~[spring-data-jpa-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.jpa.repository.query.JpaQueryLookupStrategy$CreateIfNotFoundQueryLookupStrategy.resolveQuery(JpaQueryLookupStrategy.java:208) ~[spring-data-jpa-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.jpa.repository.query.JpaQueryLookupStrategy$AbstractQueryLookupStrategy.resolveQuery(JpaQueryLookupStrategy.java:79) ~[spring-data-jpa-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$QueryExecutorMethodInterceptor.lookupQuery(RepositoryFactorySupport.java:566) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$QueryExecutorMethodInterceptor.lambda$mapMethodsToQuery$1(RepositoryFactorySupport.java:559) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193) ~[?:1.8.0_121]
+	at java.util.Iterator.forEachRemaining(Iterator.java:116) ~[?:1.8.0_121]
+	at java.util.Collections$UnmodifiableCollection$1.forEachRemaining(Collections.java:1049) ~[?:1.8.0_121]
+	at java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1801) ~[?:1.8.0_121]
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:481) ~[?:1.8.0_121]
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:471) ~[?:1.8.0_121]
+	at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708) ~[?:1.8.0_121]
+	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234) ~[?:1.8.0_121]
+	at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:499) ~[?:1.8.0_121]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$QueryExecutorMethodInterceptor.mapMethodsToQuery(RepositoryFactorySupport.java:561) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$QueryExecutorMethodInterceptor.lambda$new$0(RepositoryFactorySupport.java:551) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at java.util.Optional.map(Optional.java:215) ~[?:1.8.0_121]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$QueryExecutorMethodInterceptor.<init>(RepositoryFactorySupport.java:551) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport.getRepository(RepositoryFactorySupport.java:324) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactoryBeanSupport.lambda$afterPropertiesSet$5(RepositoryFactoryBeanSupport.java:297) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.util.Lazy.getNullable(Lazy.java:211) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.util.Lazy.get(Lazy.java:94) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactoryBeanSupport.afterPropertiesSet(RepositoryFactoryBeanSupport.java:300) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.jpa.repository.support.JpaRepositoryFactoryBean.afterPropertiesSet(JpaRepositoryFactoryBean.java:119) ~[spring-data-jpa-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1804) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1741) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:576) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:498) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:273) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1239) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1166) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:593) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	... 24 more
+[INFO ] 2019-04-08 21:25:42.887 [restartedMain] org.stfc.StfcApplication: Starting StfcApplication on dmin-PC with PID 5844 (E:\DONG\STFC\qldt\SOURCE\authen\target\classes started by dmin in E:\DONG\STFC\qldt\SOURCE\authen)
+[DEBUG] 2019-04-08 21:25:42.893 [restartedMain] org.stfc.StfcApplication: Running with Spring Boot v2.1.0.RELEASE, Spring v5.1.2.RELEASE
+[INFO ] 2019-04-08 21:25:42.893 [restartedMain] org.stfc.StfcApplication: No active profile set, falling back to default profiles: default
+[INFO ] 2019-04-08 21:25:44.897 [restartedMain] org.apache.coyote.http11.Http11NioProtocol: Initializing ProtocolHandler ["http-nio-9000"]
+[INFO ] 2019-04-08 21:25:44.904 [restartedMain] org.apache.catalina.core.StandardService: Starting service [Tomcat]
+[INFO ] 2019-04-08 21:25:44.904 [restartedMain] org.apache.catalina.core.StandardEngine: Starting Servlet Engine: Apache Tomcat/9.0.12
+[INFO ] 2019-04-08 21:25:44.915 [restartedMain] org.apache.catalina.core.AprLifecycleListener: The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_121\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Java\jdk1.8.0_121\bin;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Program Files\TortoiseGit\bin;C:\Users\dmin\AppData\Local\GitHubDesktop\bin;C:\Users\dmin\AppData\Roaming\npm;.]
+[INFO ] 2019-04-08 21:25:45.010 [restartedMain] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]: Initializing Spring embedded WebApplicationContext
+[WARN ] 2019-04-08 21:25:47.769 [restartedMain] org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext: Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'usersController': Unsatisfied dependency expressed through field 'usersRepository'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'usersRepository': Invocation of init method failed; nested exception is java.lang.IllegalArgumentException: Failed to create query for method public abstract java.util.List org.stfc.repository.UsersRepository.onSearch(org.stfc.dto.Users)! No property onSearch found for type Users!
+[INFO ] 2019-04-08 21:25:48.228 [restartedMain] org.apache.catalina.core.StandardService: Stopping service [Tomcat]
+[ERROR] 2019-04-08 21:25:48.252 [restartedMain] org.springframework.boot.SpringApplication: Application run failed
+org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'usersController': Unsatisfied dependency expressed through field 'usersRepository'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'usersRepository': Invocation of init method failed; nested exception is java.lang.IllegalArgumentException: Failed to create query for method public abstract java.util.List org.stfc.repository.UsersRepository.onSearch(org.stfc.dto.Users)! No property onSearch found for type Users!
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:596) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:90) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:374) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1378) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:575) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:498) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:846) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:863) ~[spring-context-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:546) ~[spring-context-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:140) ~[spring-boot-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:775) [spring-boot-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397) [spring-boot-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:316) [spring-boot-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1260) [spring-boot-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1248) [spring-boot-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at org.stfc.StfcApplication.main(StfcApplication.java:16) [classes/:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_121]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_121]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_121]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_121]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49) [spring-boot-devtools-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'usersRepository': Invocation of init method failed; nested exception is java.lang.IllegalArgumentException: Failed to create query for method public abstract java.util.List org.stfc.repository.UsersRepository.onSearch(org.stfc.dto.Users)! No property onSearch found for type Users!
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1745) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:576) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:498) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:273) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1239) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1166) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:593) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	... 24 more
+Caused by: java.lang.IllegalArgumentException: Failed to create query for method public abstract java.util.List org.stfc.repository.UsersRepository.onSearch(org.stfc.dto.Users)! No property onSearch found for type Users!
+	at org.springframework.data.jpa.repository.query.PartTreeJpaQuery.<init>(PartTreeJpaQuery.java:82) ~[spring-data-jpa-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.jpa.repository.query.JpaQueryLookupStrategy$CreateQueryLookupStrategy.resolveQuery(JpaQueryLookupStrategy.java:103) ~[spring-data-jpa-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.jpa.repository.query.JpaQueryLookupStrategy$CreateIfNotFoundQueryLookupStrategy.resolveQuery(JpaQueryLookupStrategy.java:208) ~[spring-data-jpa-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.jpa.repository.query.JpaQueryLookupStrategy$AbstractQueryLookupStrategy.resolveQuery(JpaQueryLookupStrategy.java:79) ~[spring-data-jpa-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$QueryExecutorMethodInterceptor.lookupQuery(RepositoryFactorySupport.java:566) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$QueryExecutorMethodInterceptor.lambda$mapMethodsToQuery$1(RepositoryFactorySupport.java:559) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193) ~[?:1.8.0_121]
+	at java.util.Iterator.forEachRemaining(Iterator.java:116) ~[?:1.8.0_121]
+	at java.util.Collections$UnmodifiableCollection$1.forEachRemaining(Collections.java:1049) ~[?:1.8.0_121]
+	at java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1801) ~[?:1.8.0_121]
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:481) ~[?:1.8.0_121]
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:471) ~[?:1.8.0_121]
+	at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708) ~[?:1.8.0_121]
+	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234) ~[?:1.8.0_121]
+	at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:499) ~[?:1.8.0_121]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$QueryExecutorMethodInterceptor.mapMethodsToQuery(RepositoryFactorySupport.java:561) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$QueryExecutorMethodInterceptor.lambda$new$0(RepositoryFactorySupport.java:551) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at java.util.Optional.map(Optional.java:215) ~[?:1.8.0_121]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$QueryExecutorMethodInterceptor.<init>(RepositoryFactorySupport.java:551) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport.getRepository(RepositoryFactorySupport.java:324) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactoryBeanSupport.lambda$afterPropertiesSet$5(RepositoryFactoryBeanSupport.java:297) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.util.Lazy.getNullable(Lazy.java:211) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.util.Lazy.get(Lazy.java:94) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactoryBeanSupport.afterPropertiesSet(RepositoryFactoryBeanSupport.java:300) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.jpa.repository.support.JpaRepositoryFactoryBean.afterPropertiesSet(JpaRepositoryFactoryBean.java:119) ~[spring-data-jpa-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1804) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1741) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:576) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:498) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:273) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1239) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1166) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:593) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	... 24 more
+Caused by: org.springframework.data.mapping.PropertyReferenceException: No property onSearch found for type Users!
+	at org.springframework.data.mapping.PropertyPath.<init>(PropertyPath.java:94) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.mapping.PropertyPath.create(PropertyPath.java:382) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.mapping.PropertyPath.create(PropertyPath.java:358) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.mapping.PropertyPath.lambda$from$0(PropertyPath.java:311) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at java.util.concurrent.ConcurrentMap.computeIfAbsent(ConcurrentMap.java:324) ~[?:1.8.0_121]
+	at org.springframework.data.mapping.PropertyPath.from(PropertyPath.java:293) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.mapping.PropertyPath.from(PropertyPath.java:276) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.repository.query.parser.Part.<init>(Part.java:81) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.repository.query.parser.PartTree$OrPart.lambda$new$0(PartTree.java:250) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193) ~[?:1.8.0_121]
+	at java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:175) ~[?:1.8.0_121]
+	at java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:948) ~[?:1.8.0_121]
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:481) ~[?:1.8.0_121]
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:471) ~[?:1.8.0_121]
+	at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708) ~[?:1.8.0_121]
+	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234) ~[?:1.8.0_121]
+	at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:499) ~[?:1.8.0_121]
+	at org.springframework.data.repository.query.parser.PartTree$OrPart.<init>(PartTree.java:251) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.repository.query.parser.PartTree$Predicate.lambda$new$0(PartTree.java:380) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193) ~[?:1.8.0_121]
+	at java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:175) ~[?:1.8.0_121]
+	at java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:948) ~[?:1.8.0_121]
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:481) ~[?:1.8.0_121]
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:471) ~[?:1.8.0_121]
+	at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708) ~[?:1.8.0_121]
+	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234) ~[?:1.8.0_121]
+	at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:499) ~[?:1.8.0_121]
+	at org.springframework.data.repository.query.parser.PartTree$Predicate.<init>(PartTree.java:381) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.repository.query.parser.PartTree.<init>(PartTree.java:93) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.jpa.repository.query.PartTreeJpaQuery.<init>(PartTreeJpaQuery.java:76) ~[spring-data-jpa-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.jpa.repository.query.JpaQueryLookupStrategy$CreateQueryLookupStrategy.resolveQuery(JpaQueryLookupStrategy.java:103) ~[spring-data-jpa-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.jpa.repository.query.JpaQueryLookupStrategy$CreateIfNotFoundQueryLookupStrategy.resolveQuery(JpaQueryLookupStrategy.java:208) ~[spring-data-jpa-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.jpa.repository.query.JpaQueryLookupStrategy$AbstractQueryLookupStrategy.resolveQuery(JpaQueryLookupStrategy.java:79) ~[spring-data-jpa-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$QueryExecutorMethodInterceptor.lookupQuery(RepositoryFactorySupport.java:566) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$QueryExecutorMethodInterceptor.lambda$mapMethodsToQuery$1(RepositoryFactorySupport.java:559) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193) ~[?:1.8.0_121]
+	at java.util.Iterator.forEachRemaining(Iterator.java:116) ~[?:1.8.0_121]
+	at java.util.Collections$UnmodifiableCollection$1.forEachRemaining(Collections.java:1049) ~[?:1.8.0_121]
+	at java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1801) ~[?:1.8.0_121]
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:481) ~[?:1.8.0_121]
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:471) ~[?:1.8.0_121]
+	at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708) ~[?:1.8.0_121]
+	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234) ~[?:1.8.0_121]
+	at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:499) ~[?:1.8.0_121]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$QueryExecutorMethodInterceptor.mapMethodsToQuery(RepositoryFactorySupport.java:561) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$QueryExecutorMethodInterceptor.lambda$new$0(RepositoryFactorySupport.java:551) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at java.util.Optional.map(Optional.java:215) ~[?:1.8.0_121]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$QueryExecutorMethodInterceptor.<init>(RepositoryFactorySupport.java:551) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport.getRepository(RepositoryFactorySupport.java:324) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactoryBeanSupport.lambda$afterPropertiesSet$5(RepositoryFactoryBeanSupport.java:297) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.util.Lazy.getNullable(Lazy.java:211) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.util.Lazy.get(Lazy.java:94) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactoryBeanSupport.afterPropertiesSet(RepositoryFactoryBeanSupport.java:300) ~[spring-data-commons-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.data.jpa.repository.support.JpaRepositoryFactoryBean.afterPropertiesSet(JpaRepositoryFactoryBean.java:119) ~[spring-data-jpa-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1804) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1741) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:576) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:498) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:273) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1239) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1166) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:593) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	... 24 more
+[INFO ] 2019-04-08 21:33:10.142 [restartedMain] org.stfc.StfcApplication: Starting StfcApplication on dmin-PC with PID 5392 (E:\DONG\STFC\qldt\SOURCE\authen\target\classes started by dmin in E:\DONG\STFC\qldt\SOURCE\authen)
+[DEBUG] 2019-04-08 21:33:10.147 [restartedMain] org.stfc.StfcApplication: Running with Spring Boot v2.1.0.RELEASE, Spring v5.1.2.RELEASE
+[INFO ] 2019-04-08 21:33:10.147 [restartedMain] org.stfc.StfcApplication: No active profile set, falling back to default profiles: default
+[INFO ] 2019-04-08 21:33:12.113 [restartedMain] org.apache.coyote.http11.Http11NioProtocol: Initializing ProtocolHandler ["http-nio-9000"]
+[INFO ] 2019-04-08 21:33:12.120 [restartedMain] org.apache.catalina.core.StandardService: Starting service [Tomcat]
+[INFO ] 2019-04-08 21:33:12.121 [restartedMain] org.apache.catalina.core.StandardEngine: Starting Servlet Engine: Apache Tomcat/9.0.12
+[INFO ] 2019-04-08 21:33:12.131 [restartedMain] org.apache.catalina.core.AprLifecycleListener: The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_121\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Java\jdk1.8.0_121\bin;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Program Files\TortoiseGit\bin;C:\Users\dmin\AppData\Local\GitHubDesktop\bin;C:\Users\dmin\AppData\Roaming\npm;.]
+[INFO ] 2019-04-08 21:33:12.243 [restartedMain] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]: Initializing Spring embedded WebApplicationContext
+[WARN ] 2019-04-08 21:33:15.787 [restartedMain] org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration: spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[INFO ] 2019-04-08 21:33:16.412 [restartedMain] org.apache.coyote.http11.Http11NioProtocol: Starting ProtocolHandler ["http-nio-9000"]
+[INFO ] 2019-04-08 21:33:16.420 [restartedMain] org.apache.tomcat.util.net.NioSelectorPool: Using a shared selector for servlet write/read
+[INFO ] 2019-04-08 21:33:16.435 [restartedMain] org.stfc.StfcApplication: Started StfcApplication in 6.558 seconds (JVM running for 7.291)
+[INFO ] 2019-04-08 21:33:22.416 [http-nio-9000-exec-1] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]: Initializing Spring DispatcherServlet 'dispatcherServlet'
+[INFO ] 2019-04-08 21:34:37.922 [restartedMain] org.stfc.StfcApplication: Starting StfcApplication on dmin-PC with PID 5348 (E:\DONG\STFC\qldt\SOURCE\authen\target\classes started by dmin in E:\DONG\STFC\qldt\SOURCE\authen)
+[DEBUG] 2019-04-08 21:34:37.928 [restartedMain] org.stfc.StfcApplication: Running with Spring Boot v2.1.0.RELEASE, Spring v5.1.2.RELEASE
+[INFO ] 2019-04-08 21:34:37.928 [restartedMain] org.stfc.StfcApplication: No active profile set, falling back to default profiles: default
+[INFO ] 2019-04-08 21:34:39.988 [restartedMain] org.apache.coyote.http11.Http11NioProtocol: Initializing ProtocolHandler ["http-nio-9000"]
+[INFO ] 2019-04-08 21:34:39.996 [restartedMain] org.apache.catalina.core.StandardService: Starting service [Tomcat]
+[INFO ] 2019-04-08 21:34:39.996 [restartedMain] org.apache.catalina.core.StandardEngine: Starting Servlet Engine: Apache Tomcat/9.0.12
+[INFO ] 2019-04-08 21:34:40.008 [restartedMain] org.apache.catalina.core.AprLifecycleListener: The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_121\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Java\jdk1.8.0_121\bin;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Program Files\TortoiseGit\bin;C:\Users\dmin\AppData\Local\GitHubDesktop\bin;C:\Users\dmin\AppData\Roaming\npm;.]
+[INFO ] 2019-04-08 21:34:40.114 [restartedMain] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]: Initializing Spring embedded WebApplicationContext
+[WARN ] 2019-04-08 21:34:43.597 [restartedMain] org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration: spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[INFO ] 2019-04-08 21:34:44.179 [restartedMain] org.apache.coyote.http11.Http11NioProtocol: Starting ProtocolHandler ["http-nio-9000"]
+[INFO ] 2019-04-08 21:34:44.187 [restartedMain] org.apache.tomcat.util.net.NioSelectorPool: Using a shared selector for servlet write/read
+[INFO ] 2019-04-08 21:34:44.201 [restartedMain] org.stfc.StfcApplication: Started StfcApplication in 6.542 seconds (JVM running for 7.208)
+[INFO ] 2019-04-08 21:34:54.026 [http-nio-9000-exec-1] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]: Initializing Spring DispatcherServlet 'dispatcherServlet'
+[INFO ] 2019-04-08 21:35:22.022 [restartedMain] org.stfc.StfcApplication: Starting StfcApplication on dmin-PC with PID 5348 (E:\DONG\STFC\qldt\SOURCE\authen\target\classes started by dmin in E:\DONG\STFC\qldt\SOURCE\authen)
+[DEBUG] 2019-04-08 21:35:22.022 [restartedMain] org.stfc.StfcApplication: Running with Spring Boot v2.1.0.RELEASE, Spring v5.1.2.RELEASE
+[INFO ] 2019-04-08 21:35:22.023 [restartedMain] org.stfc.StfcApplication: No active profile set, falling back to default profiles: default
+[INFO ] 2019-04-08 21:35:22.800 [restartedMain] org.apache.coyote.http11.Http11NioProtocol: Initializing ProtocolHandler ["http-nio-9000"]
+[INFO ] 2019-04-08 21:35:22.801 [restartedMain] org.apache.catalina.core.StandardService: Starting service [Tomcat]
+[INFO ] 2019-04-08 21:35:22.801 [restartedMain] org.apache.catalina.core.StandardEngine: Starting Servlet Engine: Apache Tomcat/9.0.12
+[INFO ] 2019-04-08 21:35:22.823 [restartedMain] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]: Initializing Spring embedded WebApplicationContext
+[WARN ] 2019-04-08 21:35:23.975 [restartedMain] org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration: spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[INFO ] 2019-04-08 21:35:24.178 [restartedMain] org.apache.coyote.http11.Http11NioProtocol: Starting ProtocolHandler ["http-nio-9000"]
+[INFO ] 2019-04-08 21:35:24.180 [restartedMain] org.apache.tomcat.util.net.NioSelectorPool: Using a shared selector for servlet write/read
+[INFO ] 2019-04-08 21:35:24.184 [restartedMain] org.stfc.StfcApplication: Started StfcApplication in 2.194 seconds (JVM running for 47.191)
+[INFO ] 2019-04-08 21:35:27.101 [restartedMain] org.stfc.StfcApplication: Starting StfcApplication on dmin-PC with PID 5348 (E:\DONG\STFC\qldt\SOURCE\authen\target\classes started by dmin in E:\DONG\STFC\qldt\SOURCE\authen)
+[DEBUG] 2019-04-08 21:35:27.101 [restartedMain] org.stfc.StfcApplication: Running with Spring Boot v2.1.0.RELEASE, Spring v5.1.2.RELEASE
+[INFO ] 2019-04-08 21:35:27.101 [restartedMain] org.stfc.StfcApplication: No active profile set, falling back to default profiles: default
+[INFO ] 2019-04-08 21:35:27.631 [restartedMain] org.apache.coyote.http11.Http11NioProtocol: Initializing ProtocolHandler ["http-nio-9000"]
+[INFO ] 2019-04-08 21:35:27.632 [restartedMain] org.apache.catalina.core.StandardService: Starting service [Tomcat]
+[INFO ] 2019-04-08 21:35:27.632 [restartedMain] org.apache.catalina.core.StandardEngine: Starting Servlet Engine: Apache Tomcat/9.0.12
+[INFO ] 2019-04-08 21:35:27.648 [restartedMain] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]: Initializing Spring embedded WebApplicationContext
+[WARN ] 2019-04-08 21:35:28.814 [restartedMain] org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration: spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[INFO ] 2019-04-08 21:35:28.950 [restartedMain] org.apache.coyote.http11.Http11NioProtocol: Starting ProtocolHandler ["http-nio-9000"]
+[INFO ] 2019-04-08 21:35:28.951 [restartedMain] org.apache.tomcat.util.net.NioSelectorPool: Using a shared selector for servlet write/read
+[INFO ] 2019-04-08 21:35:28.954 [restartedMain] org.stfc.StfcApplication: Started StfcApplication in 1.889 seconds (JVM running for 51.96)
+[INFO ] 2019-04-08 21:35:37.258 [restartedMain] org.stfc.StfcApplication: Starting StfcApplication on dmin-PC with PID 5348 (E:\DONG\STFC\qldt\SOURCE\authen\target\classes started by dmin in E:\DONG\STFC\qldt\SOURCE\authen)
+[DEBUG] 2019-04-08 21:35:37.258 [restartedMain] org.stfc.StfcApplication: Running with Spring Boot v2.1.0.RELEASE, Spring v5.1.2.RELEASE
+[INFO ] 2019-04-08 21:35:37.258 [restartedMain] org.stfc.StfcApplication: No active profile set, falling back to default profiles: default
+[INFO ] 2019-04-08 21:35:37.871 [restartedMain] org.apache.coyote.http11.Http11NioProtocol: Initializing ProtocolHandler ["http-nio-9000"]
+[INFO ] 2019-04-08 21:35:37.871 [restartedMain] org.apache.catalina.core.StandardService: Starting service [Tomcat]
+[INFO ] 2019-04-08 21:35:37.871 [restartedMain] org.apache.catalina.core.StandardEngine: Starting Servlet Engine: Apache Tomcat/9.0.12
+[INFO ] 2019-04-08 21:35:37.886 [restartedMain] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]: Initializing Spring embedded WebApplicationContext
+[WARN ] 2019-04-08 21:35:38.833 [restartedMain] org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration: spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[INFO ] 2019-04-08 21:35:39.020 [restartedMain] org.apache.coyote.http11.Http11NioProtocol: Starting ProtocolHandler ["http-nio-9000"]
+[INFO ] 2019-04-08 21:35:39.021 [restartedMain] org.apache.tomcat.util.net.NioSelectorPool: Using a shared selector for servlet write/read
+[INFO ] 2019-04-08 21:35:39.024 [restartedMain] org.stfc.StfcApplication: Started StfcApplication in 1.807 seconds (JVM running for 62.031)
+[INFO ] 2019-04-08 21:35:41.330 [restartedMain] org.stfc.StfcApplication: Starting StfcApplication on dmin-PC with PID 5348 (E:\DONG\STFC\qldt\SOURCE\authen\target\classes started by dmin in E:\DONG\STFC\qldt\SOURCE\authen)
+[DEBUG] 2019-04-08 21:35:41.330 [restartedMain] org.stfc.StfcApplication: Running with Spring Boot v2.1.0.RELEASE, Spring v5.1.2.RELEASE
+[INFO ] 2019-04-08 21:35:41.330 [restartedMain] org.stfc.StfcApplication: No active profile set, falling back to default profiles: default
+[INFO ] 2019-04-08 21:35:41.834 [restartedMain] org.apache.coyote.http11.Http11NioProtocol: Initializing ProtocolHandler ["http-nio-9000"]
+[INFO ] 2019-04-08 21:35:41.835 [restartedMain] org.apache.catalina.core.StandardService: Starting service [Tomcat]
+[INFO ] 2019-04-08 21:35:41.835 [restartedMain] org.apache.catalina.core.StandardEngine: Starting Servlet Engine: Apache Tomcat/9.0.12
+[INFO ] 2019-04-08 21:35:41.848 [restartedMain] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]: Initializing Spring embedded WebApplicationContext
+[INFO ] 2019-04-08 21:36:00.139 [restartedMain] org.stfc.StfcApplication: Starting StfcApplication on dmin-PC with PID 4884 (E:\DONG\STFC\qldt\SOURCE\authen\target\classes started by dmin in E:\DONG\STFC\qldt\SOURCE\authen)
+[DEBUG] 2019-04-08 21:36:00.143 [restartedMain] org.stfc.StfcApplication: Running with Spring Boot v2.1.0.RELEASE, Spring v5.1.2.RELEASE
+[INFO ] 2019-04-08 21:36:00.144 [restartedMain] org.stfc.StfcApplication: No active profile set, falling back to default profiles: default
+[INFO ] 2019-04-08 21:36:02.168 [restartedMain] org.apache.coyote.http11.Http11NioProtocol: Initializing ProtocolHandler ["http-nio-9000"]
+[INFO ] 2019-04-08 21:36:02.177 [restartedMain] org.apache.catalina.core.StandardService: Starting service [Tomcat]
+[INFO ] 2019-04-08 21:36:02.177 [restartedMain] org.apache.catalina.core.StandardEngine: Starting Servlet Engine: Apache Tomcat/9.0.12
+[INFO ] 2019-04-08 21:36:02.189 [restartedMain] org.apache.catalina.core.AprLifecycleListener: The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_121\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Java\jdk1.8.0_121\bin;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Program Files\TortoiseGit\bin;C:\Users\dmin\AppData\Local\GitHubDesktop\bin;C:\Users\dmin\AppData\Roaming\npm;.]
+[INFO ] 2019-04-08 21:36:02.294 [restartedMain] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]: Initializing Spring embedded WebApplicationContext
+[WARN ] 2019-04-08 21:36:05.953 [restartedMain] org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration: spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[INFO ] 2019-04-08 21:36:06.578 [restartedMain] org.apache.coyote.http11.Http11NioProtocol: Starting ProtocolHandler ["http-nio-9000"]
+[INFO ] 2019-04-08 21:36:06.587 [restartedMain] org.apache.tomcat.util.net.NioSelectorPool: Using a shared selector for servlet write/read
+[INFO ] 2019-04-08 21:36:06.603 [restartedMain] org.stfc.StfcApplication: Started StfcApplication in 6.724 seconds (JVM running for 7.386)
+[INFO ] 2019-04-08 21:36:18.596 [http-nio-9000-exec-1] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]: Initializing Spring DispatcherServlet 'dispatcherServlet'
+[INFO ] 2019-04-08 21:38:20.683 [restartedMain] org.stfc.StfcApplication: Starting StfcApplication on dmin-PC with PID 4696 (E:\DONG\STFC\qldt\SOURCE\authen\target\classes started by dmin in E:\DONG\STFC\qldt\SOURCE\authen)
+[DEBUG] 2019-04-08 21:38:20.687 [restartedMain] org.stfc.StfcApplication: Running with Spring Boot v2.1.0.RELEASE, Spring v5.1.2.RELEASE
+[INFO ] 2019-04-08 21:38:20.688 [restartedMain] org.stfc.StfcApplication: No active profile set, falling back to default profiles: default
+[INFO ] 2019-04-08 21:38:22.788 [restartedMain] org.apache.coyote.http11.Http11NioProtocol: Initializing ProtocolHandler ["http-nio-9000"]
+[INFO ] 2019-04-08 21:38:22.796 [restartedMain] org.apache.catalina.core.StandardService: Starting service [Tomcat]
+[INFO ] 2019-04-08 21:38:22.796 [restartedMain] org.apache.catalina.core.StandardEngine: Starting Servlet Engine: Apache Tomcat/9.0.12
+[INFO ] 2019-04-08 21:38:22.807 [restartedMain] org.apache.catalina.core.AprLifecycleListener: The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_121\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Java\jdk1.8.0_121\bin;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Program Files\TortoiseGit\bin;C:\Users\dmin\AppData\Local\GitHubDesktop\bin;C:\Users\dmin\AppData\Roaming\npm;.]
+[INFO ] 2019-04-08 21:38:22.923 [restartedMain] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]: Initializing Spring embedded WebApplicationContext
+[WARN ] 2019-04-08 21:38:26.560 [restartedMain] org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration: spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[INFO ] 2019-04-08 21:38:27.180 [restartedMain] org.apache.coyote.http11.Http11NioProtocol: Starting ProtocolHandler ["http-nio-9000"]
+[INFO ] 2019-04-08 21:38:27.189 [restartedMain] org.apache.tomcat.util.net.NioSelectorPool: Using a shared selector for servlet write/read
+[INFO ] 2019-04-08 21:38:27.206 [restartedMain] org.stfc.StfcApplication: Started StfcApplication in 6.805 seconds (JVM running for 7.565)
+[INFO ] 2019-04-08 21:38:38.476 [http-nio-9000-exec-1] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]: Initializing Spring DispatcherServlet 'dispatcherServlet'
+[INFO ] 2019-04-08 21:39:00.607 [http-nio-9000-exec-3] org.apache.coyote.http11.Http11Processor: Error parsing HTTP request header
+ Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
+java.lang.IllegalArgumentException: Invalid character found in method name. HTTP method names must be tokens
+	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:414) ~[tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:294) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:770) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1415) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142) [?:1.8.0_121]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617) [?:1.8.0_121]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-9.0.12.jar:9.0.12]
+	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_121]
