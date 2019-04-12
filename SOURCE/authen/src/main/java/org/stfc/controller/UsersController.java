@@ -6,7 +6,6 @@ package org.stfc.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,14 +15,18 @@ import org.stfc.utils.FormatMessage;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.stfc.business.BusinessException;
+import org.stfc.dto.Objects;
 import org.stfc.dto.UserRole;
 import org.stfc.dto.Users;
+import org.stfc.entity.AuthenRequest;
+import org.stfc.entity.AuthenResponse;
 import org.stfc.repository.UserRolesRepository;
 import org.stfc.repository.UsersRepository;
 import org.stfc.repository.impl.UsersRepositoryImpl;
@@ -48,12 +51,49 @@ public class UsersController {
     FormatMessage formatMessage;
 
     @RequestMapping(value = Constants.PATH.API_LOGIN, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public String login(HttpEntity<String> httpEntity) {
-        String body = httpEntity.getBody();
-        logger.debug("Body request: {}", body);
+    public String login(@RequestBody AuthenRequest authenRequest) {
         Gson gson = new GsonBuilder().disableHtmlEscaping().create();
-        BaseResponse response = BaseResponse.parse(Constants.ERROR_INTERNAL, formatMessage);
+        logger.debug("Body request: {}", gson.toJson(authenRequest));
+        String lang = "vi";
+        BaseResponse response = BaseResponse.parse(Constants.ERROR_INTERNAL, formatMessage, lang);
         try {
+            if (Comparator.isEqualNullOrEmpty(authenRequest.getUsername()) || Comparator.isEqualNullOrEmpty(authenRequest.getPassword())) {
+                throw new BusinessException(Constants.ERROR_INVALID_FORMAT);
+            }
+            AuthenResponse authenResponse = new AuthenResponse();
+            Users user = usersRepository.login(authenRequest.getUsername(), authenRequest.getPassword());
+            if (Comparator.isEqualNull(user)) {
+                throw new BusinessException(Constants.ERROR_LOGIN);
+            } else {
+                Objects object = usersRepository.getObjectByUser(BigInteger.valueOf(user.getUserId()));
+                authenResponse.setUser(user);
+                authenResponse.setMenu(object);
+            }
+            response = BaseResponse.parse(Constants.SUCCESS, formatMessage, lang);
+            response.setRows(authenResponse);
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+        }
+        return gson.toJson(response);
+    }
+
+    @RequestMapping(value = Constants.PATH.API_CHANGE_PASS, method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+    public String changePass(@RequestBody AuthenRequest authenRequest) {
+        Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+        logger.debug("Body request: {}", gson.toJson(authenRequest));
+        String lang = "vi";
+        BaseResponse response = BaseResponse.parse(Constants.ERROR_INTERNAL, formatMessage, lang);
+        try {
+            if (Comparator.isEqualNullOrEmpty(authenRequest.getUsername()) || Comparator.isEqualNullOrEmpty(authenRequest.getPassword())) {
+                throw new BusinessException(Constants.ERROR_INVALID_FORMAT);
+            }
+            Users user = usersRepository.login(authenRequest.getUsername(), authenRequest.getPassword());
+            if (Comparator.isEqualNull(user)) {
+                throw new BusinessException(Constants.ERROR_LOGIN);
+            } else {
+                usersRepository.changePass(user.getUserId(), authenRequest.getPasswordNew());
+            }
+            response = BaseResponse.parse(Constants.SUCCESS, formatMessage, lang);
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
         }
@@ -83,6 +123,7 @@ public class UsersController {
         }
         return gson.toJson(response);
     }
+
     @RequestMapping(value = Constants.PATH.API_USERROLES, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public String saveUserRole(@RequestBody List<UserRole> userRoles) {
         Gson gson = new GsonBuilder().disableHtmlEscaping().create();
@@ -159,6 +200,7 @@ public class UsersController {
         }
         return gson.toJson(response);
     }
+
     @RequestMapping(value = Constants.PATH.API_USERROLES + "/{userRoleId}/{status}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
     public String lockOrUnlockUserRole(@PathVariable("userRoleId") Long userRoleId, @PathVariable("status") Integer status) {
         Gson gson = new GsonBuilder().disableHtmlEscaping().create();
@@ -197,11 +239,11 @@ public class UsersController {
             }
             List<Users> listUsers = usersRepositoryImpl.onSearch(user);
             response = BaseResponse.parse(Constants.SUCCESS, formatMessage, lang);
-            if(!Comparator.isEqualNull(listUsers)){
+            if (!Comparator.isEqualNull(listUsers)) {
                 response.setTotal(listUsers.size());
                 response.setRows(listUsers);
             }
-            
+
         } catch (BusinessException be) {
             response = BaseResponse.parse(be.getMessage(), formatMessage, lang);
         } catch (Exception e) {

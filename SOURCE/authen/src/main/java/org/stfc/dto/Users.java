@@ -48,6 +48,8 @@ public class Users implements Serializable {
     @Size(max = 100)
     @Column(name = "password")
     private String password;
+    @Column(name = "password_changed")
+    private Integer passwordChanged;
     @Size(max = 200)
     @Column(name = "full_name")
     private String fullName;
@@ -101,6 +103,14 @@ public class Users implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Integer getPasswordChanged() {
+        return passwordChanged;
+    }
+
+    public void setPasswordChanged(Integer passwordChanged) {
+        this.passwordChanged = passwordChanged;
     }
 
     public String getFullName() {
@@ -191,5 +201,5 @@ public class Users implements Serializable {
     public String toString() {
         return "org.stfc.dto.Users[ userId=" + userId + " ]";
     }
-    
+
 }
