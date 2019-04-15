@@ -36,8 +36,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 /**
+ * @category Quan ly thong tin giang vien
  * @author viettx
- *
+ * @since 04/2019
  */
 @RestController
 public class LecturersController {

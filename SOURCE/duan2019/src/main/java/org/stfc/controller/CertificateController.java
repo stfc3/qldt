@@ -4,12 +4,14 @@
 package org.stfc.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,11 +40,40 @@ public class CertificateController {
 	FormatMessage formatMessage;
 
 	/**
+	 * @category Lay danh sach cac chung chi
+	 * @param lecturerId
+	 * @return
+	 */
+	@GetMapping(path = "/certificates", consumes = { MediaType.APPLICATION_JSON_VALUE })
+	public String getCertificate(@PathVariable Long certificateId) {
+		String lang = "vi";
+		logger.debug("Get certificate by {}", certificateId);
+		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+		BaseResponse response = BaseResponse.parse(Contants.ERROR_INTERNAL, formatMessage, lang);
+		try {
+			if (certificateId == null) {
+				throw new BusinessException(Contants.ERROR_ID_EMPTY);
+			}
+			List<Certificate> listData = repository.findByActive();
+			response = BaseResponse.parse(Contants.SUCCESS, formatMessage);
+			response.setData(listData);
+
+		} catch (BusinessException e) {
+			logger.error(e.getMessage(), e);
+			response = BaseResponse.parse(e.getMessage(), formatMessage);
+			// TODO: handle exception
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			// TODO: handle exception
+		}
+		return gson.toJson(response);
+	}
+
+	/**
 	 * @category them moi, chinh sua thong tin chung chi
 	 * @param Certificate
 	 * @return
 	 */
-
 	@PostMapping(path = "/certificate/save", consumes = { MediaType.APPLICATION_JSON_VALUE })
 	public String saveCertificate(@RequestBody Certificate certificate) {
 		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
@@ -76,7 +107,7 @@ public class CertificateController {
 	 * @param coursesId
 	 * @return
 	 */
-	@DeleteMapping(value = { "/certificate/delete/{certificateId}" })
+	@DeleteMapping(value = { "/certificate/delete/{certificateId}" }, consumes = { MediaType.APPLICATION_JSON_VALUE })
 	public String delete(@PathVariable Long certificateId) {
 		String lang = "vi";
 		logger.debug("Delete certificateId: {}", certificateId);
