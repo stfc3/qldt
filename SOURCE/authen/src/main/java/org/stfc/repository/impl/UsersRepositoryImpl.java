@@ -24,7 +24,7 @@ import org.stfc.utils.Comparator;
  * @author dmin
  */
 @Repository
-public class UsersRepositoryImpl{
+public class UsersRepositoryImpl {
 
     private static final Logger logger = LoggerFactory.getLogger(UsersRepositoryImpl.class);
     @Autowired
@@ -35,23 +35,25 @@ public class UsersRepositoryImpl{
         CriteriaQuery<Users> cq = cb.createQuery(Users.class);
         Root<Users> listUser = cq.from(Users.class);
         List<Predicate> predicates = new ArrayList<>();
-        if (!Comparator.isEqualNullOrEmpty(user.getFullName())) {
-            predicates.add(cb.like(listUser.get("fullName"), "%" + user.getFullName() + "%"));
-        }
-        if (!Comparator.isEqualNullOrEmpty(user.getUserName())) {
-            predicates.add(cb.equal(listUser.get("userName"), user.getUserName()));
-        }
-        if (!Comparator.isEqualNullOrEmpty(user.getEmail())) {
-            predicates.add(cb.equal(listUser.get("email"), user.getEmail()));
-        }
-        if (!Comparator.isEqualNullOrEmpty(user.getMobile())) {
-            predicates.add(cb.equal(listUser.get("mobile"), user.getMobile()));
-        }
-        if (!Comparator.isEqualNull(user.getUserType())) {
-            predicates.add(cb.equal(listUser.get("userType"), user.getUserType()));
-        }
-        if (!Comparator.isEqualNull(user.getStatus())) {
-            predicates.add(cb.equal(listUser.get("status"), user.getStatus()));
+        if (!Comparator.isEqualNull(user)) {
+            if (!Comparator.isEqualNullOrEmpty(user.getFullName())) {
+                predicates.add(cb.like(listUser.get("fullName"), "%" + user.getFullName() + "%"));
+            }
+            if (!Comparator.isEqualNullOrEmpty(user.getUserName())) {
+                predicates.add(cb.equal(listUser.get("userName"), user.getUserName()));
+            }
+            if (!Comparator.isEqualNullOrEmpty(user.getEmail())) {
+                predicates.add(cb.equal(listUser.get("email"), user.getEmail()));
+            }
+            if (!Comparator.isEqualNullOrEmpty(user.getMobile())) {
+                predicates.add(cb.equal(listUser.get("mobile"), user.getMobile()));
+            }
+            if (!Comparator.isEqualNull(user.getUserType())) {
+                predicates.add(cb.equal(listUser.get("userType"), user.getUserType()));
+            }
+            if (!Comparator.isEqualNull(user.getStatus())) {
+                predicates.add(cb.equal(listUser.get("status"), user.getStatus()));
+            }
         }
         logger.info("List predicates {}", predicates.size());
         cq.where(predicates.toArray(new Predicate[0]));

@@ -24,7 +24,7 @@ import org.stfc.utils.Comparator;
  * @author dmin
  */
 @Repository
-public class ObjectsRepositoryImpl{
+public class ObjectsRepositoryImpl {
 
     private static final Logger logger = LoggerFactory.getLogger(ObjectsRepositoryImpl.class);
     @Autowired
@@ -35,23 +35,25 @@ public class ObjectsRepositoryImpl{
         CriteriaQuery<Objects> cq = cb.createQuery(Objects.class);
         Root<Objects> listObjects = cq.from(Objects.class);
         List<Predicate> predicates = new ArrayList<>();
-        if (!Comparator.isEqualNullOrEmpty(objects.getObjectName())) {
-            predicates.add(cb.like(listObjects.get("objectName"), "%" + objects.getObjectName() + "%"));
-        }
-        if (!Comparator.isEqualNullOrEmpty(objects.getObjectCode())) {
-            predicates.add(cb.equal(listObjects.get("objectCode"), objects.getObjectCode()));
-        }
-        if (!Comparator.isEqualNullOrEmpty(objects.getAppCode())) {
-            predicates.add(cb.equal(listObjects.get("appCode"), objects.getAppCode()));
-        }
-        if (!Comparator.isEqualNull(objects.getObjectParent())) {
-            predicates.add(cb.equal(listObjects.get("objectParent"), objects.getObjectParent()));
-        }
-        if (!Comparator.isEqualNull(objects.getObjectType())) {
-            predicates.add(cb.equal(listObjects.get("objectType"), objects.getObjectType()));
-        }
-        if (!Comparator.isEqualNull(objects.getStatus())) {
-            predicates.add(cb.equal(listObjects.get("status"), objects.getStatus()));
+        if (!Comparator.isEqualNull(objects)) {
+            if (!Comparator.isEqualNullOrEmpty(objects.getObjectName())) {
+                predicates.add(cb.like(listObjects.get("objectName"), "%" + objects.getObjectName() + "%"));
+            }
+            if (!Comparator.isEqualNullOrEmpty(objects.getObjectCode())) {
+                predicates.add(cb.equal(listObjects.get("objectCode"), objects.getObjectCode()));
+            }
+            if (!Comparator.isEqualNullOrEmpty(objects.getAppCode())) {
+                predicates.add(cb.equal(listObjects.get("appCode"), objects.getAppCode()));
+            }
+            if (!Comparator.isEqualNull(objects.getObjectParent())) {
+                predicates.add(cb.equal(listObjects.get("objectParent"), objects.getObjectParent()));
+            }
+            if (!Comparator.isEqualNull(objects.getObjectType())) {
+                predicates.add(cb.equal(listObjects.get("objectType"), objects.getObjectType()));
+            }
+            if (!Comparator.isEqualNull(objects.getStatus())) {
+                predicates.add(cb.equal(listObjects.get("status"), objects.getStatus()));
+            }
         }
         logger.info("List predicates {}", predicates.size());
         cq.where(predicates.toArray(new Predicate[0]));

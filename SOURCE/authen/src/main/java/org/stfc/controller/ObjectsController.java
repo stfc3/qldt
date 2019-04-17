@@ -120,15 +120,12 @@ public class ObjectsController {
     }
 
     @RequestMapping(value = Constants.PATH.API_OBJECTS_SEARCH, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public String searchObject(@RequestBody Objects object) {
+    public String searchObject(@RequestBody(required = false) Objects object) {
         Gson gson = new GsonBuilder().disableHtmlEscaping().create();
         logger.debug("Body request: {}", gson.toJson(object));
         String lang = "vi";
         BaseResponse response = BaseResponse.parse(Constants.ERROR_INTERNAL, formatMessage, lang);
         try {
-            if (Comparator.isEqualNull(object)) {
-                throw new BusinessException(Constants.ERROR_INVALID_FORMAT);
-            }
             List<Objects> listObjects = objectsRepositoryImpl.onSearch(object);
             response = BaseResponse.parse(Constants.SUCCESS, formatMessage, lang);
             if(!Comparator.isEqualNull(listObjects)){
@@ -136,8 +133,6 @@ public class ObjectsController {
                 response.setRows(listObjects);
             }
             
-        } catch (BusinessException be) {
-            response = BaseResponse.parse(be.getMessage(), formatMessage, lang);
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
         }

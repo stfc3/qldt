@@ -24,7 +24,7 @@ import org.stfc.utils.Comparator;
  * @author dmin
  */
 @Repository
-public class RolesRepositoryImpl{
+public class RolesRepositoryImpl {
 
     private static final Logger logger = LoggerFactory.getLogger(RolesRepositoryImpl.class);
     @Autowired
@@ -35,14 +35,16 @@ public class RolesRepositoryImpl{
         CriteriaQuery<Roles> cq = cb.createQuery(Roles.class);
         Root<Roles> listRoles = cq.from(Roles.class);
         List<Predicate> predicates = new ArrayList<>();
-        if (!Comparator.isEqualNullOrEmpty(roles.getRoleName())) {
-            predicates.add(cb.like(listRoles.get("roleName"), "%" + roles.getRoleName() + "%"));
-        }
-        if (!Comparator.isEqualNullOrEmpty(roles.getRoleCode())) {
-            predicates.add(cb.equal(listRoles.get("roleCode"), roles.getRoleCode()));
-        }
-        if (!Comparator.isEqualNull(roles.getStatus())) {
-            predicates.add(cb.equal(listRoles.get("status"), roles.getStatus()));
+        if (!Comparator.isEqualNull(onSearch(roles))) {
+            if (!Comparator.isEqualNullOrEmpty(roles.getRoleName())) {
+                predicates.add(cb.like(listRoles.get("roleName"), "%" + roles.getRoleName() + "%"));
+            }
+            if (!Comparator.isEqualNullOrEmpty(roles.getRoleCode())) {
+                predicates.add(cb.equal(listRoles.get("roleCode"), roles.getRoleCode()));
+            }
+            if (!Comparator.isEqualNull(roles.getStatus())) {
+                predicates.add(cb.equal(listRoles.get("status"), roles.getStatus()));
+            }
         }
         logger.info("List predicates {}", predicates.size());
         cq.where(predicates.toArray(new Predicate[0]));
