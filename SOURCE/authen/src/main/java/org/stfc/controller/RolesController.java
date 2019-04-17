@@ -69,6 +69,7 @@ public class RolesController {
         }
         return gson.toJson(response);
     }
+
     @RequestMapping(value = Constants.PATH.API_ROLEOBJECTS, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public String saveRoleObject(@RequestBody List<RoleObject> roleObjects) {
         Gson gson = new GsonBuilder().disableHtmlEscaping().create();
@@ -145,6 +146,7 @@ public class RolesController {
         }
         return gson.toJson(response);
     }
+
     @RequestMapping(value = Constants.PATH.API_ROLEOBJECTS + "/{roleObjectId}/{status}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
     public String lockOrUnlockRoleObject(@PathVariable("roleObjectId") Long roleObjectId, @PathVariable("status") Integer status) {
         Gson gson = new GsonBuilder().disableHtmlEscaping().create();
@@ -172,24 +174,19 @@ public class RolesController {
     }
 
     @RequestMapping(value = Constants.PATH.API_ROLES_SEARCH, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public String searchRole(@RequestBody Roles role) {
+    public String searchRole(@RequestBody(required = false) Roles role) {
         Gson gson = new GsonBuilder().disableHtmlEscaping().create();
         logger.debug("Body request: {}", gson.toJson(role));
         String lang = "vi";
         BaseResponse response = BaseResponse.parse(Constants.ERROR_INTERNAL, formatMessage, lang);
         try {
-            if (Comparator.isEqualNull(role)) {
-                throw new BusinessException(Constants.ERROR_INVALID_FORMAT);
-            }
             List<Roles> listRoles = rolesRepositoryImpl.onSearch(role);
             response = BaseResponse.parse(Constants.SUCCESS, formatMessage, lang);
-            if(!Comparator.isEqualNull(listRoles)){
+            if (!Comparator.isEqualNull(listRoles)) {
                 response.setTotal(listRoles.size());
                 response.setRows(listRoles);
             }
-            
-        } catch (BusinessException be) {
-            response = BaseResponse.parse(be.getMessage(), formatMessage, lang);
+
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
         }

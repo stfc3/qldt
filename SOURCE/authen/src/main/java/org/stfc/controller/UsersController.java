@@ -228,15 +228,12 @@ public class UsersController {
     }
 
     @RequestMapping(value = Constants.PATH.API_USERS_SEARCH, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public String searchUser(@RequestBody Users user) {
+    public String searchUser(@RequestBody(required = false) Users user) {
         Gson gson = new GsonBuilder().disableHtmlEscaping().create();
         logger.debug("Body request: {}", gson.toJson(user));
         String lang = "vi";
         BaseResponse response = BaseResponse.parse(Constants.ERROR_INTERNAL, formatMessage, lang);
         try {
-            if (Comparator.isEqualNull(user)) {
-                throw new BusinessException(Constants.ERROR_INVALID_FORMAT);
-            }
             List<Users> listUsers = usersRepositoryImpl.onSearch(user);
             response = BaseResponse.parse(Constants.SUCCESS, formatMessage, lang);
             if (!Comparator.isEqualNull(listUsers)) {
@@ -244,8 +241,6 @@ public class UsersController {
                 response.setRows(listUsers);
             }
 
-        } catch (BusinessException be) {
-            response = BaseResponse.parse(be.getMessage(), formatMessage, lang);
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
         }
