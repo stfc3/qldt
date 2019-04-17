@@ -7,6 +7,8 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.stfc.dto.Experiences;
 
@@ -18,5 +20,6 @@ import org.stfc.dto.Experiences;
 public interface ExperiencesRepository extends JpaRepository<Experiences, Long>, JpaSpecificationExecutor<Experiences> {
 	List<Experiences> findByLecturerId(Long lecturer);
 
-	Experiences findExperiencesById(Long experiencesId);
+	@Query("select e from Experiences e where e.experienceId = :experienceId")
+	Experiences findExperiencesById(@Param("experienceId") Long experiencesId);
 }

@@ -6,6 +6,8 @@ package org.stfc.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.stfc.dto.CertificatePosition;
 
 /**
@@ -13,5 +15,6 @@ import org.stfc.dto.CertificatePosition;
  *
  */
 public interface CertificatePositionRepository extends JpaRepository<CertificatePosition, Long> {
-	List<CertificatePosition> findByPositions(Long positionId);
+	@Query("select c from CertificatePosition c where c.position = :position")
+	List<CertificatePosition> findByPositions(@Param("position") Long positionId);
 }

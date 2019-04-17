@@ -3,7 +3,6 @@
  */
 package org.stfc.dto;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -14,23 +13,14 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotBlank;
-
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
 
 /**
  * @author viettx
  *
  */
-@Data
 @Entity
 @Table(name = "Courses")
-@AllArgsConstructor
-public class Courses implements Serializable {
+public class Courses {
 	/**
 	 * 
 	 */
@@ -39,43 +29,28 @@ public class Courses implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "course_id", nullable = false, length = 20, unique = false)
-	@Expose(serialize = false, deserialize = false)
-	@SerializedName("course_id")
-//	@NotBlank(message = "Name is mandatory")
 	private Long courseId;
 
 	@Column(name = "course_name", nullable = false, length = 600)
-	@Expose(serialize = false, deserialize = false)
-	@SerializedName("course_name")
-	@NotBlank(message = "Name is not null")
 	private String courseName;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "start_date", nullable = true)
-	@Expose(serialize = false, deserialize = false)
-	@SerializedName("start_date")
 	private Date startDate;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "end_date", nullable = false)
-	@Expose(serialize = false, deserialize = false)
-	@SerializedName("end_date")
 	private Date endDate;
 
 	@Column(name = "created_date")
 	@Temporal(TemporalType.TIMESTAMP)
-	@Expose(serialize = false, deserialize = false)
 	private Date createDate;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "updated_date")
-	@Expose(serialize = false, deserialize = false)
 	private Date modifiedDate;
 
 	@Column(name = "lecturer_id", nullable = false, length = 20)
-	@Expose(serialize = false, deserialize = false)
-	@SerializedName("lecturer_id")
-//	@NotBlank(message = "Lecturer is not null")
 	private Long lecturerId;
 
 	/**
