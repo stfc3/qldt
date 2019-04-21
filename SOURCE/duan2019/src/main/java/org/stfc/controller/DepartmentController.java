@@ -3,11 +3,14 @@
  */
 package org.stfc.controller;
 
+import java.util.Date;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -40,9 +43,9 @@ public class DepartmentController {
 	 * @category Lay thong tin cac phong ban hien co
 	 * @return
 	 */
-	@RequestMapping(method = { RequestMethod.GET }, value = { "/get_department/" }, headers = {
+	@RequestMapping(method = { RequestMethod.GET }, value = { "/department" }, headers = {
 			"Accept=application/json" }, produces = { "text/plain;charset=UTF-8" })
-	public String onSearch() {
+	public String findAllDepartment() {
 		logger.debug("Methot GET");
 		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
 		BaseResponse response = BaseResponse.parse(Contants.ERROR_INTERNAL, formatMessage);
@@ -52,6 +55,40 @@ public class DepartmentController {
 		} catch (Exception e) {
 			// TODO: handle exception
 			logger.error(e.getMessage(), e);
+		}
+		return gson.toJson(response);
+	}
+
+	/**
+	 * Lay thong tin 1 phong ban
+	 * @param departmentId
+	 * @return
+	 */
+	@GetMapping(value = "/department/{departmentId}", headers = { "Accept=application/json" }, produces = {
+			"text/plain;charset=UTF-8" })
+	public String findOneDepartment(@PathVariable Long departmentId) {
+		String lang = "vi";
+		logger.debug("Get lecturer by {}", departmentId);
+		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+		BaseResponse response = BaseResponse.parse(Contants.ERROR_INTERNAL, formatMessage, lang);
+		try {
+			if (departmentId == null) {
+				throw new BusinessException(Contants.ERROR_ID_EMPTY);
+			}
+			Departments department = repository.findByDepartmentId(departmentId);
+			if (department == null) {
+				throw new BusinessException(Contants.ERROR_DATA_EMPTY);
+			}
+			response = BaseResponse.parse(Contants.SUCCESS, formatMessage);
+			response.setData(department);
+			response.setTotal(1);
+		} catch (BusinessException e) {
+			logger.error(e.getMessage(), e);
+			response = BaseResponse.parse(e.getMessage(), formatMessage);
+			// TODO: handle exception
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			// TODO: handle exception
 		}
 		return gson.toJson(response);
 	}
@@ -73,6 +110,11 @@ public class DepartmentController {
 			Departments department = gson.fromJson(body, Departments.class);
 			if (department == null) {
 				throw new BusinessException(Contants.ERROR_INVALID_FORMAT);
+			}
+			if (department.getId() == null) {
+				department.setCreateDate(new Date());
+			} else {
+				department.setModifiedDate(new Date());
 			}
 			repository.save(department);
 			response = BaseResponse.parse(Contants.SUCCESS, formatMessage);

@@ -8,10 +8,8 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.stfc.dto.Experiences;
-import org.stfc.dto.Lecturers;
 import org.stfc.message.BaseResponse;
 import org.stfc.message.ObjectLecturerRequest;
-import org.stfc.message.ExpriencesLecturerResponse;
 import org.stfc.repository.ExperiencesRepository;
 import org.stfc.repository.LecturersRepository;
 import org.stfc.utils.Contants;
@@ -67,19 +65,19 @@ public class ExpriencesLecturerBusiness implements Business {
 			if (req == null) {
 				throw new BusinessException(Contants.ERROR_INVALID_FORMAT);
 			}
-			ExpriencesLecturerResponse response = new ExpriencesLecturerResponse();
-			Lecturers lecturers = repository.findLecturersById(req.getLecturerId());
-			if (lecturers != null) {
-				response.setLecturer(lecturers);
-			}
+//			ExpriencesLecturerResponse response = new ExpriencesLecturerResponse();
+//			Lecturers lecturers = repository.findLecturersById(req.getLecturerId());
+//			if (lecturers != null) {
+//				response.setLecturer(lecturers);
+//			}
 			List<Experiences> listExperiences = experiencesRepository.findByLecturerId(req.getLecturerId());
 			if (listExperiences != null && !listExperiences.isEmpty()) {
-				response.setExperiences(listExperiences);
+				throw new BusinessException(Contants.ERROR_DATA_EMPTY);
 			}
 
 			res = BaseResponse.parse(Contants.SUCCESS, formatMessage, lang);
 			res.setTotal(listExperiences.size());
-			res.setData(response);
+			res.setData(listExperiences);
 
 		} catch (BusinessException be) {
 			logger.error(be.getMessage(), be);

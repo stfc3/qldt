@@ -90,7 +90,7 @@ public class SearchLecturersBussiness implements Business {
 					if (department != null) {
 						entity.setDepartment(department.getName());
 					}
-					Positions positions = cacheInfo.getPositions().get(lecturers.getDeptId());
+					Positions positions = cacheInfo.getPositions().get(lecturers.getPosiId());
 					if (positions != null) {
 						entity.setPosition(positions.getPosiName());
 					}
@@ -98,12 +98,12 @@ public class SearchLecturersBussiness implements Business {
 					listData.add(entity);
 				}
 			}
-			lecturersResponse.setListLecturers(listData);
+//			lecturersResponse.setListLecturers(listData);
 
 			logger.debug("Data response {}", gson.toJson(lecturersResponse));
 			res = BaseResponse.parse(Contants.SUCCESS, formatMessage, lang);
 			res.setTotal(listData.size());
-			res.setData(lecturersResponse);
+			res.setData(listData);
 		} catch (BusinessException be) {
 			logger.error(be.getMessage(), be);
 			res = BaseResponse.parse(be.getMessage(), formatMessage, lang);

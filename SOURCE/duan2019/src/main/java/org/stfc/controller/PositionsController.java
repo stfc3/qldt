@@ -4,6 +4,7 @@
 package org.stfc.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,6 +32,7 @@ import org.stfc.message.CertPositionResponse;
 import org.stfc.repository.CertificatePositionRepository;
 import org.stfc.repository.CertificateRepository;
 import org.stfc.repository.PositionsRepository;
+import org.stfc.utils.Comparator;
 import org.stfc.utils.Contants;
 import org.stfc.utils.FormatMessage;
 
@@ -73,8 +76,32 @@ public class PositionsController {
 		return gson.toJson(response);
 	}
 
+	@RequestMapping(method = { RequestMethod.GET }, value = { "/positions/{positionId}" }, headers = {
+			"Accept=application/json" }, produces = { "text/plain;charset=UTF-8" })
+	public String findPositions(@PathVariable Long positionId) {
+		logger.debug("Methot GET ");
+		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+		BaseResponse response = BaseResponse.parse(Contants.ERROR_INTERNAL, formatMessage);
+		try {
+			if (Comparator.isEqualNull(positionId)) {
+				throw new BusinessException(Contants.ERROR_ID_EMPTY);
+			}
+			Positions positions = repository.findByPositionId(positionId);
+			if (Comparator.isEqualNull(positions)) {
+				throw new BusinessException(Contants.ERROR_DATA_EMPTY);
+			}
+			response = BaseResponse.parse(Contants.SUCCESS, formatMessage);
+			response.setData(positions);
+			response.setTotal(1);
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error(e.getMessage(), e);
+		}
+		return gson.toJson(response);
+	}
+
 	/**
-	 * @category Them moi 1 vi tri
+	 * @category Them moi 1 vi tri, chuc danh
 	 * @param httpEntity
 	 * @return
 	 */
@@ -92,7 +119,46 @@ public class PositionsController {
 			if (positions == null) {
 				throw new BusinessException(Contants.ERROR_INVALID_FORMAT);
 			}
+			if (positions.getId() == null) {
+				positions.setCreateDate(new Date());
+			} else {
+				positions.setModifiedDate(new Date());
+			}
 			repository.save(positions);
+			response = BaseResponse.parse(Contants.SUCCESS, formatMessage, lang);
+		} catch (BusinessException be) {
+			logger.error(be.getMessage(), be);
+			response = BaseResponse.parse(be.getMessage(), formatMessage, lang);
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error(e.getMessage(), e);
+		}
+		return gson.toJson(response);
+	}
+
+	@RequestMapping(method = { RequestMethod.POST }, value = { "/positions/saves" }, headers = {
+			"Accept=application/json" }, produces = { "text/plain;charset=UTF-8" })
+	public String savesPositions(@RequestBody List<Positions> positions) {
+		String lang = "vi";
+//		String body = httpEntity.getBody();
+
+		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+		logger.debug("Body request: {}", gson.toJson(positions));
+		BaseResponse response = BaseResponse.parse(Contants.ERROR_INTERNAL, formatMessage, lang);
+
+		try {
+//			List<Positions> positions = gson.fromJson(body, List.class);
+			if (positions == null) {
+				throw new BusinessException(Contants.ERROR_INVALID_FORMAT);
+			}
+			for (Positions pos : positions) {
+				if (pos.getId() == null) {
+					pos.setCreateDate(new Date());
+				} else {
+					pos.setModifiedDate(new Date());
+				}
+			}
+			repository.saveAll(positions);
 			response = BaseResponse.parse(Contants.SUCCESS, formatMessage, lang);
 		} catch (BusinessException be) {
 			logger.error(be.getMessage(), be);

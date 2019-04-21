@@ -76,11 +76,12 @@ public class SearchDepartmentBusiness implements Business {
 			/**
 			 * Gan gia tri tra ve cho client
 			 */
-			DepartmentResponse response = new DepartmentResponse();
-			response.setListDept(listAllData);
-			logger.debug("Data response {}", gson.toJson(response));
+//			DepartmentResponse response = new DepartmentResponse();
+//			response.setListDept(listAllData);
+			logger.debug("Data response {}", gson.toJson(listAllData));
 			res = BaseResponse.parse(Contants.SUCCESS, formatMessage, lang);
-			res.setData(response);
+			res.setData(listAllData);
+			res.setTotal(listAllData.size());
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			// TODO: handle exception

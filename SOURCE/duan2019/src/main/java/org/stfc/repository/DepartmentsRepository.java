@@ -18,4 +18,10 @@ import org.stfc.dto.Departments;
 public interface DepartmentsRepository extends JpaRepository<Departments, Long>{
 	@Query("select d from Departments d where d.status = 1")
 	List<Departments> findAllDepartmentsActive();
+
+	@Query("select d from Departments d where d.status = 1 and d.id = :departmentId ")
+	Departments findByDepartmentId(Long departmentId);
+	
+	
+	
 }

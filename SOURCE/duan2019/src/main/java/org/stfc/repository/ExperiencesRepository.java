@@ -18,7 +18,8 @@ import org.stfc.dto.Experiences;
  */
 @Repository
 public interface ExperiencesRepository extends JpaRepository<Experiences, Long>, JpaSpecificationExecutor<Experiences> {
-	List<Experiences> findByLecturerId(Long lecturer);
+	@Query("select e from Experiences e where e.lecturerId = :lecturerId")
+	List<Experiences> findByLecturerId(@Param("lecturerId") Long lecturerId);
 
 	@Query("select e from Experiences e where e.experienceId = :experienceId")
 	Experiences findExperiencesById(@Param("experienceId") Long experiencesId);

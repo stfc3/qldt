@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.stfc.dto.Positions;
 import org.stfc.message.BaseResponse;
-import org.stfc.message.PositionsResponse;
 import org.stfc.repository.PositionsRepository;
 import org.stfc.utils.Contants;
 import org.stfc.utils.FormatMessage;
@@ -76,11 +75,12 @@ public class SearchPositionsBusiness implements Business {
 			/**
 			 * Gan gia tri tra ve cho client
 			 */
-			PositionsResponse response = new PositionsResponse();
-			response.setListPos(listAllData);
-			logger.debug("Data response {}", gson.toJson(response));
+//			PositionsResponse response = new PositionsResponse();
+//			response.setListPos(listAllData);
+			logger.debug("Data response {}", gson.toJson(listAllData));
 			res = BaseResponse.parse(Contants.SUCCESS, formatMessage, lang);
-			res.setData(response);
+			res.setData(listAllData);
+			res.setTotal(listAllData.size());
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			// TODO: handle exception
