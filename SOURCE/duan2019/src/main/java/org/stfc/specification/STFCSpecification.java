@@ -1,13 +1,18 @@
 package org.stfc.specification;
 
 import java.lang.reflect.Field;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.jpa.domain.Specification;
 
 public class STFCSpecification<T> {
+	private static final Logger logger = LoggerFactory.getLogger(STFCSpecification.class);
+
 	public Specification<T> getSpecification(String search) {
 		if (StringUtils.isBlank(search)) {
 			return null;
@@ -27,7 +32,7 @@ public class STFCSpecification<T> {
 		}
 		return builder.build();
 	}
-	
+
 	public String getFieldNames(Class<?> clazz, String queryValue) throws Exception {
 		String builderQuery = "";
 
@@ -35,6 +40,38 @@ public class STFCSpecification<T> {
 		for (int i = 0; i < fields.length; i++) {
 			if (fields[i].getType().getName().equals(String.class.getName())) {
 				builderQuery += fields[i].getName() + ":" + queryValue + ",";
+			} else if (fields[i].getType().getName().equals(Long.class.getName())) {
+				try {
+					Long value = Long.parseLong(queryValue);
+					builderQuery += fields[i].getName() + ":" + value + ",";
+				} catch (Exception e) {
+					// TODO: handle exception
+					logger.error(e.getMessage(), e);
+				}
+			} else if (fields[i].getType().getName().equals(Double.class.getName())) {
+				try {
+					Double value = Double.parseDouble(queryValue);
+					builderQuery += fields[i].getName() + ":" + value + ",";
+				} catch (Exception e) {
+					// TODO: handle exception
+					logger.error(e.getMessage(), e);
+				}
+			} else if (fields[i].getType().getName().equals(Integer.class.getName())) {
+				try {
+					Integer value = Integer.parseInt(queryValue);
+					builderQuery += fields[i].getName() + ":" + value + ",";
+				} catch (Exception e) {
+					// TODO: handle exception
+					logger.error(e.getMessage(), e);
+				}
+			} else if (fields[i].getType().getName().equals(Boolean.class.getName())) {
+				try {
+					Boolean value = Boolean.parseBoolean(queryValue);
+					builderQuery += fields[i].getName() + ":" + value + ",";
+				} catch (Exception e) {
+					// TODO: handle exception
+					logger.error(e.getMessage(), e);
+				}
 			}
 		}
 		return builderQuery;
