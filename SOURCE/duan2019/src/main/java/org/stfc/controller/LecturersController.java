@@ -72,10 +72,10 @@ public class LecturersController {
 		BaseResponse response = BaseResponse.parse(Contants.ERROR_INTERNAL, formatMessage);
 		try {
 			SearchLecturersBussiness bussiness = new SearchLecturersBussiness();
-			bussiness.setFormatMessage(formatMessage);
-			bussiness.setRepository(lecturerRepository);
-			bussiness.setImp(imp);
 			bussiness.setCacheInfo(cacheInfo);
+			bussiness.setFormatMessage(formatMessage);
+			bussiness.setImp(imp);
+			bussiness.setRepository(lecturerRepository);
 			response = bussiness.process(body, gson);
 		} catch (Exception e) {
 			// TODO: handle exception
