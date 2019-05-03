@@ -55,7 +55,7 @@
     </logger>
     <logger name="com.mchange" additivity="false"> 
     </logger>-->
-    <logger name="com.vnpay.ott" level="DEBUG"> 
+    <logger name="org.stfc" level="DEBUG"> 
     </logger>
     <logger name="org.springframework.security" level="ERROR"> 
     </logger>

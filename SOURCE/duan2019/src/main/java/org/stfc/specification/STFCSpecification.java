@@ -46,7 +46,7 @@ public class STFCSpecification<T> {
 					builderQuery += fields[i].getName() + ":" + value + ",";
 				} catch (Exception e) {
 					// TODO: handle exception
-					logger.error(e.getMessage(), e);
+//					logger.error(e.getMessage(), e);
 				}
 			} else if (fields[i].getType().getName().equals(Double.class.getName())) {
 				try {
@@ -54,7 +54,7 @@ public class STFCSpecification<T> {
 					builderQuery += fields[i].getName() + ":" + value + ",";
 				} catch (Exception e) {
 					// TODO: handle exception
-					logger.error(e.getMessage(), e);
+//					logger.error(e.getMessage(), e);
 				}
 			} else if (fields[i].getType().getName().equals(Integer.class.getName())) {
 				try {
@@ -62,7 +62,7 @@ public class STFCSpecification<T> {
 					builderQuery += fields[i].getName() + ":" + value + ",";
 				} catch (Exception e) {
 					// TODO: handle exception
-					logger.error(e.getMessage(), e);
+//					logger.error(e.getMessage(), e);
 				}
 			} else if (fields[i].getType().getName().equals(Boolean.class.getName())) {
 				try {
@@ -70,7 +70,7 @@ public class STFCSpecification<T> {
 					builderQuery += fields[i].getName() + ":" + value + ",";
 				} catch (Exception e) {
 					// TODO: handle exception
-					logger.error(e.getMessage(), e);
+//					logger.error(e.getMessage(), e);
 				}
 			}
 		}
