@@ -19,6 +19,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.hibernate.annotations.DynamicInsert;
@@ -70,6 +71,8 @@ public class Objects implements Serializable {
     @Column(name = "updated_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedDate;
+    @Transient
+    private String keySearch;
 
     public Objects() {
     }
@@ -165,6 +168,15 @@ public class Objects implements Serializable {
     public void setUpdatedDate(Date updatedDate) {
         this.updatedDate = updatedDate;
     }
+
+    public String getKeySearch() {
+        return keySearch;
+    }
+
+    public void setKeySearch(String keySearch) {
+        this.keySearch = keySearch;
+    }
+    
 
     @Override
     public int hashCode() {

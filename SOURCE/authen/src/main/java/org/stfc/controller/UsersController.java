@@ -71,6 +71,8 @@ public class UsersController {
             }
             response = BaseResponse.parse(Constants.SUCCESS, formatMessage, lang);
             response.setRows(authenResponse);
+        } catch (BusinessException be) {
+            response = BaseResponse.parse(be.getMessage(), formatMessage, lang);
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
         }
@@ -94,6 +96,8 @@ public class UsersController {
                 usersRepository.changePass(user.getUserId(), authenRequest.getPasswordNew());
             }
             response = BaseResponse.parse(Constants.SUCCESS, formatMessage, lang);
+        } catch (BusinessException be) {
+            response = BaseResponse.parse(be.getMessage(), formatMessage, lang);
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
         }
@@ -240,7 +244,6 @@ public class UsersController {
                 response.setTotal(listUsers.size());
                 response.setRows(listUsers);
             }
-
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
         }

@@ -5,13 +5,9 @@
  */
 package org.stfc.repository.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,35 +26,63 @@ public class ObjectsRepositoryImpl {
     @Autowired
     EntityManager em;
 
-    public List<Objects> onSearch(Objects objects) {
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<Objects> cq = cb.createQuery(Objects.class);
-        Root<Objects> listObjects = cq.from(Objects.class);
-        List<Predicate> predicates = new ArrayList<>();
-        if (!Comparator.isEqualNull(objects)) {
-            if (!Comparator.isEqualNullOrEmpty(objects.getObjectName())) {
-                predicates.add(cb.like(listObjects.get("objectName"), "%" + objects.getObjectName() + "%"));
+    public List<Objects> onSearch(Objects object) {
+        StringBuilder sql = new StringBuilder("SELECT * FROM objects o WHERE 1 = 1");
+        if (!Comparator.isEqualNull(object)) {
+            if (!Comparator.isEqualNull(object.getObjectId())) {
+                sql.append(" AND o.object_id = :objectId");
             }
-            if (!Comparator.isEqualNullOrEmpty(objects.getObjectCode())) {
-                predicates.add(cb.equal(listObjects.get("objectCode"), objects.getObjectCode()));
+            if (!Comparator.isEqualNullOrEmpty(object.getObjectCode())) {
+                sql.append(" AND o.object_code = :objectCode");
             }
-            if (!Comparator.isEqualNullOrEmpty(objects.getAppCode())) {
-                predicates.add(cb.equal(listObjects.get("appCode"), objects.getAppCode()));
+            if (!Comparator.isEqualNullOrEmpty(object.getObjectName())) {
+                sql.append(" AND o.object_name = :objectName");
             }
-            if (!Comparator.isEqualNull(objects.getObjectParent())) {
-                predicates.add(cb.equal(listObjects.get("objectParent"), objects.getObjectParent()));
+            if (!Comparator.isEqualNullOrEmpty(object.getAppCode())) {
+                sql.append(" AND o.app_code = :appCode");
             }
-            if (!Comparator.isEqualNull(objects.getObjectType())) {
-                predicates.add(cb.equal(listObjects.get("objectType"), objects.getObjectType()));
+            if (!Comparator.isEqualNull(object.getObjectType())) {
+                sql.append(" AND o.object_type = :objectType");
             }
-            if (!Comparator.isEqualNull(objects.getStatus())) {
-                predicates.add(cb.equal(listObjects.get("status"), objects.getStatus()));
+            if (!Comparator.isEqualNull(object.getObjectParent())) {
+                sql.append(" AND o.object_parent = :objectParent");
+            }
+            if (!Comparator.isEqualNull(object.getStatus())) {
+                sql.append(" AND o.status = :status");
+            }
+            if (!Comparator.isEqualNullOrEmpty(object.getKeySearch())) {
+                sql.append(" AND MATCH (o.object_code, o.object_name, o.app_code, o.description) AGAINST (:keySearch)");
             }
         }
-        logger.info("List predicates {}", predicates.size());
-        cq.where(predicates.toArray(new Predicate[0]));
-        return em.createQuery(cq).getResultList();
-
+        Query query =em.createNativeQuery(sql.toString(), Objects.class);
+        
+        if (!Comparator.isEqualNull(object)) {
+            if (!Comparator.isEqualNull(object.getObjectId())) {
+                query.setParameter("objectId", object.getObjectId());
+            }
+            if (!Comparator.isEqualNullOrEmpty(object.getObjectCode())) {
+                query.setParameter("objectCode", object.getObjectCode());
+            }
+            if (!Comparator.isEqualNullOrEmpty(object.getObjectName())) {
+                query.setParameter("objectName", object.getObjectName());
+            }
+            if (!Comparator.isEqualNullOrEmpty(object.getAppCode())) {
+                query.setParameter("appCode", object.getAppCode());
+            }
+            if (!Comparator.isEqualNull(object.getObjectType())) {
+                query.setParameter("objectType", object.getObjectType());
+            }
+            if (!Comparator.isEqualNull(object.getObjectParent())) {
+                query.setParameter("objectParent", object.getObjectParent());
+            }
+            if (!Comparator.isEqualNull(object.getStatus())) {
+                query.setParameter("status", object.getStatus());
+            }
+            if (!Comparator.isEqualNullOrEmpty(object.getKeySearch())) {
+                query.setParameter("keySearch", object.getKeySearch());
+            }
+        }
+        return query.getResultList();
     }
 
 }
