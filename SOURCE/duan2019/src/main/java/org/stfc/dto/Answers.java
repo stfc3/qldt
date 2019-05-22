@@ -28,25 +28,23 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author dongdv
  */
 @Entity
-@Table(name = "questions")
+@Table(name = "answers")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Questions.findAll", query = "SELECT q FROM Questions q")})
-public class Questions implements Serializable {
+    @NamedQuery(name = "Answers.findAll", query = "SELECT a FROM Answers a")})
+public class Answers implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @Column(name = "answer_id")
+    private Long answerId;
     @Column(name = "question_id")
-    private Long questionId;
-    @Column(name = "survey_id")
-    private BigInteger surveyId;
+    private BigInteger questionId;
     @Size(max = 1000)
-    @Column(name = "question_content")
-    private String questionContent;
-    @Column(name = "question_type")
-    private Integer questionType;
+    @Column(name = "answer_name")
+    private String answerName;
     @Column(name = "created_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
@@ -56,43 +54,35 @@ public class Questions implements Serializable {
     @Transient
     private String keySearch;
 
-    public Questions() {
+    public Answers() {
     }
 
-    public Questions(Long questionId) {
-        this.questionId = questionId;
+    public Answers(Long answerId) {
+        this.answerId = answerId;
     }
 
-    public Long getQuestionId() {
+    public Long getAnswerId() {
+        return answerId;
+    }
+
+    public void setAnswerId(Long answerId) {
+        this.answerId = answerId;
+    }
+
+    public BigInteger getQuestionId() {
         return questionId;
     }
 
-    public void setQuestionId(Long questionId) {
+    public void setQuestionId(BigInteger questionId) {
         this.questionId = questionId;
     }
 
-    public BigInteger getSurveyId() {
-        return surveyId;
+    public String getAnswerName() {
+        return answerName;
     }
 
-    public void setSurveyId(BigInteger surveyId) {
-        this.surveyId = surveyId;
-    }
-
-    public String getQuestionContent() {
-        return questionContent;
-    }
-
-    public void setQuestionContent(String questionContent) {
-        this.questionContent = questionContent;
-    }
-
-    public Integer getQuestionType() {
-        return questionType;
-    }
-
-    public void setQuestionType(Integer questionType) {
-        this.questionType = questionType;
+    public void setAnswerName(String answerName) {
+        this.answerName = answerName;
     }
 
     public Date getCreatedDate() {
@@ -122,18 +112,18 @@ public class Questions implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (questionId != null ? questionId.hashCode() : 0);
+        hash += (answerId != null ? answerId.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Questions)) {
+        if (!(object instanceof Answers)) {
             return false;
         }
-        Questions other = (Questions) object;
-        if ((this.questionId == null && other.questionId != null) || (this.questionId != null && !this.questionId.equals(other.questionId))) {
+        Answers other = (Answers) object;
+        if ((this.answerId == null && other.answerId != null) || (this.answerId != null && !this.answerId.equals(other.answerId))) {
             return false;
         }
         return true;
@@ -141,7 +131,7 @@ public class Questions implements Serializable {
 
     @Override
     public String toString() {
-        return "org.stfc.dto.Questions[ questionId=" + questionId + " ]";
+        return "org.stfc.dto.Answers[ answerId=" + answerId + " ]";
     }
     
 }

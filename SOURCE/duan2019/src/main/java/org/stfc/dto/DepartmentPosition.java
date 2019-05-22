@@ -19,8 +19,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -28,71 +26,68 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author dongdv
  */
 @Entity
-@Table(name = "questions")
+@Table(name = "department_position")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Questions.findAll", query = "SELECT q FROM Questions q")})
-public class Questions implements Serializable {
+    @NamedQuery(name = "DepartmentPosition.findAll", query = "SELECT d FROM DepartmentPosition d")})
+public class DepartmentPosition implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "question_id")
-    private Long questionId;
-    @Column(name = "survey_id")
-    private BigInteger surveyId;
-    @Size(max = 1000)
-    @Column(name = "question_content")
-    private String questionContent;
-    @Column(name = "question_type")
-    private Integer questionType;
+    @Column(name = "department_position_id")
+    private Long departmentPositionId;
+    @Column(name = "department_id")
+    private BigInteger departmentId;
+    @Column(name = "position_id")
+    private BigInteger positionId;
+    @Column(name = "status")
+    private Integer status;
     @Column(name = "created_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
     @Column(name = "updated_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedDate;
-    @Transient
-    private String keySearch;
 
-    public Questions() {
+    public DepartmentPosition() {
     }
 
-    public Questions(Long questionId) {
-        this.questionId = questionId;
+    public DepartmentPosition(Long departmentPositionId) {
+        this.departmentPositionId = departmentPositionId;
     }
 
-    public Long getQuestionId() {
-        return questionId;
+    public Long getDepartmentPositionId() {
+        return departmentPositionId;
     }
 
-    public void setQuestionId(Long questionId) {
-        this.questionId = questionId;
+    public void setDepartmentPositionId(Long departmentPositionId) {
+        this.departmentPositionId = departmentPositionId;
     }
 
-    public BigInteger getSurveyId() {
-        return surveyId;
+    public BigInteger getDepartmentId() {
+        return departmentId;
     }
 
-    public void setSurveyId(BigInteger surveyId) {
-        this.surveyId = surveyId;
+    public void setDepartmentId(BigInteger departmentId) {
+        this.departmentId = departmentId;
     }
 
-    public String getQuestionContent() {
-        return questionContent;
+    public BigInteger getPositionId() {
+        return positionId;
     }
 
-    public void setQuestionContent(String questionContent) {
-        this.questionContent = questionContent;
+    public void setPositionId(BigInteger positionId) {
+        this.positionId = positionId;
     }
 
-    public Integer getQuestionType() {
-        return questionType;
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setQuestionType(Integer questionType) {
-        this.questionType = questionType;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public Date getCreatedDate() {
@@ -111,29 +106,21 @@ public class Questions implements Serializable {
         this.updatedDate = updatedDate;
     }
 
-    public String getKeySearch() {
-        return keySearch;
-    }
-
-    public void setKeySearch(String keySearch) {
-        this.keySearch = keySearch;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (questionId != null ? questionId.hashCode() : 0);
+        hash += (departmentPositionId != null ? departmentPositionId.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Questions)) {
+        if (!(object instanceof DepartmentPosition)) {
             return false;
         }
-        Questions other = (Questions) object;
-        if ((this.questionId == null && other.questionId != null) || (this.questionId != null && !this.questionId.equals(other.questionId))) {
+        DepartmentPosition other = (DepartmentPosition) object;
+        if ((this.departmentPositionId == null && other.departmentPositionId != null) || (this.departmentPositionId != null && !this.departmentPositionId.equals(other.departmentPositionId))) {
             return false;
         }
         return true;
@@ -141,7 +128,7 @@ public class Questions implements Serializable {
 
     @Override
     public String toString() {
-        return "org.stfc.dto.Questions[ questionId=" + questionId + " ]";
+        return "org.stfc.dto.DepartmentPosition[ departmentPositionId=" + departmentPositionId + " ]";
     }
     
 }

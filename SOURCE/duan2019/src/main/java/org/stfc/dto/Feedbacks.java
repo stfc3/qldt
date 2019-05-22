@@ -27,60 +27,50 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author dongdv
  */
 @Entity
-@Table(name = "survey_results")
+@Table(name = "feedbacks")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "SurveyResults.findAll", query = "SELECT s FROM SurveyResults s")})
-public class SurveyResults implements Serializable {
+    @NamedQuery(name = "Feedbacks.findAll", query = "SELECT f FROM Feedbacks f")})
+public class Feedbacks implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "survey_result_id")
-    private Long surveyResultId;
-    @Column(name = "survey_id")
-    private BigInteger surveyId;
-    @Column(name = "question_id")
-    private BigInteger questionId;
+    @Column(name = "feedback_id")
+    private Long feedbackId;
+    @Column(name = "course_id")
+    private BigInteger courseId;
     @Column(name = "officer_id")
     private BigInteger officerId;
-    @Size(max = 1000)
-    @Column(name = "answer")
-    private String answer;
+    @Size(max = 2000)
+    @Column(name = "feedback_content")
+    private String feedbackContent;
     @Column(name = "created_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
 
-    public SurveyResults() {
+    public Feedbacks() {
     }
 
-    public SurveyResults(Long surveyResultId) {
-        this.surveyResultId = surveyResultId;
+    public Feedbacks(Long feedbackId) {
+        this.feedbackId = feedbackId;
     }
 
-    public Long getSurveyResultId() {
-        return surveyResultId;
+    public Long getFeedbackId() {
+        return feedbackId;
     }
 
-    public void setSurveyResultId(Long surveyResultId) {
-        this.surveyResultId = surveyResultId;
+    public void setFeedbackId(Long feedbackId) {
+        this.feedbackId = feedbackId;
     }
 
-    public BigInteger getSurveyId() {
-        return surveyId;
+    public BigInteger getCourseId() {
+        return courseId;
     }
 
-    public void setSurveyId(BigInteger surveyId) {
-        this.surveyId = surveyId;
-    }
-
-    public BigInteger getQuestionId() {
-        return questionId;
-    }
-
-    public void setQuestionId(BigInteger questionId) {
-        this.questionId = questionId;
+    public void setCourseId(BigInteger courseId) {
+        this.courseId = courseId;
     }
 
     public BigInteger getOfficerId() {
@@ -91,12 +81,12 @@ public class SurveyResults implements Serializable {
         this.officerId = officerId;
     }
 
-    public String getAnswer() {
-        return answer;
+    public String getFeedbackContent() {
+        return feedbackContent;
     }
 
-    public void setAnswer(String answer) {
-        this.answer = answer;
+    public void setFeedbackContent(String feedbackContent) {
+        this.feedbackContent = feedbackContent;
     }
 
     public Date getCreatedDate() {
@@ -110,18 +100,18 @@ public class SurveyResults implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (surveyResultId != null ? surveyResultId.hashCode() : 0);
+        hash += (feedbackId != null ? feedbackId.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof SurveyResults)) {
+        if (!(object instanceof Feedbacks)) {
             return false;
         }
-        SurveyResults other = (SurveyResults) object;
-        if ((this.surveyResultId == null && other.surveyResultId != null) || (this.surveyResultId != null && !this.surveyResultId.equals(other.surveyResultId))) {
+        Feedbacks other = (Feedbacks) object;
+        if ((this.feedbackId == null && other.feedbackId != null) || (this.feedbackId != null && !this.feedbackId.equals(other.feedbackId))) {
             return false;
         }
         return true;
@@ -129,7 +119,7 @@ public class SurveyResults implements Serializable {
 
     @Override
     public String toString() {
-        return "org.stfc.dto.SurveyResults[ surveyResultId=" + surveyResultId + " ]";
+        return "org.stfc.dto.Feedbacks[ feedbackId=" + feedbackId + " ]";
     }
     
 }

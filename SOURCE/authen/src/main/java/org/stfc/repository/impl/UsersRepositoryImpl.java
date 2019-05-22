@@ -18,7 +18,7 @@ import org.stfc.utils.StringUtils;
 
 /**
  *
- * @author dmin
+ * @author dongdv
  */
 @Repository
 public class UsersRepositoryImpl {

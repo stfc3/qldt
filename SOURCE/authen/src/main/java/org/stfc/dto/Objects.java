@@ -27,7 +27,7 @@ import org.hibernate.annotations.DynamicUpdate;
 
 /**
  *
- * @author dmin
+ * @author dongdv
  */
 @Entity
 @Table(name = "objects")

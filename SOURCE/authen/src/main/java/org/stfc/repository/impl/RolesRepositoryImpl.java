@@ -17,7 +17,7 @@ import org.stfc.utils.Comparator;
 
 /**
  *
- * @author dmin
+ * @author dongdv
  */
 @Repository
 public class RolesRepositoryImpl {
