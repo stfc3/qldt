@@ -13,8 +13,8 @@ public class SpecificationsBuilder<T> {
         params = new ArrayList<>();
     }
 
-    public final SpecificationsBuilder<T> with(final String key, final String operation, final Object value, final String prefix, final String suffix) {
-        return with(SearchOperation.OR_PREDICATE_FLAG, key, operation, value, prefix, suffix);
+    public final SpecificationsBuilder<T> with(SearchOperation searchOperation,final String key, final String operation, final Object value, final String prefix, final String suffix) {
+        return with(searchOperation, key, operation, value, prefix, suffix);
     }
 
     public final SpecificationsBuilder<T> with(final String orPredicate, final String key, final String operation, Object value, final String prefix, final String suffix) {

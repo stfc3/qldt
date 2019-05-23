@@ -17,14 +17,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.stfc.dto.Lecturers;
-import org.stfc.utils.Utils;
+import org.stfc.message.LecturersRequest;
+import org.stfc.utils.Comparator;
 
 /**
  * @author viett
  *
  */
 @Repository
-public class LecturersCustomerRepositoryImp implements LecturersCustomerRepository {
+public class LecturersCustomerRepositoryImp {
 	private static final Logger logger = LoggerFactory.getLogger(LecturersCustomerRepositoryImp.class);
 	/*
 	 * (non-Javadoc)
@@ -36,7 +37,6 @@ public class LecturersCustomerRepositoryImp implements LecturersCustomerReposito
 	@Autowired
 	EntityManager em;
 
-	@Override
 	public List<Lecturers> findByFullNameAndGender(String fullName, String gender) {
 		// TODO Auto-generated method stub
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -54,33 +54,33 @@ public class LecturersCustomerRepositoryImp implements LecturersCustomerReposito
 		return em.createQuery(cq).getResultList();
 	}
 
-	@Override
-	public List<Lecturers> onSearch(String fullName, String gender, String phone, String email, Long deprtId,
-			Long postionId, Integer status) {
+	public List<Lecturers> onSearch(LecturersRequest request) {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Lecturers> cq = cb.createQuery(Lecturers.class);
 		Root<Lecturers> lecturers = cq.from(Lecturers.class);
 		List<Predicate> predicates = new ArrayList<>();
-		if (!Utils.getInstance().isEmpty(fullName)) {
-			predicates.add(cb.like(lecturers.get("fullName"), "%" + fullName + "%"));
-		}
-		if (!Utils.getInstance().isEmpty(gender)) {
-			predicates.add(cb.equal(lecturers.get("gender"), gender));
-		}
-		if (!Utils.getInstance().isEmpty(phone)) {
-			predicates.add(cb.equal(lecturers.get("mobile"), phone));
-		}
-		if (!Utils.getInstance().isEmpty(email)) {
-			predicates.add(cb.equal(lecturers.get("email"), email));
-		}
-		if (deprtId != null) {
-			predicates.add(cb.equal(lecturers.get("deptId"), deprtId));
-		}
-		if (status != null) {
-			predicates.add(cb.equal(lecturers.get("status"), status));
-		}
-		if (postionId != null) {
-			predicates.add(cb.equal(lecturers.get("posiId"), postionId));
+		if (!Comparator.isEqualNull(request)) {
+			if (!Comparator.isEqualNullOrEmpty(request.getFullName())) {
+				predicates.add(cb.like(lecturers.get("fullName"), "%" + request.getFullName() + "%"));
+			}
+			if (!Comparator.isEqualNullOrEmpty(request.getGender())) {
+				predicates.add(cb.equal(lecturers.get("gender"), request.getGender()));
+			}
+			if (!Comparator.isEqualNullOrEmpty(request.getPhone())) {
+				predicates.add(cb.equal(lecturers.get("mobile"), request.getPhone()));
+			}
+			if (!Comparator.isEqualNullOrEmpty(request.getEmail())) {
+				predicates.add(cb.equal(lecturers.get("email"), request.getEmail()));
+			}
+			if (!Comparator.isEqualNull(request.getDepId())) {
+				predicates.add(cb.equal(lecturers.get("deptId"), request.getDepId()));
+			}
+			if (!Comparator.isEqualNull(request.getStauts())) {
+				predicates.add(cb.equal(lecturers.get("status"), request.getStauts()));
+			}
+			if (!Comparator.isEqualNull(request.getPosId())) {
+				predicates.add(cb.equal(lecturers.get("posiId"), request.getPosId()));
+			}
 		}
 		logger.info("List predicates {}", predicates.size());
 		cq.where(predicates.toArray(new Predicate[0]));

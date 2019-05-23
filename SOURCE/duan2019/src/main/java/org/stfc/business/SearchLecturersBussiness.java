@@ -8,7 +8,9 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Service;
 import org.stfc.cache.CacheInfo;
 import org.stfc.dto.Departments;
 import org.stfc.dto.Lecturers;
@@ -20,6 +22,8 @@ import org.stfc.message.LecturersResponse;
 import org.stfc.repository.LecturersRepository;
 import org.stfc.repository.impl.LecturersCustomerRepositoryImp;
 import org.stfc.specification.STFCSpecification;
+import org.stfc.specification.SearchOperation;
+import org.stfc.utils.Comparator;
 import org.stfc.utils.Contants;
 import org.stfc.utils.FormatMessage;
 
@@ -29,14 +33,14 @@ import com.google.gson.Gson;
  * @author viettx
  *
  */
-
+@Service
 public class SearchLecturersBussiness implements Business {
 	private static final Logger logger = LoggerFactory.getLogger(SearchLecturersBussiness.class);
 
 	FormatMessage formatMessage;
-
+	@Autowired
 	LecturersRepository repository;
-
+	@Autowired
 	LecturersCustomerRepositoryImp imp;
 
 	CacheInfo cacheInfo;
@@ -46,20 +50,6 @@ public class SearchLecturersBussiness implements Business {
 	 */
 	public void setFormatMessage(FormatMessage formatMessage) {
 		this.formatMessage = formatMessage;
-	}
-
-	/**
-	 * @param repository the repository to set
-	 */
-	public void setRepository(LecturersRepository repository) {
-		this.repository = repository;
-	}
-
-	/**
-	 * @param imp the imp to set
-	 */
-	public void setImp(LecturersCustomerRepositoryImp imp) {
-		this.imp = imp;
 	}
 
 	/**
@@ -78,15 +68,24 @@ public class SearchLecturersBussiness implements Business {
 		String TAG = "onSearchLecturers";
 		try {
 			LecturersRequest req = gson.fromJson(request, LecturersRequest.class);
+			logger.debug("Request {}", gson.toJson(req));
+			List<Lecturers> listAllData = null;
 			if (req == null) {
-				throw new BusinessException(Contants.ERROR_INVALID_FORMAT);
+				listAllData = imp.onSearch(null);
+			} else {
+
+				if (!Comparator.isEqualNull(req.getQuery())) {
+					STFCSpecification<Lecturers> stfcSpecification = new STFCSpecification<Lecturers>();
+					String query = stfcSpecification.getFieldNames(Lecturers.class, req.getQuery());
+					Specification<Lecturers> spec = stfcSpecification
+							.getSpecification(SearchOperation.OR_PREDICATE_FLAG, query);
+					listAllData = repository.findAll(spec);
+				} else {
+					listAllData = imp.onSearch(req);
+				}
+
 			}
 			LecturersResponse lecturersResponse = new LecturersResponse();
-			STFCSpecification<Lecturers> stfcSpecification = new STFCSpecification<Lecturers>();
-//			Field[] fields = Lecturers.getDeclaredFields();
-			String query = stfcSpecification.getFieldNames(Lecturers.class, req.getQuery());
-			Specification<Lecturers> spec = stfcSpecification.getSpecification(query);
-			List<Lecturers> listAllData = repository.findAll(spec);
 //			System.out.println(listData.size());
 //			List<Lecturers> listAllData = imp.onSearch(req.getFullName(), req.getGender(), req.getPhone(),
 //					req.getEmail(), req.getDepId(), req.getPosId(), req.getStauts());

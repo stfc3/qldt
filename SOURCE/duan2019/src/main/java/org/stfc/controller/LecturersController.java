@@ -12,8 +12,10 @@ import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.stfc.business.BusinessException;
 import org.stfc.business.CourseLecturerBusiness;
@@ -24,6 +26,7 @@ import org.stfc.dto.Courses;
 import org.stfc.dto.Experiences;
 import org.stfc.dto.Lecturers;
 import org.stfc.message.BaseResponse;
+import org.stfc.message.LecturersRequest;
 import org.stfc.repository.CoursesRepository;
 import org.stfc.repository.EvaluationRepository;
 import org.stfc.repository.ExperiencesRepository;
@@ -57,6 +60,8 @@ public class LecturersController {
 	CacheInfo cacheInfo;
 	@Autowired
 	EvaluationRepository evaluationRepository;
+	@Autowired
+	SearchLecturersBussiness lecturerBusiness;
 
 	/**
 	 * @category Get all officers
@@ -65,18 +70,17 @@ public class LecturersController {
 	 */
 	@RequestMapping(method = { RequestMethod.POST }, value = { "/lecturer/search" }, headers = {
 			"Accept=application/json" }, produces = { "text/plain;charset=UTF-8" })
-	public String onSearch(HttpEntity<String> httpEntity) {
-		String body = httpEntity.getBody();
-		logger.debug("Body request: {}", body);
+	public String onSearch(@RequestBody(required = false) LecturersRequest request) {
+
 		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+		logger.debug("Body request: {}", gson.toJson(request));
+
 		BaseResponse response = BaseResponse.parse(Contants.ERROR_INTERNAL, formatMessage);
 		try {
-			SearchLecturersBussiness bussiness = new SearchLecturersBussiness();
-			bussiness.setCacheInfo(cacheInfo);
-			bussiness.setFormatMessage(formatMessage);
-			bussiness.setImp(imp);
-			bussiness.setRepository(lecturerRepository);
-			response = bussiness.process(body, gson);
+			lecturerBusiness.setCacheInfo(cacheInfo);
+			lecturerBusiness.setFormatMessage(formatMessage);
+
+			response = lecturerBusiness.process(gson.toJson(request), gson);
 		} catch (Exception e) {
 			// TODO: handle exception
 			logger.error(e.getMessage(), e);

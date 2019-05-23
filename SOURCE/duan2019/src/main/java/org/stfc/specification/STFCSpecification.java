@@ -1,7 +1,6 @@
 package org.stfc.specification;
 
 import java.lang.reflect.Field;
-import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,7 +12,7 @@ import org.springframework.data.jpa.domain.Specification;
 public class STFCSpecification<T> {
 	private static final Logger logger = LoggerFactory.getLogger(STFCSpecification.class);
 
-	public Specification<T> getSpecification(String search) {
+	public Specification<T> getSpecification(String orPredicateFlag,String search) {
 		if (StringUtils.isBlank(search)) {
 			return null;
 		}
@@ -28,14 +27,14 @@ public class STFCSpecification<T> {
 			String s3 = matcher.group(3);
 			String s4 = matcher.group(4);
 			String s5 = matcher.group(5);
-			builder.with(s1, s2, s4, s3, s5);
+			builder.with(orPredicateFlag,s1, s2, s4, s3, s5);
 		}
 		return builder.build();
 	}
 
 	public String getFieldNames(Class<?> clazz, String queryValue) throws Exception {
 		String builderQuery = "";
-
+		
 		Field[] fields = clazz.getDeclaredFields();
 		for (int i = 0; i < fields.length; i++) {
 			if (fields[i].getType().getName().equals(String.class.getName())) {
@@ -46,7 +45,7 @@ public class STFCSpecification<T> {
 					builderQuery += fields[i].getName() + ":" + value + ",";
 				} catch (Exception e) {
 					// TODO: handle exception
-//					logger.error(e.getMessage(), e);
+					logger.error(e.getMessage(), e);
 				}
 			} else if (fields[i].getType().getName().equals(Double.class.getName())) {
 				try {
@@ -54,7 +53,7 @@ public class STFCSpecification<T> {
 					builderQuery += fields[i].getName() + ":" + value + ",";
 				} catch (Exception e) {
 					// TODO: handle exception
-//					logger.error(e.getMessage(), e);
+					logger.error(e.getMessage(), e);
 				}
 			} else if (fields[i].getType().getName().equals(Integer.class.getName())) {
 				try {
@@ -62,7 +61,7 @@ public class STFCSpecification<T> {
 					builderQuery += fields[i].getName() + ":" + value + ",";
 				} catch (Exception e) {
 					// TODO: handle exception
-//					logger.error(e.getMessage(), e);
+					logger.error(e.getMessage(), e);
 				}
 			} else if (fields[i].getType().getName().equals(Boolean.class.getName())) {
 				try {
@@ -70,7 +69,7 @@ public class STFCSpecification<T> {
 					builderQuery += fields[i].getName() + ":" + value + ",";
 				} catch (Exception e) {
 					// TODO: handle exception
-//					logger.error(e.getMessage(), e);
+					logger.error(e.getMessage(), e);
 				}
 			}
 		}
