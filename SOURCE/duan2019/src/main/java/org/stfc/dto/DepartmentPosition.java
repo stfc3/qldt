@@ -6,6 +6,7 @@
 package org.stfc.dto;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -18,80 +19,67 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
 
 /**
  *
  * @author dongdv
  */
 @Entity
-@Table(name = "roles")
+@Table(name = "department_position")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Roles.findAll", query = "SELECT r FROM Roles r")})
-@DynamicInsert
-@DynamicUpdate
-public class Roles implements Serializable {
+    @NamedQuery(name = "DepartmentPosition.findAll", query = "SELECT d FROM DepartmentPosition d")})
+public class DepartmentPosition implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "role_id")
-    private Long roleId;
-    @Size(max = 100)
-    @Column(name = "role_code")
-    private String roleCode;
-    @Size(max = 200)
-    @Column(name = "role_name")
-    private String roleName;
+    @Column(name = "department_position_id")
+    private Long departmentPositionId;
+    @Column(name = "department_id")
+    private BigInteger departmentId;
+    @Column(name = "position_id")
+    private BigInteger positionId;
     @Column(name = "status")
     private Integer status;
-    @Size(max = 500)
-    @Column(name = "description")
-    private String description;
     @Column(name = "created_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
     @Column(name = "updated_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedDate;
-    @Transient
-    private String keySearch;
 
-    public Roles() {
+    public DepartmentPosition() {
     }
 
-    public Roles(Long roleId) {
-        this.roleId = roleId;
+    public DepartmentPosition(Long departmentPositionId) {
+        this.departmentPositionId = departmentPositionId;
     }
 
-    public Long getRoleId() {
-        return roleId;
+    public Long getDepartmentPositionId() {
+        return departmentPositionId;
     }
 
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
+    public void setDepartmentPositionId(Long departmentPositionId) {
+        this.departmentPositionId = departmentPositionId;
     }
 
-    public String getRoleCode() {
-        return roleCode;
+    public BigInteger getDepartmentId() {
+        return departmentId;
     }
 
-    public void setRoleCode(String roleCode) {
-        this.roleCode = roleCode;
+    public void setDepartmentId(BigInteger departmentId) {
+        this.departmentId = departmentId;
     }
 
-    public String getRoleName() {
-        return roleName;
+    public BigInteger getPositionId() {
+        return positionId;
     }
 
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
+    public void setPositionId(BigInteger positionId) {
+        this.positionId = positionId;
     }
 
     public Integer getStatus() {
@@ -100,14 +88,6 @@ public class Roles implements Serializable {
 
     public void setStatus(Integer status) {
         this.status = status;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public Date getCreatedDate() {
@@ -126,29 +106,21 @@ public class Roles implements Serializable {
         this.updatedDate = updatedDate;
     }
 
-    public String getKeySearch() {
-        return keySearch;
-    }
-
-    public void setKeySearch(String keySearch) {
-        this.keySearch = keySearch;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (roleId != null ? roleId.hashCode() : 0);
+        hash += (departmentPositionId != null ? departmentPositionId.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Roles)) {
+        if (!(object instanceof DepartmentPosition)) {
             return false;
         }
-        Roles other = (Roles) object;
-        if ((this.roleId == null && other.roleId != null) || (this.roleId != null && !this.roleId.equals(other.roleId))) {
+        DepartmentPosition other = (DepartmentPosition) object;
+        if ((this.departmentPositionId == null && other.departmentPositionId != null) || (this.departmentPositionId != null && !this.departmentPositionId.equals(other.departmentPositionId))) {
             return false;
         }
         return true;
@@ -156,7 +128,7 @@ public class Roles implements Serializable {
 
     @Override
     public String toString() {
-        return "org.stfc.dto.Roles[ roleId=" + roleId + " ]";
+        return "org.stfc.dto.DepartmentPosition[ departmentPositionId=" + departmentPositionId + " ]";
     }
-
+    
 }

@@ -5,13 +5,9 @@
  */
 package org.stfc.repository.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +17,7 @@ import org.stfc.utils.Comparator;
 
 /**
  *
- * @author dmin
+ * @author dongdv
  */
 @Repository
 public class RolesRepositoryImpl {
@@ -30,26 +26,44 @@ public class RolesRepositoryImpl {
     @Autowired
     EntityManager em;
 
-    public List<Roles> onSearch(Roles roles) {
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<Roles> cq = cb.createQuery(Roles.class);
-        Root<Roles> listRoles = cq.from(Roles.class);
-        List<Predicate> predicates = new ArrayList<>();
-        if (!Comparator.isEqualNull(onSearch(roles))) {
-            if (!Comparator.isEqualNullOrEmpty(roles.getRoleName())) {
-                predicates.add(cb.like(listRoles.get("roleName"), "%" + roles.getRoleName() + "%"));
+    public List<Roles> onSearch(Roles role) {
+        StringBuilder sql = new StringBuilder("SELECT * FROM roles r WHERE 1 = 1");
+        if (!Comparator.isEqualNull(role)) {
+            if (!Comparator.isEqualNull(role.getRoleId())) {
+                sql.append(" AND r.role_id = :roleId");
             }
-            if (!Comparator.isEqualNullOrEmpty(roles.getRoleCode())) {
-                predicates.add(cb.equal(listRoles.get("roleCode"), roles.getRoleCode()));
+            if (!Comparator.isEqualNullOrEmpty(role.getRoleCode())) {
+                sql.append(" AND r.role_code = :roleCode");
             }
-            if (!Comparator.isEqualNull(roles.getStatus())) {
-                predicates.add(cb.equal(listRoles.get("status"), roles.getStatus()));
+            if (!Comparator.isEqualNullOrEmpty(role.getRoleCode())) {
+                sql.append(" AND r.role_name = :roleName");
+            }
+            if (!Comparator.isEqualNull(role.getStatus())) {
+                sql.append(" AND r.status = :status");
+            }
+            if (!Comparator.isEqualNullOrEmpty(role.getKeySearch())) {
+                sql.append(" AND MATCH (r.role_code, r.role_name, r.description) AGAINST (:keySearch)");
             }
         }
-        logger.info("List predicates {}", predicates.size());
-        cq.where(predicates.toArray(new Predicate[0]));
-        return em.createQuery(cq).getResultList();
-
+        Query query =em.createNativeQuery(sql.toString(), Roles.class);
+        
+        if (!Comparator.isEqualNull(role)) {
+            if (!Comparator.isEqualNull(role.getRoleId())) {
+                query.setParameter("roleId", role.getRoleId());
+            }
+            if (!Comparator.isEqualNullOrEmpty(role.getRoleCode())) {
+                query.setParameter("roleCode", role.getRoleCode());
+            }
+            if (!Comparator.isEqualNullOrEmpty(role.getRoleName())) {
+                query.setParameter("roleName", role.getRoleName());
+            }
+            if (!Comparator.isEqualNull(role.getStatus())) {
+                query.setParameter("status", role.getStatus());
+            }
+            if (!Comparator.isEqualNullOrEmpty(role.getKeySearch())) {
+                query.setParameter("keySearch", role.getKeySearch());
+            }
+        }
+        return query.getResultList();
     }
-
 }

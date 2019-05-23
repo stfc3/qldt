@@ -10,7 +10,7 @@ import org.stfc.dto.Users;
 
 /**
  *
- * @author dmin
+ * @author dongdv
  */
 public class AuthenResponse {
 

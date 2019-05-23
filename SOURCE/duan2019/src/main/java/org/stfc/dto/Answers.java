@@ -6,6 +6,7 @@
 package org.stfc.dto;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -21,39 +22,29 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
 
 /**
  *
  * @author dongdv
  */
 @Entity
-@Table(name = "roles")
+@Table(name = "answers")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Roles.findAll", query = "SELECT r FROM Roles r")})
-@DynamicInsert
-@DynamicUpdate
-public class Roles implements Serializable {
+    @NamedQuery(name = "Answers.findAll", query = "SELECT a FROM Answers a")})
+public class Answers implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "role_id")
-    private Long roleId;
-    @Size(max = 100)
-    @Column(name = "role_code")
-    private String roleCode;
-    @Size(max = 200)
-    @Column(name = "role_name")
-    private String roleName;
-    @Column(name = "status")
-    private Integer status;
-    @Size(max = 500)
-    @Column(name = "description")
-    private String description;
+    @Column(name = "answer_id")
+    private Long answerId;
+    @Column(name = "question_id")
+    private BigInteger questionId;
+    @Size(max = 1000)
+    @Column(name = "answer_name")
+    private String answerName;
     @Column(name = "created_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
@@ -63,51 +54,35 @@ public class Roles implements Serializable {
     @Transient
     private String keySearch;
 
-    public Roles() {
+    public Answers() {
     }
 
-    public Roles(Long roleId) {
-        this.roleId = roleId;
+    public Answers(Long answerId) {
+        this.answerId = answerId;
     }
 
-    public Long getRoleId() {
-        return roleId;
+    public Long getAnswerId() {
+        return answerId;
     }
 
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
+    public void setAnswerId(Long answerId) {
+        this.answerId = answerId;
     }
 
-    public String getRoleCode() {
-        return roleCode;
+    public BigInteger getQuestionId() {
+        return questionId;
     }
 
-    public void setRoleCode(String roleCode) {
-        this.roleCode = roleCode;
+    public void setQuestionId(BigInteger questionId) {
+        this.questionId = questionId;
     }
 
-    public String getRoleName() {
-        return roleName;
+    public String getAnswerName() {
+        return answerName;
     }
 
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+    public void setAnswerName(String answerName) {
+        this.answerName = answerName;
     }
 
     public Date getCreatedDate() {
@@ -137,18 +112,18 @@ public class Roles implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (roleId != null ? roleId.hashCode() : 0);
+        hash += (answerId != null ? answerId.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Roles)) {
+        if (!(object instanceof Answers)) {
             return false;
         }
-        Roles other = (Roles) object;
-        if ((this.roleId == null && other.roleId != null) || (this.roleId != null && !this.roleId.equals(other.roleId))) {
+        Answers other = (Answers) object;
+        if ((this.answerId == null && other.answerId != null) || (this.answerId != null && !this.answerId.equals(other.answerId))) {
             return false;
         }
         return true;
@@ -156,7 +131,7 @@ public class Roles implements Serializable {
 
     @Override
     public String toString() {
-        return "org.stfc.dto.Roles[ roleId=" + roleId + " ]";
+        return "org.stfc.dto.Answers[ answerId=" + answerId + " ]";
     }
-
+    
 }

@@ -6,6 +6,16 @@
     <class>org.stfc.dto.SurveyResults</class>
     <class>org.stfc.dto.Questions</class>
     <class>org.stfc.dto.Officers</class>
+    <class>org.stfc.dto.Lecturers_1</class>
+    <class>org.stfc.dto.Departments_1</class>
+    <class>org.stfc.dto.Courses_1</class>
+    <class>org.stfc.dto.Evaluations_1</class>
+    <class>org.stfc.dto.Answers</class>
+    <class>org.stfc.dto.Experiences_1</class>
+    <class>org.stfc.dto.DepartmentPosition</class>
+    <class>org.stfc.dto.OfficerCourse</class>
+    <class>org.stfc.dto.Positions_1</class>
+    <class>org.stfc.dto.Feedbacks</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://13.250.191.59:3306/qldt?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="qldt"/>

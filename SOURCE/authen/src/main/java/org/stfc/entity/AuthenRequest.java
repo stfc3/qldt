@@ -7,7 +7,7 @@ package org.stfc.entity;
 
 /**
  *
- * @author dmin
+ * @author dongdv
  */
 public class AuthenRequest {
 
