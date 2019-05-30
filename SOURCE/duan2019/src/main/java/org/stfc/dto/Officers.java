@@ -19,6 +19,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -59,9 +60,9 @@ public class Officers implements Serializable {
     @Column(name = "email")
     private String email;
     @Column(name = "department_id")
-    private BigInteger departmentId;
+    private Long departmentId;
     @Column(name = "position_id")
-    private BigInteger positionId;
+    private Long positionId;
     @Column(name = "status")
     private Integer status;
     @Column(name = "created_date")
@@ -70,12 +71,8 @@ public class Officers implements Serializable {
     @Column(name = "updated_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedDate;
-    @Column(name = "create_date")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createDate;
-    @Size(max = 100)
-    @Column(name = "fist_name")
-    private String fistName;
+    @Transient
+    private String keySearch;
 
     public Officers() {
     }
@@ -140,19 +137,19 @@ public class Officers implements Serializable {
         this.email = email;
     }
 
-    public BigInteger getDepartmentId() {
+    public Long getDepartmentId() {
         return departmentId;
     }
 
-    public void setDepartmentId(BigInteger departmentId) {
+    public void setDepartmentId(Long departmentId) {
         this.departmentId = departmentId;
     }
 
-    public BigInteger getPositionId() {
+    public Long getPositionId() {
         return positionId;
     }
 
-    public void setPositionId(BigInteger positionId) {
+    public void setPositionId(Long positionId) {
         this.positionId = positionId;
     }
 
@@ -180,20 +177,12 @@ public class Officers implements Serializable {
         this.updatedDate = updatedDate;
     }
 
-    public Date getCreateDate() {
-        return createDate;
+    public String getKeySearch() {
+        return keySearch;
     }
 
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
-
-    public String getFistName() {
-        return fistName;
-    }
-
-    public void setFistName(String fistName) {
-        this.fistName = fistName;
+    public void setKeySearch(String keySearch) {
+        this.keySearch = keySearch;
     }
 
     @Override

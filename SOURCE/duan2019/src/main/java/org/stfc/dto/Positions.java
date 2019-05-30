@@ -1,105 +1,125 @@
-/**
- * 
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package org.stfc.dto;
 
+import java.io.Serializable;
 import java.util.Date;
-
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * @author viettx
  *
+ * @author dmin
  */
 @Entity
-@Table(name = "Positions")
-public class Positions {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "position_id", unique = false, nullable = false, length = 20)
-	private Long id;
-	@Column(name = "position_name", length = 200)
-	private String posiName;
-	@Column(name = "status", length = 1)
-	private int status;
-	@Column(name = "create_date")
-	private Date createDate;
-	@Column(name = "updated_date")
-	private Date modifiedDate;
+@Table(name = "positions")
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Positions.findAll", query = "SELECT p FROM Positions p")})
+public class Positions implements Serializable {
 
-	/**
-	 * @return the id
-	 */
-	public Long getId() {
-		return id;
-	}
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "position_id")
+    private Long positionId;
+    @Size(max = 200)
+    @Column(name = "position_name")
+    private String positionName;
+    @Column(name = "status")
+    private Integer status;
+    @Column(name = "created_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdDate;
+    @Column(name = "updated_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date updatedDate;
 
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Positions() {
+    }
 
-	/**
-	 * @return the posiName
-	 */
-	public String getPosiName() {
-		return posiName;
-	}
+    public Positions(Long positionId) {
+        this.positionId = positionId;
+    }
 
-	/**
-	 * @param posiName the posiName to set
-	 */
-	public void setPosiName(String posiName) {
-		this.posiName = posiName;
-	}
+    public Long getPositionId() {
+        return positionId;
+    }
 
-	/**
-	 * @return the status
-	 */
-	public int getStatus() {
-		return status;
-	}
+    public void setPositionId(Long positionId) {
+        this.positionId = positionId;
+    }
 
-	/**
-	 * @param status the status to set
-	 */
-	public void setStatus(int status) {
-		this.status = status;
-	}
+    public String getPositionName() {
+        return positionName;
+    }
 
-	/**
-	 * @return the createDate
-	 */
-	public Date getCreateDate() {
-		return createDate;
-	}
+    public void setPositionName(String positionName) {
+        this.positionName = positionName;
+    }
 
-	/**
-	 * @param createDate the createDate to set
-	 */
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}
+    public Integer getStatus() {
+        return status;
+    }
 
-	/**
-	 * @return the modifiedDate
-	 */
-	public Date getModifiedDate() {
-		return modifiedDate;
-	}
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
 
-	/**
-	 * @param modifiedDate the modifiedDate to set
-	 */
-	public void setModifiedDate(Date modifiedDate) {
-		this.modifiedDate = modifiedDate;
-	}
+    public Date getCreatedDate() {
+        return createdDate;
+    }
 
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public Date getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(Date updatedDate) {
+        this.updatedDate = updatedDate;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (positionId != null ? positionId.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Positions)) {
+            return false;
+        }
+        Positions other = (Positions) object;
+        if ((this.positionId == null && other.positionId != null) || (this.positionId != null && !this.positionId.equals(other.positionId))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "org.stfc.dto.Positions[ postionId=" + positionId + " ]";
+    }
+    
 }

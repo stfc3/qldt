@@ -119,10 +119,10 @@ public class PositionsController {
 			if (positions == null) {
 				throw new BusinessException(Contants.ERROR_INVALID_FORMAT);
 			}
-			if (positions.getId() == null) {
-				positions.setCreateDate(new Date());
+			if (positions.getPositionId()== null) {
+				positions.setCreatedDate(new Date());
 			} else {
-				positions.setModifiedDate(new Date());
+				positions.setUpdatedDate(new Date());
 			}
 			repository.save(positions);
 			response = BaseResponse.parse(Contants.SUCCESS, formatMessage, lang);
@@ -152,10 +152,10 @@ public class PositionsController {
 				throw new BusinessException(Contants.ERROR_INVALID_FORMAT);
 			}
 			for (Positions pos : positions) {
-				if (pos.getId() == null) {
-					pos.setCreateDate(new Date());
+				if (pos.getPositionId()== null) {
+					pos.setCreatedDate(new Date());
 				} else {
-					pos.setModifiedDate(new Date());
+					pos.setUpdatedDate(new Date());
 				}
 			}
 			repository.saveAll(positions);
@@ -261,8 +261,8 @@ public class PositionsController {
 				}
 			}
 			CertPositionResponse certPositionResponse = new CertPositionResponse();
-			certPositionResponse.setPositionId(positions.getId());
-			certPositionResponse.setPositionName(positions.getPosiName());
+			certPositionResponse.setPositionId(positions.getPositionId());
+			certPositionResponse.setPositionName(positions.getPositionName());
 			certPositionResponse.setListCertification(listData);
 			response = BaseResponse.parse(Contants.SUCCESS, formatMessage);
 			response.setData(certPositionResponse);

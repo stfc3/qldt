@@ -24,6 +24,7 @@ import org.stfc.dto.Answers;
 import org.stfc.dto.Questions;
 import org.stfc.dto.SurveyResults;
 import org.stfc.dto.Surveys;
+import org.stfc.entity.SurveyImportRequest;
 import org.stfc.repository.AnswersRepository;
 import org.stfc.repository.QuestionsRepository;
 import org.stfc.repository.SurveyResultsRepository;
@@ -60,19 +61,16 @@ public class SurveyController {
     FormatMessage formatMessage;
 
     @RequestMapping(value = Constants.PATH.API_SURVEY_IMPORT, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public String importSurveyResult(@RequestBody List<SurveyResults> surveyResults) {
+    public String importSurveyResult(@RequestBody List<SurveyImportRequest> surveyImportRequests) {
         Gson gson = new GsonBuilder().disableHtmlEscaping().create();
-        logger.debug("Body request: {}", gson.toJson(surveyResults));
+        logger.debug("Body request: {}", gson.toJson(surveyImportRequests));
         String lang = "vi";
         BaseResponse response = BaseResponse.parse(Constants.ERROR_INTERNAL, formatMessage, lang);
         try {
-            if (Comparator.isEqualNull(surveyResults)) {
+            if (Comparator.isEqualNull(surveyImportRequests)) {
                 throw new BusinessException(Constants.ERROR_INVALID_FORMAT);
             }
-            for (SurveyResults surveyResult : surveyResults) {
-                surveyResult.setCreatedDate(new Date());
-                surveyResultsRepository.save(surveyResult);
-            }
+            surveysRepositoryImpl.importSurveyResult(surveyImportRequests);
             response = BaseResponse.parse(Constants.SUCCESS, formatMessage, lang);
         } catch (BusinessException be) {
             response = BaseResponse.parse(be.getMessage(), formatMessage, lang);
@@ -104,8 +102,7 @@ public class SurveyController {
         }
         return gson.toJson(response);
     }
-    
-    
+
     @RequestMapping(value = Constants.PATH.API_SURVEYS, method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
     public String updateSurvey(@RequestBody Surveys survey) {
         Gson gson = new GsonBuilder().disableHtmlEscaping().create();
@@ -132,7 +129,7 @@ public class SurveyController {
         }
         return gson.toJson(response);
     }
-    
+
     @RequestMapping(value = Constants.PATH.API_SURVEYS_SEARCH, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public String searchSurvey(@RequestBody(required = false) Surveys survey) {
         Gson gson = new GsonBuilder().disableHtmlEscaping().create();
@@ -151,7 +148,7 @@ public class SurveyController {
         }
         return gson.toJson(response);
     }
-    
+
     @RequestMapping(value = Constants.PATH.API_SURVEY_QUESTIONS, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public String insertQuestion(@RequestBody List<Questions> questions) {
         Gson gson = new GsonBuilder().disableHtmlEscaping().create();
@@ -174,6 +171,7 @@ public class SurveyController {
         }
         return gson.toJson(response);
     }
+
     @RequestMapping(value = Constants.PATH.API_SURVEY_QUESTIONS_SEARCH, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public String searchQuestion(@RequestBody(required = false) Questions question) {
         Gson gson = new GsonBuilder().disableHtmlEscaping().create();
@@ -192,6 +190,7 @@ public class SurveyController {
         }
         return gson.toJson(response);
     }
+
     @RequestMapping(value = Constants.PATH.API_SURVEY_QUESTIONS, method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
     public String updateQuestion(@RequestBody Questions question) {
         Gson gson = new GsonBuilder().disableHtmlEscaping().create();
@@ -218,7 +217,7 @@ public class SurveyController {
         }
         return gson.toJson(response);
     }
-    
+
     @RequestMapping(value = Constants.PATH.API_SURVEY_ANSWERS, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public String insertAnswer(@RequestBody List<Answers> answers) {
         Gson gson = new GsonBuilder().disableHtmlEscaping().create();
@@ -241,6 +240,7 @@ public class SurveyController {
         }
         return gson.toJson(response);
     }
+
     @RequestMapping(value = Constants.PATH.API_SURVEY_ANSWERS_SEARCH, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public String searchAnswer(@RequestBody(required = false) Answers answer) {
         Gson gson = new GsonBuilder().disableHtmlEscaping().create();
@@ -259,7 +259,7 @@ public class SurveyController {
         }
         return gson.toJson(response);
     }
-    
+
     @RequestMapping(value = Constants.PATH.API_SURVEY_ANSWERS, method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
     public String updateAnswer(@RequestBody Answers answer) {
         Gson gson = new GsonBuilder().disableHtmlEscaping().create();

@@ -15,7 +15,6 @@ public interface Constants {
     String FORMAT_DATE = "dd/MM/yyyy HH:mm:ss";
 
     public interface PATH {
-
         String API_SURVEY_IMPORT = "/api/v1/survey/import";
         String API_SURVEYS = "/api/v1/surveys";
         String API_SURVEYS_SEARCH = "/api/v1/surveys/search";
@@ -23,5 +22,12 @@ public interface Constants {
         String API_SURVEY_QUESTIONS_SEARCH = "/api/v1/survey/questions/search";
         String API_SURVEY_ANSWERS = "/api/v1/survey/answers";
         String API_SURVEY_ANSWERS_SEARCH = "/api/v1/survey/answers/search";
+    }
+
+    public interface STATUS {
+        Integer ACTIVE = 1;
+    }
+    public interface QUESTION_TYPE {
+        Integer SINGE = 1;
     }
 }

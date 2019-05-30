@@ -40,11 +40,11 @@ public class SurveyResults implements Serializable {
     @Column(name = "survey_result_id")
     private Long surveyResultId;
     @Column(name = "survey_id")
-    private BigInteger surveyId;
+    private Long surveyId;
     @Column(name = "question_id")
-    private BigInteger questionId;
+    private Long questionId;
     @Column(name = "officer_id")
-    private BigInteger officerId;
+    private Long officerId;
     @Size(max = 1000)
     @Column(name = "answer")
     private String answer;
@@ -67,27 +67,27 @@ public class SurveyResults implements Serializable {
         this.surveyResultId = surveyResultId;
     }
 
-    public BigInteger getSurveyId() {
+    public Long getSurveyId() {
         return surveyId;
     }
 
-    public void setSurveyId(BigInteger surveyId) {
+    public void setSurveyId(Long surveyId) {
         this.surveyId = surveyId;
     }
 
-    public BigInteger getQuestionId() {
+    public Long getQuestionId() {
         return questionId;
     }
 
-    public void setQuestionId(BigInteger questionId) {
+    public void setQuestionId(Long questionId) {
         this.questionId = questionId;
     }
 
-    public BigInteger getOfficerId() {
+    public Long getOfficerId() {
         return officerId;
     }
 
-    public void setOfficerId(BigInteger officerId) {
+    public void setOfficerId(Long officerId) {
         this.officerId = officerId;
     }
 

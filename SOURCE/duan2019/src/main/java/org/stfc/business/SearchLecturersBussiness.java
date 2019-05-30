@@ -106,7 +106,7 @@ public class SearchLecturersBussiness implements Business {
 					}
 					Positions positions = cacheInfo.getPositions().get(lecturers.getPosiId());
 					if (positions != null) {
-						entity.setPosition(positions.getPosiName());
+						entity.setPosition(positions.getPositionName());
 					}
 					entity.setStatus(formatMessage.getStatusName(lecturers.getStatus(), lang));
 					listData.add(entity);

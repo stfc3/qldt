@@ -60,7 +60,7 @@ public class CacheInfo {
 		 * Convert data from list to map
 		 */
 		positions = listPosi.stream()
-                .collect(Collectors.toMap(Positions::getId, vlstPosition -> vlstPosition));
+                .collect(Collectors.toMap(Positions::getPositionId, vlstPosition -> vlstPosition));
 		
 		List<Departments> listDept = departmentsRepository.findAllDepartmentsActive();
 		departments = listDept.stream()
