@@ -13,12 +13,19 @@ import org.stfc.utils.Comparator;
  */
 public class SurveyImportRequest {
 
+    // Tieu de trong file bieu mau excel
     private String surveyTitle;
+    //ho ten
     private String fullName;
+    //so dien thoai
     private String mobile;
+    //email
     private String email;
+    //Chuc vu
     private String positionName;
+    //Ghep tieu de cac khoa hoc
     private String questionContent;
+    //cau tra loi cho tung mon hoc cua hoc vien
     private String answer;
 
     public String getSurveyTitle() {

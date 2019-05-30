@@ -21,18 +21,25 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.stfc.business.BusinessException;
 import org.stfc.dto.Answers;
+import org.stfc.dto.Officers;
+import org.stfc.dto.Positions;
 import org.stfc.dto.Questions;
 import org.stfc.dto.SurveyResults;
 import org.stfc.dto.Surveys;
 import org.stfc.entity.SurveyImportRequest;
 import org.stfc.repository.AnswersRepository;
+import org.stfc.repository.OfficersRepository;
+import org.stfc.repository.PositionsRepository;
 import org.stfc.repository.QuestionsRepository;
 import org.stfc.repository.SurveyResultsRepository;
 import org.stfc.repository.SurveysRepository;
 import org.stfc.repository.impl.AnswersRepositoryImpl;
+import org.stfc.repository.impl.OfficersRepositoryImpl;
+import org.stfc.repository.impl.PositionsRepositoryImpl;
 import org.stfc.repository.impl.QuestionsRepositoryImpl;
 import org.stfc.repository.impl.SurveysRepositoryImpl;
 import org.stfc.utils.Comparator;
+import org.stfc.utils.DateTimeUtils;
 import org.stfc.utils.IntrospectorUtils;
 
 /**
@@ -58,6 +65,14 @@ public class SurveyController {
     @Autowired
     AnswersRepositoryImpl answersRepositoryImpl;
     @Autowired
+    PositionsRepository positionsRepository;
+    @Autowired
+    PositionsRepositoryImpl positionsRepositoryImpl;
+    @Autowired
+    OfficersRepository officersRepository;
+    @Autowired
+    OfficersRepositoryImpl officersRepositoryImpl;
+    @Autowired
     FormatMessage formatMessage;
 
     @RequestMapping(value = Constants.PATH.API_SURVEY_IMPORT, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -70,7 +85,7 @@ public class SurveyController {
             if (Comparator.isEqualNull(surveyImportRequests)) {
                 throw new BusinessException(Constants.ERROR_INVALID_FORMAT);
             }
-            surveysRepositoryImpl.importSurveyResult(surveyImportRequests);
+            importSurveyData(surveyImportRequests);
             response = BaseResponse.parse(Constants.SUCCESS, formatMessage, lang);
         } catch (BusinessException be) {
             response = BaseResponse.parse(be.getMessage(), formatMessage, lang);
@@ -287,4 +302,111 @@ public class SurveyController {
         return gson.toJson(response);
     }
 
+    
+    private void importSurveyData(List<SurveyImportRequest> surveyImportRequests) throws Exception {
+        if (Comparator.isEqualNullOrEmpty(surveyImportRequests)) {
+            throw new BusinessException(Constants.ERROR_INVALID_FORMAT);
+        }
+        for (SurveyImportRequest surveyImportRequest : surveyImportRequests) {
+            //validate
+            if (Comparator.isEqualNullOrEmpty(surveyImportRequest.getSurveyTitle())) {
+                throw new BusinessException(Constants.ERROR_INVALID_FORMAT);
+            }
+            if (Comparator.isEqualNullOrEmpty(surveyImportRequest.getFullName())) {
+                throw new BusinessException(Constants.ERROR_INVALID_FORMAT);
+            }
+            if (Comparator.isEqualNullOrEmpty(surveyImportRequest.getEmail())) {
+                throw new BusinessException(Constants.ERROR_INVALID_FORMAT);
+            }
+            if (Comparator.isEqualNullOrEmpty(surveyImportRequest.getPositionName())) {
+                throw new BusinessException(Constants.ERROR_INVALID_FORMAT);
+            }
+            if (Comparator.isEqualNullOrEmpty(surveyImportRequest.getQuestionContent())) {
+                throw new BusinessException(Constants.ERROR_INVALID_FORMAT);
+            }
+            if (Comparator.isEqualNullOrEmpty(surveyImportRequest.getAnswer())) {
+                throw new BusinessException(Constants.ERROR_INVALID_FORMAT);
+            }
+
+            //survey
+            Surveys surveyInput = new Surveys();
+            surveyInput.setSurveyTitle(surveyImportRequest.getSurveyTitle());
+            List<Surveys> listSurveys = surveysRepositoryImpl.onSearch(surveyInput);
+            Long surveyId = null;
+            if (!Comparator.isEqualNullOrEmpty(listSurveys)) {
+                surveyId = listSurveys.get(0).getSurveyId();
+            } else {
+                surveyInput.setSurveyDescription(surveyImportRequest.getSurveyTitle());
+                surveyInput.setStartTime(DateTimeUtils.truncYear(new Date()));
+                surveyInput.setEndTime(DateTimeUtils.truncYear(DateTimeUtils.addYear(new Date(), 1)));
+                surveyInput.setCreatedDate(new Date());
+                surveyInput.setUpdatedDate(new Date());
+                surveyInput = surveysRepository.save(surveyInput);
+                surveyId = surveyInput.getSurveyId();
+            }
+            logger.info("surveyId: " + surveyId);
+            //position
+            Positions positionInput = new Positions();
+            positionInput.setPositionName(surveyImportRequest.getPositionName());
+            List<Positions> listPositions = positionsRepositoryImpl.onSearch(positionInput);
+            Long positionId = null;
+            if (!Comparator.isEqualNullOrEmpty(listPositions)) {
+                positionId = listPositions.get(0).getPositionId();
+            } else {
+                positionInput.setPositionName(surveyImportRequest.getPositionName());
+                positionInput.setStatus(Constants.STATUS.ACTIVE);
+                positionInput.setCreatedDate(new Date());
+                positionInput.setUpdatedDate(new Date());
+                positionInput = positionsRepository.save(positionInput);
+                positionId = positionInput.getPositionId();
+            }
+            logger.info("positionId: " + positionId);
+            //officer
+            Officers officerInput = new Officers();
+            officerInput.setEmail(surveyImportRequest.getEmail());
+            List<Officers> listOfficers = officersRepositoryImpl.onSearch(officerInput);
+            Long officerId = null;
+            if (!Comparator.isEqualNullOrEmpty(listOfficers)) {
+                officerId = listOfficers.get(0).getOfficerId();
+            } else {
+                officerInput.setFirstName(surveyImportRequest.getFirstName());
+                officerInput.setLastName(surveyImportRequest.getLastName());
+                officerInput.setFullName(surveyImportRequest.getFullName());
+                officerInput.setMobile(surveyImportRequest.getMobile());
+                officerInput.setPositionId(positionId);
+                officerInput.setStatus(Constants.STATUS.ACTIVE);
+                officerInput.setCreatedDate(new Date());
+                officerInput.setUpdatedDate(new Date());
+                officerInput = officersRepository.save(officerInput);
+                officerId = officerInput.getOfficerId();
+            }
+            logger.info("officerId: " + officerId);
+            //question
+            Questions questionInput = new Questions();
+            questionInput.setQuestionContent(surveyImportRequest.getQuestionContent());
+            List<Questions> listQuestions = questionsRepositoryImpl.onSearch(questionInput);
+            Long questionId = null;
+            if (!Comparator.isEqualNullOrEmpty(listQuestions)) {
+                questionId = listQuestions.get(0).getQuestionId();
+            } else {
+                questionInput.setQuestionType(Constants.QUESTION_TYPE.SINGE);
+                questionInput.setCreatedDate(new Date());
+                questionInput.setUpdatedDate(new Date());
+                questionInput = questionsRepository.save(questionInput);
+                questionId = questionInput.getQuestionId();
+            }
+            logger.info("questionId: " + questionId);
+
+            //survey result
+            SurveyResults surveyResults = new SurveyResults();
+            surveyResults.setOfficerId(officerId);
+            surveyResults.setQuestionId(questionId);
+            surveyResults.setSurveyId(surveyId);
+            surveyResults.setAnswer(surveyImportRequest.getAnswer());
+            surveyResults.setCreatedDate(new Date());
+            surveyResults = surveyResultsRepository.save(surveyResults);
+
+            logger.info("surveyResultId: " + surveyResults.getSurveyResultId());
+        }
+    }
 }
