@@ -50,13 +50,13 @@ INDEX department_idx (department_id ASC, department_parent_id ASC) USING BTREE
 COMMENT = 'Bảng danh sách các phòng ban';
 
 CREATE TABLE positions (
-postion_id bigint NOT NULL AUTO_INCREMENT,
-postion_name varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
+position_id bigint NOT NULL AUTO_INCREMENT,
+position_name varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
 status int(1) NULL,
 created_date timestamp NULL DEFAULT CURRENT_TIMESTAMP,
 updated_date timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-PRIMARY KEY (postion_id) ,
-INDEX postion_idx (postion_id ASC) USING BTREE
+PRIMARY KEY (position_id) ,
+INDEX position_idx (position_id ASC) USING BTREE
 )
 COMMENT = 'Bảng danh sách các chức danh';
 

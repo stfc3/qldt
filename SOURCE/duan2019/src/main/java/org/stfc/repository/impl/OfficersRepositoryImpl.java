@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.stfc.dto.Officers;
 import org.stfc.dto.Positions;
-import org.stfc.dto.Questions;
 import org.stfc.utils.Comparator;
 import org.stfc.utils.StringUtils;
 
@@ -57,7 +56,7 @@ public class OfficersRepositoryImpl {
                 sql.append(" AND MATCH (u.full_name, u.last_name, u.first_name, u.email, u.mobile, u.gender) AGAINST (:keySearch)");
             }
         }
-        Query query = em.createNativeQuery(sql.toString(), Questions.class);
+        Query query = em.createNativeQuery(sql.toString(), Positions.class);
 
         if (!Comparator.isEqualNull(officers)) {
             if (!Comparator.isEqualNull(officers.getOfficerId())) {

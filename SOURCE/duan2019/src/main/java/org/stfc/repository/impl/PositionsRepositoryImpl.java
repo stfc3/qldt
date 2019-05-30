@@ -13,7 +13,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.stfc.dto.Positions;
-import org.stfc.dto.Questions;
 import org.stfc.utils.Comparator;
 import org.stfc.utils.StringUtils;
 
@@ -41,7 +40,7 @@ public class PositionsRepositoryImpl {
                 sql.append(" AND u.status = :status");
             }
         }
-        Query query = em.createNativeQuery(sql.toString(), Questions.class);
+        Query query = em.createNativeQuery(sql.toString(), Positions.class);
 
         if (!Comparator.isEqualNull(positions)) {
             if (!Comparator.isEqualNull(positions.getPositionId())) {
