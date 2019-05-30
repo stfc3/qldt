@@ -41,7 +41,7 @@ public class Questions implements Serializable {
     @Column(name = "question_id")
     private Long questionId;
     @Column(name = "survey_id")
-    private BigInteger surveyId;
+    private Long surveyId;
     @Size(max = 1000)
     @Column(name = "question_content")
     private String questionContent;
@@ -71,11 +71,11 @@ public class Questions implements Serializable {
         this.questionId = questionId;
     }
 
-    public BigInteger getSurveyId() {
+    public Long getSurveyId() {
         return surveyId;
     }
 
-    public void setSurveyId(BigInteger surveyId) {
+    public void setSurveyId(Long surveyId) {
         this.surveyId = surveyId;
     }
 

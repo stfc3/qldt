@@ -390,6 +390,7 @@ public class SurveyController {
                 questionId = listQuestions.get(0).getQuestionId();
             } else {
                 questionInput.setQuestionType(Constants.QUESTION_TYPE.SINGE);
+                questionInput.setSurveyId(surveyId);
                 questionInput.setCreatedDate(new Date());
                 questionInput.setUpdatedDate(new Date());
                 questionInput = questionsRepository.save(questionInput);
