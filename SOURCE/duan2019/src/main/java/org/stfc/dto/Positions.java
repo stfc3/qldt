@@ -21,6 +21,8 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.springframework.lang.Nullable;
+
 /**
  *
  * @author dmin
@@ -38,6 +40,10 @@ public class Positions implements Serializable {
     @Basic(optional = false)
     @Column(name = "position_id")
     private Long positionId;
+    @Column(name = "code")
+    @Nullable
+    @Size(max = 20)
+    private String code;
     @Size(max = 200)
     @Column(name = "position_name")
     private String positionName;
@@ -50,7 +56,23 @@ public class Positions implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedDate;
 
-    public Positions() {
+    
+    
+    /**
+	 * @return the code
+	 */
+	public String getCode() {
+		return code;
+	}
+
+	/**
+	 * @param code the code to set
+	 */
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public Positions() {
     }
 
     public Positions(Long positionId) {
