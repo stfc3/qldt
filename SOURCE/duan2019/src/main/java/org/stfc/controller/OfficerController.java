@@ -47,11 +47,11 @@ public class OfficerController {
             if (Comparator.isEqualNull(officer)) {
                 response = BaseResponse.parse(Constants.ERROR_DATA_EMPTY, formatMessage, lang);
             }else{
+                response = BaseResponse.parse(Constants.SUCCESS, formatMessage, lang);
                 officerResponse.setOfficer(officer);
                 officerResponse.setOfficerCertificates(officersRepositoryImpl.findCertificatesByOfficer(officer.getOfficerId()));
                 officerResponse.setCourses(officersRepositoryImpl.findCoursesByOfficer(officer.getOfficerId()));
                 response.setData(officerResponse);
-                response = BaseResponse.parse(Constants.SUCCESS, formatMessage, lang);
             }
             
         } catch (Exception e) {
