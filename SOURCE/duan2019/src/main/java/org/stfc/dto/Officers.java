@@ -186,6 +186,7 @@ public class Officers implements Serializable {
     }
 
     public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getKeySearch() {
