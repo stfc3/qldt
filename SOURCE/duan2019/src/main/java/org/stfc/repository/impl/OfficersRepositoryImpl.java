@@ -114,7 +114,7 @@ public class OfficersRepositoryImpl {
     }
     public List<Courses> findCoursesByOfficer(Long officerId) {
         if (!Comparator.isEqualNull(officerId)) {
-            String sql = "SELECT * FROM courses c, officer_course oc WHERE oc.officer_id = c.officer_id AND oc.officer_id = :officerId";
+            String sql = "SELECT * FROM courses c, officer_course oc WHERE oc.course_id = c.course_id AND oc.officer_id = :officerId";
             Query query = em.createNativeQuery(sql, Courses.class);
             query.setParameter("officerId", officerId);
             List<Courses> listCourses = query.getResultList();

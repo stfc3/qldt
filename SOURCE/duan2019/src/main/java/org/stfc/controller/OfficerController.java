@@ -45,7 +45,7 @@ public class OfficerController {
             Officers officer = officersRepositoryImpl.findOfficerByUsername(username);
             OfficerResponse officerResponse=new  OfficerResponse();
             if (Comparator.isEqualNull(officer)) {
-                response = BaseResponse.parse(Constants.ERROR_INTERNAL, formatMessage, lang);
+                response = BaseResponse.parse(Constants.ERROR_DATA_EMPTY, formatMessage, lang);
             }else{
                 officerResponse.setOfficer(officer);
                 officerResponse.setOfficerCertificates(officersRepositoryImpl.findCertificatesByOfficer(officer.getOfficerId()));
