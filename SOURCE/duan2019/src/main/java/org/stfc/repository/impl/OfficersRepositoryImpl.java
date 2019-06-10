@@ -12,6 +12,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.stfc.dto.CertificateOfficers;
+import org.stfc.dto.Courses;
 import org.stfc.dto.Officers;
 import org.stfc.utils.Comparator;
 import org.stfc.utils.StringUtils;
@@ -84,5 +86,42 @@ public class OfficersRepositoryImpl {
             }
         }
         return query.getResultList();
+    }
+
+    public Officers findOfficerByUsername(String username) {
+        if (!Comparator.isEqualNullOrEmpty(username)) {
+            String sql = "SELECT o.*, p.position_name FROM officers o, users u, positions p WHERE o.user_id = u.id AND u.status = 'ACTIVE' AND o.status = 1 AND o.position_id = p.position_id AND p.status = 1 AND u.username = :username";
+            Query query = em.createNativeQuery(sql, Officers.class);
+            query.setParameter("username", username);
+            List<Officers> listOfficers = query.getResultList();
+            if (!Comparator.isEqualNullOrEmpty(listOfficers)) {
+                return listOfficers.get(0);
+            }
+        }
+        return null;
+    }
+    public List<CertificateOfficers> findCertificatesByOfficer(Long officerId) {
+        if (!Comparator.isEqualNull(officerId)) {
+            String sql = "SELECT oc.*, c.certificate_name FROM officer_certificate oc, certificates c WHERE oc.certificate_id = c.certificate_id AND oc.status = 1 AND c.status = 1 AND oc.officer_id = :officerId";
+            Query query = em.createNativeQuery(sql, CertificateOfficers.class);
+            query.setParameter("officerId", officerId);
+            List<CertificateOfficers> listOfficerCertificate = query.getResultList();
+            if (!Comparator.isEqualNullOrEmpty(listOfficerCertificate)) {
+                return listOfficerCertificate;
+            }
+        }
+        return null;
+    }
+    public List<Courses> findCoursesByOfficer(Long officerId) {
+        if (!Comparator.isEqualNull(officerId)) {
+            String sql = "SELECT * FROM courses c, officer_course oc WHERE oc.officer_id = c.officer_id AND oc.officer_id = :officerId";
+            Query query = em.createNativeQuery(sql, Courses.class);
+            query.setParameter("officerId", officerId);
+            List<Courses> listCourses = query.getResultList();
+            if (!Comparator.isEqualNullOrEmpty(listCourses)) {
+                return listCourses;
+            }
+        }
+        return null;
     }
 }
