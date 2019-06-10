@@ -71,8 +71,12 @@ public class Officers implements Serializable {
     @Column(name = "updated_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedDate;
+    @Column(name = "user_id")
+    private Long userId;
     @Transient
     private String keySearch;
+    @Transient
+    private String positionName;
 
     public Officers() {
     }
@@ -177,12 +181,27 @@ public class Officers implements Serializable {
         this.updatedDate = updatedDate;
     }
 
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+    }
+
     public String getKeySearch() {
         return keySearch;
     }
 
     public void setKeySearch(String keySearch) {
         this.keySearch = keySearch;
+    }
+
+    public String getPositionName() {
+        return positionName;
+    }
+
+    public void setPositionName(String positionName) {
+        this.positionName = positionName;
     }
 
     @Override
