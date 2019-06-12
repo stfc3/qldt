@@ -3,6 +3,8 @@
  */
 package org.stfc.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -13,6 +15,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import org.stfc.utils.Constants;
 
 /**
  * @author viettx
@@ -20,7 +23,7 @@ import javax.persistence.Transient;
  */
 @Entity
 @Table(name = "officer_certificate")
-public class CertificateOfficers {
+public class CertificateOfficers implements Serializable {
 
     @Id
     @GeneratedValue
@@ -34,6 +37,7 @@ public class CertificateOfficers {
     private String numberCert;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "certificate_issue_date")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_FORMAT.DD_MM_YYYY_HH_MM_SS, timezone = Constants.DATE_FORMAT.TIMEZONE_HCM)
     private Date dateCert;
     @Column(name = "certificate_issue_place")
     private String placeCert;
@@ -41,9 +45,11 @@ public class CertificateOfficers {
     private int status;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_date")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_FORMAT.DD_MM_YYYY_HH_MM_SS, timezone = Constants.DATE_FORMAT.TIMEZONE_HCM)
     private Date createDate;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "updated_date")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_FORMAT.DD_MM_YYYY_HH_MM_SS, timezone = Constants.DATE_FORMAT.TIMEZONE_HCM)
     private Date modifiedDate;
     @Transient
     private String certificateName;

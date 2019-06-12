@@ -32,4 +32,8 @@ public interface Constants {
     public interface QUESTION_TYPE {
         Integer SINGE = 1;
     }
+    public interface DATE_FORMAT{
+        String DD_MM_YYYY_HH_MM_SS = "dd/MM/yyyy HH:mm:ss";
+        String TIMEZONE_HCM = "Asia/Ho_Chi_Minh";
+    }
 }

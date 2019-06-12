@@ -3,6 +3,8 @@
  */
 package org.stfc.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -13,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.stfc.utils.Constants;
 
 /**
  * @author viettx
@@ -20,7 +23,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "Courses")
-public class Courses {
+public class Courses implements Serializable {
 	/**
 	 * 
 	 */
@@ -36,18 +39,22 @@ public class Courses {
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "start_date", nullable = true)
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_FORMAT.DD_MM_YYYY_HH_MM_SS, timezone = Constants.DATE_FORMAT.TIMEZONE_HCM)
 	private Date startDate;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "end_date", nullable = false)
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_FORMAT.DD_MM_YYYY_HH_MM_SS, timezone = Constants.DATE_FORMAT.TIMEZONE_HCM)
 	private Date endDate;
 
 	@Column(name = "created_date")
 	@Temporal(TemporalType.TIMESTAMP)
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_FORMAT.DD_MM_YYYY_HH_MM_SS, timezone = Constants.DATE_FORMAT.TIMEZONE_HCM)
 	private Date createDate;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "updated_date")
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_FORMAT.DD_MM_YYYY_HH_MM_SS, timezone = Constants.DATE_FORMAT.TIMEZONE_HCM)
 	private Date modifiedDate;
 
 	@Column(name = "lecturer_id", nullable = false, length = 20)
