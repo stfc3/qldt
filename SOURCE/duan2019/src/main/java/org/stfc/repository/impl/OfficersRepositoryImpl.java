@@ -90,7 +90,7 @@ public class OfficersRepositoryImpl {
 
     public Officers findOfficerByUsername(String username) {
         if (!Comparator.isEqualNullOrEmpty(username)) {
-            String sql = "SELECT o.*, p.position_name FROM officers o, users u, positions p WHERE o.user_id = u.id AND u.status = 'ACTIVE' AND o.status = 1 AND o.position_id = p.position_id AND p.status = 1 AND u.username = :username";
+            String sql = "SELECT o.*, p.position_name as positionName FROM officers o, users u, positions p WHERE o.user_id = u.id AND u.status = 'ACTIVE' AND o.status = 1 AND o.position_id = p.position_id AND p.status = 1 AND u.username = :username";
             Query query = em.createNativeQuery(sql, Officers.class);
             query.setParameter("username", username);
             List<Officers> listOfficers = query.getResultList();
@@ -102,7 +102,7 @@ public class OfficersRepositoryImpl {
     }
     public List<CertificateOfficers> findCertificatesByOfficer(Long officerId) {
         if (!Comparator.isEqualNull(officerId)) {
-            String sql = "SELECT oc.*, c.certificate_name FROM officer_certificate oc, certificates c WHERE oc.certificate_id = c.certificate_id AND oc.status = 1 AND c.status = 1 AND oc.officer_id = :officerId";
+            String sql = "SELECT oc.*, c.certificate_name as certificateName FROM officer_certificate oc, certificates c WHERE oc.certificate_id = c.certificate_id AND oc.status = 1 AND c.status = 1 AND oc.officer_id = :officerId";
             Query query = em.createNativeQuery(sql, CertificateOfficers.class);
             query.setParameter("officerId", officerId);
             List<CertificateOfficers> listOfficerCertificate = query.getResultList();
