@@ -13,13 +13,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
-import lombok.Data;
-
 /**
  * @author viett
  *
  */
-@Data
+
 @Entity
 @Table(name = "position_certificate")
 public class PositionCertificate {
