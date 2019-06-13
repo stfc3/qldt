@@ -113,7 +113,7 @@ public class OfficersRepositoryImpl {
             sql.append(", oc.certificate_issue_date as dateCert, oc.certificate_issue_place as placeCert");
             sql.append(", oc.status as status, oc.created_date as createDate, oc.updated_date as modifiedDate");
             sql.append(", c.certificate_name as certificateName");
-            sql.append(" FROM officer_certificate oc, certificates");
+            sql.append(" FROM officer_certificate oc, certificates c");
             sql.append(" WHERE oc.certificate_id = c.certificate_id AND oc.status = 1 AND c.status = 1 AND oc.officer_id = :officerId");
             Query query = em.createNativeQuery(sql.toString(), CertificateOfficers.class);
             query.setParameter("officerId", officerId);
