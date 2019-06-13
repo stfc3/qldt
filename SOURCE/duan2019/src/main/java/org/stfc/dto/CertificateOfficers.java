@@ -54,6 +54,20 @@ public class CertificateOfficers implements Serializable {
     @Transient
     private String certificateName;
 
+    public CertificateOfficers(Long id, Long officer, Long certificate, String numberCert, Date dateCert, String placeCert, int status, Date createDate, Date modifiedDate, String certificateName) {
+        this.id = id;
+        this.officer = officer;
+        this.certificate = certificate;
+        this.numberCert = numberCert;
+        this.dateCert = dateCert;
+        this.placeCert = placeCert;
+        this.status = status;
+        this.createDate = createDate;
+        this.modifiedDate = modifiedDate;
+        this.certificateName = certificateName;
+    }
+    
+
     /**
      * @return the id
      */

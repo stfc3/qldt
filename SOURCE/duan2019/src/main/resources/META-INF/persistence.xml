@@ -11,6 +11,7 @@
     <class>org.stfc.dto.OfficerCourse</class>
     <class>org.stfc.dto.Feedbacks</class>
     <class>org.stfc.dto.Positions</class>
+    <class>org.stfc.dto.Users</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://13.250.191.59:3306/qldt?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="qldt"/>

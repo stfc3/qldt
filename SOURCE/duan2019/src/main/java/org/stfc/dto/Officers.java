@@ -7,7 +7,6 @@ package org.stfc.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -83,6 +82,23 @@ public class Officers implements Serializable {
     private String positionName;
 
     public Officers() {
+    }
+
+    public Officers(Long officerId, String firstName, String lastName, String fullName, String gender, String mobile, String email, Long positionId, Integer status, Date createdDate, Date updatedDate, Long userId, Long departmentId, String positionName) {
+        this.officerId = officerId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.fullName = fullName;
+        this.gender = gender;
+        this.mobile = mobile;
+        this.email = email;
+        this.departmentId = departmentId;
+        this.positionId = positionId;
+        this.status = status;
+        this.createdDate = createdDate;
+        this.updatedDate = updatedDate;
+        this.userId = userId;
+        this.positionName = positionName;
     }
 
     public Officers(Long officerId) {

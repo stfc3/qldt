@@ -90,14 +90,14 @@ public class OfficersRepositoryImpl {
 
     public Officers findOfficerByUsername(String username) {
         if (!Comparator.isEqualNullOrEmpty(username)) {
-            StringBuilder sql = new StringBuilder("SELECT o.officer_id as officerId, o.first_name as firstName");
-            sql.append(", o.last_name as lastName, o.full_name as fullName, o.gender as gender, o.mobile as mobile");
-            sql.append(", o.email as email, o.position_id as positionId, o.status as status, o.created_date as createdDate");
-            sql.append(", o.updated_date as updatedDate, o.user_id as userId, o.department_id as departmentId");
-            sql.append(", p.position_name as positionName");
-            sql.append(" FROM officers o, users u, positions p");
-            sql.append(" WHERE o.user_id = u.id AND u.status = 'ACTIVE' AND o.status = 1 AND o.position_id = p.position_id AND p.status = 1 AND u.username = :username");
-            Query query = em.createNativeQuery(sql.toString(), Officers.class);
+            StringBuilder sql = new StringBuilder("SELECT new org.stfc.dto.Officers (o.officerId, o.firstName");
+            sql.append(", o.lastName, o.fullName, o.gender, o.mobile");
+            sql.append(", o.email, o.positionId, o.status, o.createdDate");
+            sql.append(", o.updatedDate, o.userId, o.departmentId");
+            sql.append(", p.positionName)");
+            sql.append(" FROM Officers o, Users u, Positions p");
+            sql.append(" WHERE o.userId = u.id AND u.status = 'ACTIVE' AND o.status = 1 AND o.positionId = p.positionId AND p.status = 1 AND u.username = :username");
+            Query query = em.createQuery(sql.toString());
             query.setParameter("username", username);
             List<Officers> listOfficers = query.getResultList();
             if (!Comparator.isEqualNullOrEmpty(listOfficers)) {
@@ -108,14 +108,14 @@ public class OfficersRepositoryImpl {
     }
     public List<CertificateOfficers> findCertificatesByOfficer(Long officerId) {
         if (!Comparator.isEqualNull(officerId)) {
-            StringBuilder sql = new StringBuilder("SELECT oc.officer_certificate_id as id, oc.officer_id as officer");
-            sql.append(", oc.certificate_number as numberCert, oc.certificate_id as certificate");
-            sql.append(", oc.certificate_issue_date as dateCert, oc.certificate_issue_place as placeCert");
-            sql.append(", oc.status as status, oc.created_date as createDate, oc.updated_date as modifiedDate");
-            sql.append(", c.certificate_name as certificateName");
-            sql.append(" FROM officer_certificate oc, certificates c");
-            sql.append(" WHERE oc.certificate_id = c.certificate_id AND oc.status = 1 AND c.status = 1 AND oc.officer_id = :officerId");
-            Query query = em.createNativeQuery(sql.toString(), CertificateOfficers.class);
+            StringBuilder sql = new StringBuilder("SELECT new org.stfc.dto.CertificateOfficers ( oc.id, oc.officer");
+            sql.append(", oc.numberCert, oc.certificate");
+            sql.append(", oc.dateCert, oc.placeCert");
+            sql.append(", oc.status, oc.createDate, oc.modifiedDate");
+            sql.append(", c.certificateName)");
+            sql.append(" FROM CertificateOfficers oc, Certificate c");
+            sql.append(" WHERE oc.certificate = c.id AND oc.status = 1 AND c.status = 1 AND oc.officer = :officerId");
+            Query query = em.createQuery(sql.toString());
             query.setParameter("officerId", officerId);
             List<CertificateOfficers> listOfficerCertificate = query.getResultList();
             if (!Comparator.isEqualNullOrEmpty(listOfficerCertificate)) {
