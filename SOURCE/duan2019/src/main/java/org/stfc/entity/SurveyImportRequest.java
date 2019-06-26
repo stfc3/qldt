@@ -5,7 +5,12 @@
  */
 package org.stfc.entity;
 
+import java.util.Date;
+
 import org.stfc.utils.Comparator;
+import org.stfc.utils.Constants;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 /**
  *
@@ -21,12 +26,17 @@ public class SurveyImportRequest {
     private String mobile;
     //email
     private String email;
+   //Loại Chuc vu
+    private String positionType;
     //Chuc vu
     private String positionName;
     //Ghep tieu de cac khoa hoc
     private String questionContent;
     //cau tra loi cho tung mon hoc cua hoc vien
     private String answer;
+    //thoi gian co the hoc
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_FORMAT.DD_MM_YYYY_HH_MM_SS, timezone = Constants.DATE_FORMAT.TIMEZONE_HCM)
+    private Date learnDate;
 
     public String getSurveyTitle() {
         return surveyTitle;
@@ -84,7 +94,15 @@ public class SurveyImportRequest {
         this.email = email;
     }
 
-    public String getPositionName() {
+    public String getPositionType() {
+		return positionType;
+	}
+
+	public void setPositionType(String positionType) {
+		this.positionType = positionType;
+	}
+
+	public String getPositionName() {
         return positionName;
     }
 
@@ -107,5 +125,13 @@ public class SurveyImportRequest {
     public void setAnswer(String answer) {
         this.answer = answer;
     }
+
+	public Date getLearnDate() {
+		return learnDate;
+	}
+
+	public void setLearnDate(Date learnDate) {
+		this.learnDate = learnDate;
+	}
 
 }

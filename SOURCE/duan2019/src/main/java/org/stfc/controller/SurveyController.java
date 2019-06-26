@@ -347,13 +347,13 @@ public class SurveyController {
             logger.info("surveyId: " + surveyId);
             //position
             Positions positionInput = new Positions();
+            positionInput.setPositionType(surveyImportRequest.getPositionType());
             positionInput.setPositionName(surveyImportRequest.getPositionName());
             List<Positions> listPositions = positionsRepositoryImpl.onSearch(positionInput);
             Long positionId = null;
             if (!Comparator.isEqualNullOrEmpty(listPositions)) {
                 positionId = listPositions.get(0).getPositionId();
             } else {
-                positionInput.setPositionName(surveyImportRequest.getPositionName());
                 positionInput.setStatus(Constants.STATUS.ACTIVE);
                 positionInput.setCreatedDate(new Date());
                 positionInput.setUpdatedDate(new Date());
@@ -405,6 +405,7 @@ public class SurveyController {
             surveyResults.setSurveyId(surveyId);
             surveyResults.setAnswer(surveyImportRequest.getAnswer());
             surveyResults.setCreatedDate(new Date());
+            surveyResults.setLearnDate(surveyImportRequest.getLearnDate());
             surveyResults = surveyResultsRepository.save(surveyResults);
 
             logger.info("surveyResultId: " + surveyResults.getSurveyResultId());

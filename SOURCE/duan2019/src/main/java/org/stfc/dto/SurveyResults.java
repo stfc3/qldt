@@ -51,6 +51,9 @@ public class SurveyResults implements Serializable {
     @Column(name = "created_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
+    @Column(name = "learn_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date learnDate;
 
     public SurveyResults() {
     }
@@ -107,7 +110,15 @@ public class SurveyResults implements Serializable {
         this.createdDate = createdDate;
     }
 
-    @Override
+    public Date getLearnDate() {
+		return learnDate;
+	}
+
+	public void setLearnDate(Date learnDate) {
+		this.learnDate = learnDate;
+	}
+
+	@Override
     public int hashCode() {
         int hash = 0;
         hash += (surveyResultId != null ? surveyResultId.hashCode() : 0);

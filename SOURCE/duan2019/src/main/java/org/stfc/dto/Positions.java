@@ -44,6 +44,9 @@ public class Positions implements Serializable {
     @Nullable
     @Size(max = 20)
     private String code;
+    @Size(max = 50)
+    @Column(name = "position_type")
+    private String positionType;
     @Size(max = 200)
     @Column(name = "position_name")
     private String positionName;
@@ -87,7 +90,16 @@ public class Positions implements Serializable {
         this.positionId = positionId;
     }
 
-    public String getPositionName() {
+    
+    public String getPositionType() {
+		return positionType;
+	}
+
+	public void setPositionType(String positionType) {
+		this.positionType = positionType;
+	}
+
+	public String getPositionName() {
         return positionName;
     }
 

@@ -5,7 +5,6 @@
  */
 package org.stfc.repository.impl;
 
-import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -13,21 +12,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.stfc.business.BusinessException;
-import org.stfc.dto.Officers;
-import org.stfc.dto.Positions;
-import org.stfc.dto.Questions;
-import org.stfc.dto.SurveyResults;
 import org.stfc.dto.Surveys;
-import org.stfc.entity.SurveyImportRequest;
-import org.stfc.repository.OfficersRepository;
-import org.stfc.repository.PositionsRepository;
-import org.stfc.repository.QuestionsRepository;
-import org.stfc.repository.SurveyResultsRepository;
-import org.stfc.repository.SurveysRepository;
 import org.stfc.utils.Comparator;
-import org.stfc.utils.Constants;
-import org.stfc.utils.DateTimeUtils;
 import org.stfc.utils.StringUtils;
 
 /**

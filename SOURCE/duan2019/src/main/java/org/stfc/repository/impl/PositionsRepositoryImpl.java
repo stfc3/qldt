@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.stfc.dto.Positions;
 import org.stfc.utils.Comparator;
-import org.stfc.utils.StringUtils;
 
 /**
  *
@@ -33,8 +32,11 @@ public class PositionsRepositoryImpl {
             if (!Comparator.isEqualNull(positions.getPositionId())) {
                 sql.append(" AND u.position_id = :positionId");
             }
+            if (!Comparator.isEqualNullOrEmpty(positions.getPositionType())) {
+                sql.append(" AND u.position_type = :positionType");
+            }
             if (!Comparator.isEqualNullOrEmpty(positions.getPositionName())) {
-                sql.append(" AND u.position_name like :positionName escape '/'");
+                sql.append(" AND u.position_name = :positionName");
             }
             if (!Comparator.isEqualNull(positions.getStatus())) {
                 sql.append(" AND u.status = :status");
@@ -46,8 +48,11 @@ public class PositionsRepositoryImpl {
             if (!Comparator.isEqualNull(positions.getPositionId())) {
                 query.setParameter("positionId", positions.getPositionId());
             }
+            if (!Comparator.isEqualNullOrEmpty(positions.getPositionType())) {
+                query.setParameter("positionType",positions.getPositionType());
+            }
             if (!Comparator.isEqualNullOrEmpty(positions.getPositionName())) {
-                query.setParameter("positionName", "%" + StringUtils.escapeCharacter(positions.getPositionName()) + "%");
+                query.setParameter("positionName",positions.getPositionName());
             }
             if (!Comparator.isEqualNull(positions.getStatus())) {
                 query.setParameter("status", positions.getStatus());
