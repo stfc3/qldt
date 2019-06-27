@@ -15,15 +15,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.stfc.business.BusinessException;
 import org.stfc.dto.Courses;
 import org.stfc.dto.Evaluations;
 import org.stfc.message.BaseResponse;
-import org.stfc.repository.CoursesRepository;
+import org.stfc.message.CoursesRequest;
+import org.stfc.message.CoursesResponse;
 import org.stfc.repository.EvaluationRepository;
+import org.stfc.repository.impl.CourseServices;
+import org.stfc.utils.Comparator;
 import org.stfc.utils.Contants;
 import org.stfc.utils.FormatMessage;
+import org.stfc.utils.Language;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -36,13 +42,38 @@ import com.google.gson.GsonBuilder;
 @RestController
 public class CoursesController {
 	private static final Logger logger = LoggerFactory.getLogger(CoursesController.class);
+
 	@Autowired
-	CoursesRepository repository;
+	CourseServices courseServices;
 	@Autowired
 	FormatMessage formatMessage;
 
 	@Autowired
 	EvaluationRepository evaluationRepository;
+
+	@RequestMapping(method = { RequestMethod.POST }, value = { "/courses/search" }, headers = {
+			"Accept=application/json" }, produces = { "text/plain;charset=UTF-8" })
+	public String onSearch(@RequestBody(required = false) CoursesRequest request) {
+		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+		logger.debug("Body request: {}", gson.toJson(request));
+		BaseResponse response = BaseResponse.parse(Contants.ERROR_INTERNAL, formatMessage, Language.VI.getValue());
+		try {
+			logger.debug("Request {}", gson.toJson(request));
+			List<Courses> listData = courseServices.findAllCourse(request);
+			CoursesResponse coursesResponse = new CoursesResponse();
+			response = BaseResponse.parse(Contants.SUCCESS, formatMessage, Language.VI.getValue());
+			if(!Comparator.isEqualNullOrEmpty(listData)){
+				coursesResponse.setCourses(listData);
+				response.setTotal(listData.size());
+			}
+			response.setData(coursesResponse);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error(e.getMessage(), e);
+		}
+		return gson.toJson(response);
+	}
 
 	/**
 	 * Lay thong tin khoa hoc giang vien
@@ -59,7 +90,7 @@ public class CoursesController {
 			if (coursesId == null) {
 				throw new BusinessException(Contants.ERROR_ID_EMPTY);
 			}
-			Courses courses = repository.findCoursesById(coursesId);
+			Courses courses = courseServices.findCoursesById(coursesId);
 			if (courses == null) {
 				throw new BusinessException(Contants.ERROR_DATA_EMPTY);
 			}
@@ -89,7 +120,6 @@ public class CoursesController {
 		logger.debug("Body request: {}", gson.toJson(courses));
 		String lang = "vi";
 		BaseResponse response = BaseResponse.parse(Contants.ERROR_INTERNAL, formatMessage, lang);
-
 		try {
 			if (courses == null) {
 				throw new BusinessException(Contants.ERROR_INVALID_FORMAT);
@@ -99,11 +129,10 @@ public class CoursesController {
 			} else {
 				courses.setModifiedDate(new Date());
 			}
-			repository.save(courses);
+			courseServices.save(courses);
 			response = BaseResponse.parse(Contants.SUCCESS, formatMessage, lang);
 		} catch (BusinessException be) {
 			response = BaseResponse.parse(be.getMessage(), formatMessage, lang);
-
 		} catch (Exception e) {
 			// TODO: handle exception
 			logger.error(e.getMessage(), e);
@@ -129,7 +158,7 @@ public class CoursesController {
 			if (coursesId == null) {
 				throw new BusinessException(Contants.ERROR_ID_EMPTY);
 			}
-			repository.deleteById(coursesId);
+			courseServices.deleteById(coursesId);
 			response = BaseResponse.parse(Contants.SUCCESS, formatMessage);
 		} catch (BusinessException be) {
 			response = BaseResponse.parse(be.getMessage(), formatMessage, lang);

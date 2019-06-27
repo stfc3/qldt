@@ -26,6 +26,7 @@ import org.stfc.specification.SearchOperation;
 import org.stfc.utils.Comparator;
 import org.stfc.utils.Contants;
 import org.stfc.utils.FormatMessage;
+import org.stfc.utils.Language;
 
 import com.google.gson.Gson;
 
@@ -62,9 +63,10 @@ public class SearchLecturersBussiness implements Business {
 	@Override
 	public BaseResponse process(String request, Gson gson) {
 		// TODO Auto-generated method stub
-		BaseResponse res = BaseResponse.parse(Contants.ERROR_INTERNAL, formatMessage);
+		String lang = Language.VI.getValue();
+		BaseResponse res = BaseResponse.parse(Contants.ERROR_INTERNAL, formatMessage, lang);
 		long start = System.currentTimeMillis();
-		String lang = "vi";
+		
 		String TAG = "onSearchLecturers";
 		try {
 			LecturersRequest req = gson.fromJson(request, LecturersRequest.class);
@@ -73,7 +75,6 @@ public class SearchLecturersBussiness implements Business {
 			if (req == null) {
 				listAllData = imp.onSearch(null);
 			} else {
-
 				if (!Comparator.isEqualNull(req.getQuery())) {
 					STFCSpecification<Lecturers> stfcSpecification = new STFCSpecification<Lecturers>();
 					String query = stfcSpecification.getFieldNames(Lecturers.class, req.getQuery());

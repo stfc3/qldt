@@ -70,7 +70,7 @@ public class SearchPositionsBusiness implements Business {
 			/**
 			 * Lay danh sach vi tri lam viec, chuc vu trong bo dang o trang thai hoat dong
 			 */
-			List<Positions> listAllData = repository.findAllPositionsActive();
+			List<Positions> listAllData = repository.findAllPositions();
 
 			/**
 			 * Gan gia tri tra ve cho client

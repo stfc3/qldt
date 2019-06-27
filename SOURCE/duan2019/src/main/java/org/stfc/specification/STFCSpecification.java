@@ -12,7 +12,7 @@ import org.springframework.data.jpa.domain.Specification;
 public class STFCSpecification<T> {
 	private static final Logger logger = LoggerFactory.getLogger(STFCSpecification.class);
 
-	public Specification<T> getSpecification(String orPredicateFlag,String search) {
+	public Specification<T> getSpecification(String orPredicateFlag, String search) {
 		if (StringUtils.isBlank(search)) {
 			return null;
 		}
@@ -27,51 +27,64 @@ public class STFCSpecification<T> {
 			String s3 = matcher.group(3);
 			String s4 = matcher.group(4);
 			String s5 = matcher.group(5);
-			builder.with(orPredicateFlag,s1, s2, s4, s3, s5);
+			builder.with(orPredicateFlag, s1, s2, s4, s3, s5);
 		}
 		return builder.build();
 	}
 
 	public String getFieldNames(Class<?> clazz, String queryValue) throws Exception {
 		String builderQuery = "";
-		
+
 		Field[] fields = clazz.getDeclaredFields();
 		for (int i = 0; i < fields.length; i++) {
 			if (fields[i].getType().getName().equals(String.class.getName())) {
-				builderQuery += fields[i].getName() + ":" + queryValue + ",";
-			} else if (fields[i].getType().getName().equals(Long.class.getName())) {
-				try {
-					Long value = Long.parseLong(queryValue);
-					builderQuery += fields[i].getName() + ":" + value + ",";
-				} catch (Exception e) {
-					// TODO: handle exception
-					logger.error(e.getMessage(), e);
-				}
-			} else if (fields[i].getType().getName().equals(Double.class.getName())) {
-				try {
-					Double value = Double.parseDouble(queryValue);
-					builderQuery += fields[i].getName() + ":" + value + ",";
-				} catch (Exception e) {
-					// TODO: handle exception
-					logger.error(e.getMessage(), e);
-				}
-			} else if (fields[i].getType().getName().equals(Integer.class.getName())) {
-				try {
-					Integer value = Integer.parseInt(queryValue);
-					builderQuery += fields[i].getName() + ":" + value + ",";
-				} catch (Exception e) {
-					// TODO: handle exception
-					logger.error(e.getMessage(), e);
-				}
-			} else if (fields[i].getType().getName().equals(Boolean.class.getName())) {
-				try {
-					Boolean value = Boolean.parseBoolean(queryValue);
-					builderQuery += fields[i].getName() + ":" + value + ",";
-				} catch (Exception e) {
-					// TODO: handle exception
-					logger.error(e.getMessage(), e);
+				if (i == fields.length - 1) {
+					builderQuery += fields[i].getName() + SearchOperation.STARTS_WITH.getCode() + queryValue;
+				} else {
+					builderQuery += fields[i].getName() + SearchOperation.STARTS_WITH.getCode() + queryValue + ",";
 				}
 			}
+//			else if (fields[i].getType().getName().equals(Long.class.getName())) {
+//				try {
+//					Long value = Long.parseLong(queryValue);
+//					builderQuery += fields[i].getName() + SearchOperation.EQUALITY.getCode() + value + ",";
+//				} catch (Exception e) {
+//					// TODO: handle exception
+//					logger.error(e.getMessage(), e);
+//				}
+//			} else if (fields[i].getType().getName().equals(Double.class.getName())) {
+//				try {
+//					Double value = Double.parseDouble(queryValue);
+//					builderQuery += fields[i].getName() + SearchOperation.EQUALITY.getCode() + value + ",";
+//				} catch (Exception e) {
+//					// TODO: handle exception
+//					logger.error(e.getMessage(), e);
+//				}
+//			} else if (fields[i].getType().getName().equals(Integer.class.getName())) {
+//				try {
+//					Integer value = Integer.parseInt(queryValue);
+//					builderQuery += fields[i].getName() + SearchOperation.EQUALITY.getCode()+ value + ",";
+//				} catch (Exception e) {
+//					// TODO: handle exception
+//					logger.error(e.getMessage(), e);
+//				}
+//			} else if (fields[i].getType().getName().equals(Boolean.class.getName())) {
+//				try {
+//					Boolean value = Boolean.parseBoolean(queryValue);
+//					builderQuery += fields[i].getName() + SearchOperation.EQUALITY.getCode() + value + ",";
+//				} catch (Exception e) {
+//					// TODO: handle exception
+//					logger.error(e.getMessage(), e);
+//				}
+//			}else if (fields[i].getType().getName().equals(Date.class.getName())) {
+//				try {
+//					Boolean value = Boolean.parseBoolean(queryValue);
+//					builderQuery += fields[i].getName() + ":" + value + ",";
+//				} catch (Exception e) {
+//					// TODO: handle exception
+//					logger.error(e.getMessage(), e);
+//				}
+//			}
 		}
 		return builderQuery;
 	}

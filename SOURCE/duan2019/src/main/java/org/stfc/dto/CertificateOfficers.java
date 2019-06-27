@@ -25,181 +25,188 @@ import org.stfc.utils.Constants;
 @Table(name = "officer_certificate")
 public class CertificateOfficers implements Serializable {
 
-    @Id
-    @GeneratedValue
-    @Column(name = "officer_certificate_id", nullable = false, length = 20, unique = true)
-    private Long id;
-    @Column(name = "officer_id", nullable = false, length = 20)
-    private Long officer;
-    @Column(name = "certificate_id", nullable = false, length = 20)
-    private Long certificate;
-    @Column(name = "certificate_number", nullable = false, length = 200)
-    private String numberCert;
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "certificate_issue_date")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_FORMAT.DD_MM_YYYY_HH_MM_SS, timezone = Constants.DATE_FORMAT.TIMEZONE_HCM)
-    private Date dateCert;
-    @Column(name = "certificate_issue_place")
-    private String placeCert;
-    @Column(name = "status", nullable = false, length = 1)
-    private int status;
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "created_date")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_FORMAT.DD_MM_YYYY_HH_MM_SS, timezone = Constants.DATE_FORMAT.TIMEZONE_HCM)
-    private Date createDate;
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "updated_date")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_FORMAT.DD_MM_YYYY_HH_MM_SS, timezone = Constants.DATE_FORMAT.TIMEZONE_HCM)
-    private Date modifiedDate;
-    @Transient
-    private String certificateName;
+	@Id
+	@GeneratedValue
+	@Column(name = "officer_certificate_id", nullable = false, length = 20, unique = true)
+	private Long id;
+	@Column(name = "officer_id", nullable = false, length = 20)
+	private Long officer;
+	@Column(name = "certificate_id", nullable = false, length = 20)
+	private Long certificate;
+	@Column(name = "certificate_number", nullable = false, length = 200)
+	private String numberCert;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "certificate_issue_date")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_FORMAT.DD_MM_YYYY_HH_MM_SS, timezone = Constants.DATE_FORMAT.TIMEZONE_HCM)
+	private Date dateCert;
+	@Column(name = "certificate_issue_place")
+	private String placeCert;
+	@Column(name = "status", nullable = false, length = 1)
+	private Integer status;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "created_date")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_FORMAT.DD_MM_YYYY_HH_MM_SS, timezone = Constants.DATE_FORMAT.TIMEZONE_HCM)
+	private Date createDate;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "updated_date")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_FORMAT.DD_MM_YYYY_HH_MM_SS, timezone = Constants.DATE_FORMAT.TIMEZONE_HCM)
+	private Date modifiedDate;
+	@Transient
+	private String certificateName;
 
-    public CertificateOfficers(Long id, Long officer, String numberCert, Long certificate, Date dateCert, String placeCert, int status, Date createDate, Date modifiedDate, String certificateName) {
-        this.id = id;
-        this.officer = officer;
-        this.certificate = certificate;
-        this.numberCert = numberCert;
-        this.dateCert = dateCert;
-        this.placeCert = placeCert;
-        this.status = status;
-        this.createDate = createDate;
-        this.modifiedDate = modifiedDate;
-        this.certificateName = certificateName;
-    }
-    
+	public CertificateOfficers(Long id, Long officer, String numberCert, Long certificate, Date dateCert,
+			String placeCert, Integer status, Date createDate, Date modifiedDate, String certificateName) {
+		this.id = id;
+		this.officer = officer;
+		this.certificate = certificate;
+		this.numberCert = numberCert;
+		this.dateCert = dateCert;
+		this.placeCert = placeCert;
+		this.status = status;
+		this.createDate = createDate;
+		this.modifiedDate = modifiedDate;
+		this.certificateName = certificateName;
+	}
 
-    /**
-     * @return the id
-     */
-    public Long getId() {
-        return id;
-    }
+	/**
+	 * 
+	 */
+	public CertificateOfficers() {
 
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
+	}
 
-    /**
-     * @return the officer
-     */
-    public Long getOfficer() {
-        return officer;
-    }
+	/**
+	 * @return the id
+	 */
+	public Long getId() {
+		return id;
+	}
 
-    /**
-     * @param officer the officer to set
-     */
-    public void setOfficer(Long officer) {
-        this.officer = officer;
-    }
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    /**
-     * @return the certificate
-     */
-    public Long getCertificate() {
-        return certificate;
-    }
+	/**
+	 * @return the officer
+	 */
+	public Long getOfficer() {
+		return officer;
+	}
 
-    /**
-     * @param certificate the certificate to set
-     */
-    public void setCertificate(Long certificate) {
-        this.certificate = certificate;
-    }
+	/**
+	 * @param officer the officer to set
+	 */
+	public void setOfficer(Long officer) {
+		this.officer = officer;
+	}
 
-    /**
-     * @return the numberCert
-     */
-    public String getNumberCert() {
-        return numberCert;
-    }
+	/**
+	 * @return the certificate
+	 */
+	public Long getCertificate() {
+		return certificate;
+	}
 
-    /**
-     * @param numberCert the numberCert to set
-     */
-    public void setNumberCert(String numberCert) {
-        this.numberCert = numberCert;
-    }
+	/**
+	 * @param certificate the certificate to set
+	 */
+	public void setCertificate(Long certificate) {
+		this.certificate = certificate;
+	}
 
-    /**
-     * @return the dateCert
-     */
-    public Date getDateCert() {
-        return dateCert;
-    }
+	/**
+	 * @return the numberCert
+	 */
+	public String getNumberCert() {
+		return numberCert;
+	}
 
-    /**
-     * @param dateCert the dateCert to set
-     */
-    public void setDateCert(Date dateCert) {
-        this.dateCert = dateCert;
-    }
+	/**
+	 * @param numberCert the numberCert to set
+	 */
+	public void setNumberCert(String numberCert) {
+		this.numberCert = numberCert;
+	}
 
-    /**
-     * @return the placeCert
-     */
-    public String getPlaceCert() {
-        return placeCert;
-    }
+	/**
+	 * @return the dateCert
+	 */
+	public Date getDateCert() {
+		return dateCert;
+	}
 
-    /**
-     * @param placeCert the placeCert to set
-     */
-    public void setPlaceCert(String placeCert) {
-        this.placeCert = placeCert;
-    }
+	/**
+	 * @param dateCert the dateCert to set
+	 */
+	public void setDateCert(Date dateCert) {
+		this.dateCert = dateCert;
+	}
 
-    /**
-     * @return the status
-     */
-    public int getStatus() {
-        return status;
-    }
+	/**
+	 * @return the placeCert
+	 */
+	public String getPlaceCert() {
+		return placeCert;
+	}
 
-    /**
-     * @param status the status to set
-     */
-    public void setStatus(int status) {
-        this.status = status;
-    }
+	/**
+	 * @param placeCert the placeCert to set
+	 */
+	public void setPlaceCert(String placeCert) {
+		this.placeCert = placeCert;
+	}
 
-    /**
-     * @return the createDate
-     */
-    public Date getCreateDate() {
-        return createDate;
-    }
+	/**
+	 * @return the status
+	 */
+	public Integer getStatus() {
+		return status;
+	}
 
-    /**
-     * @param createDate the createDate to set
-     */
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
+	/**
+	 * @param status the status to set
+	 */
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
 
-    /**
-     * @return the modifiedDate
-     */
-    public Date getModifiedDate() {
-        return modifiedDate;
-    }
+	/**
+	 * @return the createDate
+	 */
+	public Date getCreateDate() {
+		return createDate;
+	}
 
-    /**
-     * @param modifiedDate the modifiedDate to set
-     */
-    public void setModifiedDate(Date modifiedDate) {
-        this.modifiedDate = modifiedDate;
-    }
+	/**
+	 * @param createDate the createDate to set
+	 */
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
 
-    public String getCertificateName() {
-        return certificateName;
-    }
+	/**
+	 * @return the modifiedDate
+	 */
+	public Date getModifiedDate() {
+		return modifiedDate;
+	}
 
-    public void setCertificateName(String certificateName) {
-        this.certificateName = certificateName;
-    }
+	/**
+	 * @param modifiedDate the modifiedDate to set
+	 */
+	public void setModifiedDate(Date modifiedDate) {
+		this.modifiedDate = modifiedDate;
+	}
+
+	public String getCertificateName() {
+		return certificateName;
+	}
+
+	public void setCertificateName(String certificateName) {
+		this.certificateName = certificateName;
+	}
 
 }

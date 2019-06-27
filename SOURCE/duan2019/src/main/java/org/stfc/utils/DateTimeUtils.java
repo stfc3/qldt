@@ -115,6 +115,11 @@ public class DateTimeUtils {
         //1539881999000
         //1539795600000
         System.out.println(DateTimeUtils.truncYear(new Date()));
-//            System.out.println(DateTimeUtils.convestTimestampToDate(1535595015948l));
+            try {
+				System.out.println(DateTimeUtils.convestStringToDate("20190601000000", Contants.FORMAT_TIME));
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
     }
 }

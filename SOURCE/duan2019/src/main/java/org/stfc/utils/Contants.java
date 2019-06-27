@@ -13,6 +13,7 @@ public class Contants {
 	public static final String STATUS_00 = "STATUS-00";
 	public static final String STATUS_01 = "STATUS-01";
 	public static final String FORMAT_DATE = "dd/MM/yyyy HH:mm:ss";
+	public static final String FORMAT_TIME = "yyyyMMddhhmmss";
 
 	public static void init() {
 

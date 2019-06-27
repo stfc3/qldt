@@ -7,17 +7,17 @@ package org.stfc.utils;
 
 /**
  *
- * @author dongdv
+ * @author viettx
  */
 public class StringUtils {
 
+	public static String escapeCharacter(String param) {
+		if (!Comparator.isEqualNullOrEmpty(param)) {
+			return param.trim().toLowerCase().replace("/", "//").replace("%", "/%").replace("_", "/_");
+		} else {
+			return "";
+		}
+	}
 
-    public static String escapeCharacter(String param) {
-        if (!Comparator.isEqualNullOrEmpty(param)) {
-            return param.trim().toLowerCase().replace("/", "//")
-                    .replace("%", "/%").replace("_", "/_");
-        } else {
-            return "";
-        }
-    }
+	
 }

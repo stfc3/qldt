@@ -152,10 +152,14 @@ public class PositionsController {
 				throw new BusinessException(Contants.ERROR_INVALID_FORMAT);
 			}
 			for (Positions pos : positions) {
+				Positions position = repository.findByPositionId(pos.getPositionId());
 				if (pos.getPositionId()== null) {
 					pos.setCreatedDate(new Date());
 				} else {
 					pos.setUpdatedDate(new Date());
+				}
+				if(Comparator.isEqualNull(pos.getPositionName())) {
+					pos.setPositionName(position.getPositionName());
 				}
 			}
 			repository.saveAll(positions);
