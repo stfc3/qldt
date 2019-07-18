@@ -31,223 +31,244 @@ import org.stfc.utils.Constants;
 @Entity
 @Table(name = "officers")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Officers.findAll", query = "SELECT o FROM Officers o")})
+@NamedQueries({ @NamedQuery(name = "Officers.findAll", query = "SELECT o FROM Officers o") })
 public class Officers implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "officer_id")
-    private Long officerId;
-    @Size(max = 100)
-    @Column(name = "first_name")
-    private String firstName;
-    @Size(max = 100)
-    @Column(name = "last_name")
-    private String lastName;
-    @Size(max = 200)
-    @Column(name = "full_name")
-    private String fullName;
-    @Size(max = 10)
-    @Column(name = "gender")
-    private String gender;
-    @Size(max = 15)
-    @Column(name = "mobile")
-    private String mobile;
-    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
-    @Size(max = 100)
-    @Column(name = "email")
-    private String email;
-    @Column(name = "department_id")
-    private Long departmentId;
-    @Column(name = "position_id")
-    private Long positionId;
-    @Column(name = "status")
-    private Integer status;
-    @Column(name = "created_date")
-    @Temporal(TemporalType.TIMESTAMP)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_FORMAT.DD_MM_YYYY_HH_MM_SS, timezone = Constants.DATE_FORMAT.TIMEZONE_HCM)
-    private Date createdDate;
-    @Column(name = "updated_date")
-    @Temporal(TemporalType.TIMESTAMP)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_FORMAT.DD_MM_YYYY_HH_MM_SS, timezone = Constants.DATE_FORMAT.TIMEZONE_HCM)
-    private Date updatedDate;
-    @Column(name = "user_id")
-    private Long userId;
-    @Transient
-    private String keySearch;
-    @Transient
-    private String positionName;
+	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Basic(optional = false)
+	@Column(name = "officer_id")
+	private Long officerId;
+	@Size(max = 100)
+	@Column(name = "first_name")
+	private String firstName;
+	@Size(max = 100)
+	@Column(name = "last_name")
+	private String lastName;
+	@Size(max = 200)
+	@Column(name = "full_name")
+	private String fullName;
+	@Size(max = 10)
+	@Column(name = "gender")
+	private String gender;
+	@Size(max = 15)
+	@Column(name = "mobile")
+	private String mobile;
+	// @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
+	// message="Invalid email")//if the field contains email address consider using
+	// this annotation to enforce field validation
+	@Size(max = 100)
+	@Column(name = "email")
+	private String email;
+	@Column(name = "department_id")
+	private Long departmentId;
+	@Column(name = "position_id")
+	private Long positionId;
+	@Column(name = "status")
+	private Integer status;
+	@Column(name = "created_date")
+	@Temporal(TemporalType.TIMESTAMP)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_FORMAT.DD_MM_YYYY_HH_MM_SS, timezone = Constants.DATE_FORMAT.TIMEZONE_HCM)
+	private Date createdDate;
+	@Column(name = "updated_date")
+	@Temporal(TemporalType.TIMESTAMP)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_FORMAT.DD_MM_YYYY_HH_MM_SS, timezone = Constants.DATE_FORMAT.TIMEZONE_HCM)
+	private Date updatedDate;
+	@Column(name = "user_id")
+	private Long userId;
+	@Transient
+	private String keySearch;
+	@Transient
+	private String positionName;
+	@Transient
+	private String positionType;
 
-    public Officers() {
-    }
+	/**
+	 * @return the positionType
+	 */
+	public String getPositionType() {
+		return positionType;
+	}
 
-    public Officers(Long officerId, String firstName, String lastName, String fullName, String gender, String mobile, String email, Long positionId, Integer status, Date createdDate, Date updatedDate, Long userId, Long departmentId, String positionName) {
-        this.officerId = officerId;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.fullName = fullName;
-        this.gender = gender;
-        this.mobile = mobile;
-        this.email = email;
-        this.departmentId = departmentId;
-        this.positionId = positionId;
-        this.status = status;
-        this.createdDate = createdDate;
-        this.updatedDate = updatedDate;
-        this.userId = userId;
-        this.positionName = positionName;
-    }
+	/**
+	 * @param positionType the positionType to set
+	 */
+	public void setPositionType(String positionType) {
+		this.positionType = positionType;
+	}
 
-    public Officers(Long officerId) {
-        this.officerId = officerId;
-    }
+	public Officers() {
+	}
 
-    public Long getOfficerId() {
-        return officerId;
-    }
+	public Officers(Long officerId, String firstName, String lastName, String fullName, String gender, String mobile,
+			String email, Long positionId, Integer status, Date createdDate, Date updatedDate, Long userId,
+			Long departmentId, String positionName, String positionType) {
+		this.officerId = officerId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.fullName = fullName;
+		this.gender = gender;
+		this.mobile = mobile;
+		this.email = email;
+		this.departmentId = departmentId;
+		this.positionId = positionId;
+		this.status = status;
+		this.createdDate = createdDate;
+		this.updatedDate = updatedDate;
+		this.userId = userId;
+		this.positionName = positionName;
+		this.positionType = positionType;
+	}
 
-    public void setOfficerId(Long officerId) {
-        this.officerId = officerId;
-    }
+	public Officers(Long officerId) {
+		this.officerId = officerId;
+	}
 
-    public String getFirstName() {
-        return firstName;
-    }
+	public Long getOfficerId() {
+		return officerId;
+	}
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+	public void setOfficerId(Long officerId) {
+		this.officerId = officerId;
+	}
 
-    public String getLastName() {
-        return lastName;
-    }
+	public String getFirstName() {
+		return firstName;
+	}
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
 
-    public String getFullName() {
-        return fullName;
-    }
+	public String getLastName() {
+		return lastName;
+	}
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 
-    public String getGender() {
-        return gender;
-    }
+	public String getFullName() {
+		return fullName;
+	}
 
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
 
-    public String getMobile() {
-        return mobile;
-    }
+	public String getGender() {
+		return gender;
+	}
 
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public String getMobile() {
+		return mobile;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
 
-    public Long getDepartmentId() {
-        return departmentId;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public void setDepartmentId(Long departmentId) {
-        this.departmentId = departmentId;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public Long getPositionId() {
-        return positionId;
-    }
+	public Long getDepartmentId() {
+		return departmentId;
+	}
 
-    public void setPositionId(Long positionId) {
-        this.positionId = positionId;
-    }
+	public void setDepartmentId(Long departmentId) {
+		this.departmentId = departmentId;
+	}
 
-    public Integer getStatus() {
-        return status;
-    }
+	public Long getPositionId() {
+		return positionId;
+	}
 
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
+	public void setPositionId(Long positionId) {
+		this.positionId = positionId;
+	}
 
-    public Date getCreatedDate() {
-        return createdDate;
-    }
+	public Integer getStatus() {
+		return status;
+	}
 
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
 
-    public Date getUpdatedDate() {
-        return updatedDate;
-    }
+	public Date getCreatedDate() {
+		return createdDate;
+	}
 
-    public void setUpdatedDate(Date updatedDate) {
-        this.updatedDate = updatedDate;
-    }
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
 
-    public Long getUserId() {
-        return userId;
-    }
+	public Date getUpdatedDate() {
+		return updatedDate;
+	}
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
+	public void setUpdatedDate(Date updatedDate) {
+		this.updatedDate = updatedDate;
+	}
 
-    public String getKeySearch() {
-        return keySearch;
-    }
+	public Long getUserId() {
+		return userId;
+	}
 
-    public void setKeySearch(String keySearch) {
-        this.keySearch = keySearch;
-    }
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
 
-    public String getPositionName() {
-        return positionName;
-    }
+	public String getKeySearch() {
+		return keySearch;
+	}
 
-    public void setPositionName(String positionName) {
-        this.positionName = positionName;
-    }
+	public void setKeySearch(String keySearch) {
+		this.keySearch = keySearch;
+	}
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (officerId != null ? officerId.hashCode() : 0);
-        return hash;
-    }
+	public String getPositionName() {
+		return positionName;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Officers)) {
-            return false;
-        }
-        Officers other = (Officers) object;
-        if ((this.officerId == null && other.officerId != null) || (this.officerId != null && !this.officerId.equals(other.officerId))) {
-            return false;
-        }
-        return true;
-    }
+	public void setPositionName(String positionName) {
+		this.positionName = positionName;
+	}
 
-    @Override
-    public String toString() {
-        return "org.stfc.dto.Officers[ officerId=" + officerId + " ]";
-    }
-    
+	@Override
+	public int hashCode() {
+		int hash = 0;
+		hash += (officerId != null ? officerId.hashCode() : 0);
+		return hash;
+	}
+
+	@Override
+	public boolean equals(Object object) {
+		// TODO: Warning - this method won't work in the case the id fields are not set
+		if (!(object instanceof Officers)) {
+			return false;
+		}
+		Officers other = (Officers) object;
+		if ((this.officerId == null && other.officerId != null)
+				|| (this.officerId != null && !this.officerId.equals(other.officerId))) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "org.stfc.dto.Officers[ officerId=" + officerId + " ]";
+	}
+
 }
