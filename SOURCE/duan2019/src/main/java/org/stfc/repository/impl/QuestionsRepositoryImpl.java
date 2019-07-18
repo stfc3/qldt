@@ -36,6 +36,9 @@ public class QuestionsRepositoryImpl {
             if (!Comparator.isEqualNullOrEmpty(question.getQuestionContent())) {
                 sql.append(" AND u.question_content like :questionContent escape '/'");
             }
+            if (!Comparator.isEqualNullOrEmpty(question.getQuestionCode())) {
+                sql.append(" AND u.question_code = :questionCode");
+            }
             if (!Comparator.isEqualNull(question.getQuestionId())) {
                 sql.append(" AND u.question_id = :questionId");
             }
@@ -54,6 +57,9 @@ public class QuestionsRepositoryImpl {
             }
             if (!Comparator.isEqualNullOrEmpty(question.getQuestionContent())) {
                 query.setParameter("questionContent", "%" + StringUtils.escapeCharacter(question.getQuestionContent()) + "%");
+            }
+            if (!Comparator.isEqualNullOrEmpty(question.getQuestionCode())) {
+                query.setParameter("questionCode", question.getQuestionCode());
             }
             if (!Comparator.isEqualNull(question.getQuestionId())) {
                 query.setParameter("questionId", question.getQuestionId());
