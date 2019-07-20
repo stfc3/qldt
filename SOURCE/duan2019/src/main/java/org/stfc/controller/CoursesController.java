@@ -55,12 +55,12 @@ public class CoursesController {
 	public String onSearch(@RequestBody(required = false) Courses request) {
 		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
 		logger.debug("Body request: {}", gson.toJson(request));
-		BaseResponse response = BaseResponse.parse(Contants.ERROR_INTERNAL, formatMessage, Language.VI.getLang());
+		BaseResponse response = BaseResponse.parse(Contants.ERROR_INTERNAL, formatMessage, Language.VI.getValue());
 		try {
 			logger.debug("Request {}", gson.toJson(request));
 			List<Courses> listData = courseServices.findAllCourse(request);
 			CoursesResponse coursesResponse = new CoursesResponse();
-			response = BaseResponse.parse(Contants.SUCCESS, formatMessage, Language.VI.getLang());
+			response = BaseResponse.parse(Contants.SUCCESS, formatMessage, Language.VI.getValue());
 			if(!Comparator.isEqualNullOrEmpty(listData)){
 				coursesResponse.setCourses(listData);
 				response.setTotal(listData.size());
