@@ -22,6 +22,8 @@ public class SurveyImportRequest {
     private String surveyTitle;
     //ho ten
     private String fullName;
+    //ho ten
+    private String gender;
     //so dien thoai
     private String mobile;
     //email
@@ -32,6 +34,8 @@ public class SurveyImportRequest {
     private String positionName;
     //Ghep tieu de cac khoa hoc
     private String questionContent;
+    //ma khoa hoc
+    private String questionCode;
     //cau tra loi cho tung mon hoc cua hoc vien
     private String answer;
     //thoi gian co the hoc
@@ -132,6 +136,22 @@ public class SurveyImportRequest {
 
 	public void setLearnDate(Date learnDate) {
 		this.learnDate = learnDate;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getQuestionCode() {
+		return questionCode;
+	}
+
+	public void setQuestionCode(String questionCode) {
+		this.questionCode = questionCode;
 	}
 
 }

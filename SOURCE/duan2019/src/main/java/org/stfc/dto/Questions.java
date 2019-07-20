@@ -45,6 +45,9 @@ public class Questions implements Serializable {
     @Size(max = 1000)
     @Column(name = "question_content")
     private String questionContent;
+    @Size(max = 100)
+    @Column(name = "question_code")
+    private String questionCode;
     @Column(name = "question_type")
     private Integer questionType;
     @Column(name = "created_date")
@@ -87,7 +90,15 @@ public class Questions implements Serializable {
         this.questionContent = questionContent;
     }
 
-    public Integer getQuestionType() {
+    public String getQuestionCode() {
+		return questionCode;
+	}
+
+	public void setQuestionCode(String questionCode) {
+		this.questionCode = questionCode;
+	}
+
+	public Integer getQuestionType() {
         return questionType;
     }
 

@@ -6,8 +6,10 @@ package org.stfc.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.stfc.message.BaseResponse;
 import org.stfc.utils.Constants;
@@ -15,9 +17,19 @@ import org.stfc.utils.FormatMessage;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.Date;
 import java.util.List;
+import javax.servlet.ServletContext;
+
+import javax.servlet.http.HttpServletRequest;
+import org.springframework.core.io.InputStreamResource;
+
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.stfc.business.BusinessException;
 import org.stfc.dto.Answers;
@@ -26,7 +38,9 @@ import org.stfc.dto.Positions;
 import org.stfc.dto.Questions;
 import org.stfc.dto.SurveyResults;
 import org.stfc.dto.Surveys;
+import org.stfc.entity.ExportSurvey;
 import org.stfc.entity.SurveyImportRequest;
+import org.stfc.excel.ExcelUtils;
 import org.stfc.repository.AnswersRepository;
 import org.stfc.repository.OfficersRepository;
 import org.stfc.repository.PositionsRepository;
@@ -74,6 +88,8 @@ public class SurveyController {
     OfficersRepositoryImpl officersRepositoryImpl;
     @Autowired
     FormatMessage formatMessage;
+    @Autowired
+    ServletContext context;
 
     @RequestMapping(value = Constants.PATH.API_SURVEY_IMPORT, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public String importSurveyResult(@RequestBody List<SurveyImportRequest> surveyImportRequests) {
@@ -302,13 +318,12 @@ public class SurveyController {
         return gson.toJson(response);
     }
 
-    
     private void importSurveyData(List<SurveyImportRequest> surveyImportRequests) throws Exception {
         if (Comparator.isEqualNullOrEmpty(surveyImportRequests)) {
             throw new BusinessException(Constants.ERROR_INVALID_FORMAT);
         }
         for (SurveyImportRequest surveyImportRequest : surveyImportRequests) {
-            //validate
+            // validate
             if (Comparator.isEqualNullOrEmpty(surveyImportRequest.getSurveyTitle())) {
                 throw new BusinessException(Constants.ERROR_INVALID_FORMAT);
             }
@@ -328,7 +343,7 @@ public class SurveyController {
                 throw new BusinessException(Constants.ERROR_INVALID_FORMAT);
             }
 
-            //survey
+            // survey
             Surveys surveyInput = new Surveys();
             surveyInput.setSurveyTitle(surveyImportRequest.getSurveyTitle());
             List<Surveys> listSurveys = surveysRepositoryImpl.onSearch(surveyInput);
@@ -345,7 +360,7 @@ public class SurveyController {
                 surveyId = surveyInput.getSurveyId();
             }
             logger.info("surveyId: " + surveyId);
-            //position
+            // position
             Positions positionInput = new Positions();
             positionInput.setPositionType(surveyImportRequest.getPositionType());
             positionInput.setPositionName(surveyImportRequest.getPositionName());
@@ -361,7 +376,7 @@ public class SurveyController {
                 positionId = positionInput.getPositionId();
             }
             logger.info("positionId: " + positionId);
-            //officer
+            // officer
             Officers officerInput = new Officers();
             officerInput.setEmail(surveyImportRequest.getEmail());
             List<Officers> listOfficers = officersRepositoryImpl.onSearch(officerInput);
@@ -372,6 +387,7 @@ public class SurveyController {
                 officerInput.setFirstName(surveyImportRequest.getFirstName());
                 officerInput.setLastName(surveyImportRequest.getLastName());
                 officerInput.setFullName(surveyImportRequest.getFullName());
+                officerInput.setGender(surveyImportRequest.getGender());
                 officerInput.setMobile(surveyImportRequest.getMobile());
                 officerInput.setPositionId(positionId);
                 officerInput.setStatus(Constants.STATUS.ACTIVE);
@@ -381,14 +397,15 @@ public class SurveyController {
                 officerId = officerInput.getOfficerId();
             }
             logger.info("officerId: " + officerId);
-            //question
+            // question
             Questions questionInput = new Questions();
-            questionInput.setQuestionContent(surveyImportRequest.getQuestionContent());
+            questionInput.setQuestionCode(surveyImportRequest.getQuestionCode());
             List<Questions> listQuestions = questionsRepositoryImpl.onSearch(questionInput);
             Long questionId = null;
             if (!Comparator.isEqualNullOrEmpty(listQuestions)) {
                 questionId = listQuestions.get(0).getQuestionId();
             } else {
+                questionInput.setQuestionContent(surveyImportRequest.getQuestionContent());
                 questionInput.setQuestionType(Constants.QUESTION_TYPE.SINGE);
                 questionInput.setSurveyId(surveyId);
                 questionInput.setCreatedDate(new Date());
@@ -398,7 +415,7 @@ public class SurveyController {
             }
             logger.info("questionId: " + questionId);
 
-            //survey result
+            // survey result
             SurveyResults surveyResults = new SurveyResults();
             surveyResults.setOfficerId(officerId);
             surveyResults.setQuestionId(questionId);
@@ -410,5 +427,73 @@ public class SurveyController {
 
             logger.info("surveyResultId: " + surveyResults.getSurveyResultId());
         }
+    }
+
+    @RequestMapping(value = Constants.PATH.API_SURVEY_EXPORT, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public String exportSurvey(@RequestParam @DateTimeFormat(pattern = Constants.DATE_FORMAT.YYYY_MM_DD) Date fromDate,
+            @RequestParam @DateTimeFormat(pattern = Constants.DATE_FORMAT.YYYY_MM_DD) Date toDate,
+            @RequestParam(required = false) String positionType) {
+        Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+        String lang = "vi";
+        BaseResponse response = BaseResponse.parse(Constants.ERROR_INTERNAL, formatMessage, lang);
+        try {
+            List<ExportSurvey> listExportSurveys = surveysRepositoryImpl.exportSurvey(fromDate, toDate, positionType);
+            response = BaseResponse.parse(Constants.SUCCESS, formatMessage, lang);
+            if (!Comparator.isEqualNull(listExportSurveys)) {
+                response.setTotal(listExportSurveys.size());
+                response.setData(listExportSurveys);
+            }
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+        }
+        return gson.toJson(response);
+    }
+
+    @RequestMapping(value = Constants.PATH.API_SURVEY_EXPORT_DOWNLOAD, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<InputStreamResource> download(@RequestParam @DateTimeFormat(pattern = Constants.DATE_FORMAT.YYYY_MM_DD) Date fromDate,
+            @RequestParam @DateTimeFormat(pattern = Constants.DATE_FORMAT.YYYY_MM_DD) Date toDate,
+            @RequestParam(required = false) String positionType) {
+
+        long startTime = System.currentTimeMillis();
+        long processDuration = 0;
+        String contentType = null;
+        InputStreamResource resource = null;
+        try {
+            logger.info("START download");
+
+            ExcelUtils excelUtils = new ExcelUtils();
+            String filePathTemp = context.getRealPath(Constants.EXPROT.PATH_TEMP + File.separator + Constants.EXPROT.PATH_FILE_SURVEY_TEMPLATE);
+            String pathFolderOutput = context.getRealPath(Constants.EXPROT.PATH_REPORT);
+            File folderOutput = new File(pathFolderOutput);
+            if (!folderOutput.exists()) {
+                folderOutput.mkdir();
+            }
+            String filePathOutput = pathFolderOutput + File.separator + Constants.EXPROT.PATH_FILE_SURVEY_TEMPLATE;
+            List<ExportSurvey> listExportSurveys = surveysRepositoryImpl.exportSurvey(fromDate, toDate, positionType);
+            excelUtils.write(listExportSurveys, filePathTemp, filePathOutput);
+            File fileExport = new File(filePathOutput);
+
+            contentType = context.getMimeType(fileExport.getAbsolutePath());
+            if (contentType == null) {
+                contentType = "application/octet-stream";
+            }
+            logger.info("contentType: " + contentType);
+
+            resource = new InputStreamResource(new FileInputStream(fileExport));
+            processDuration = System.currentTimeMillis() - startTime;
+            logger.info("END download in " + processDuration + "ms");
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + fileExport.getName())
+                    .contentType(MediaType.parseMediaType(contentType))
+                    .contentLength(fileExport.length())
+                    .body(resource);
+
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            processDuration = System.currentTimeMillis() - startTime;
+            logger.info("END download in " + processDuration + "ms");
+        }
+
+        return null;
     }
 }
