@@ -97,7 +97,7 @@ public class OfficersRepositoryImpl {
 			sql.append(", o.lastName, o.fullName, o.gender, o.mobile");
 			sql.append(", o.email, o.positionId, o.status, o.createdDate");
 			sql.append(", o.updatedDate, o.userId, o.departmentId");
-			sql.append(", p.positionName)");
+			sql.append(", p.positionName, p.positionType)");
 			sql.append(" FROM Officers o, Users u, Positions p");
 			sql.append(
 					" WHERE o.userId = u.id AND u.status = 'ACTIVE' AND o.status = 1 AND o.positionId = p.positionId AND p.status = 1 AND u.username = :username");

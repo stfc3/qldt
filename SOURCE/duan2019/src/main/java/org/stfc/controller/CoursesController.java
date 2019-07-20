@@ -22,7 +22,6 @@ import org.stfc.business.BusinessException;
 import org.stfc.dto.Courses;
 import org.stfc.dto.Evaluations;
 import org.stfc.message.BaseResponse;
-import org.stfc.message.CoursesRequest;
 import org.stfc.message.CoursesResponse;
 import org.stfc.repository.EvaluationRepository;
 import org.stfc.repository.impl.CourseServices;
@@ -53,15 +52,15 @@ public class CoursesController {
 
 	@RequestMapping(method = { RequestMethod.POST }, value = { "/courses/search" }, headers = {
 			"Accept=application/json" }, produces = { "text/plain;charset=UTF-8" })
-	public String onSearch(@RequestBody(required = false) CoursesRequest request) {
+	public String onSearch(@RequestBody(required = false) Courses request) {
 		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
 		logger.debug("Body request: {}", gson.toJson(request));
-		BaseResponse response = BaseResponse.parse(Contants.ERROR_INTERNAL, formatMessage, Language.VI.getValue());
+		BaseResponse response = BaseResponse.parse(Contants.ERROR_INTERNAL, formatMessage, Language.VI.getLang());
 		try {
 			logger.debug("Request {}", gson.toJson(request));
 			List<Courses> listData = courseServices.findAllCourse(request);
 			CoursesResponse coursesResponse = new CoursesResponse();
-			response = BaseResponse.parse(Contants.SUCCESS, formatMessage, Language.VI.getValue());
+			response = BaseResponse.parse(Contants.SUCCESS, formatMessage, Language.VI.getLang());
 			if(!Comparator.isEqualNullOrEmpty(listData)){
 				coursesResponse.setCourses(listData);
 				response.setTotal(listData.size());

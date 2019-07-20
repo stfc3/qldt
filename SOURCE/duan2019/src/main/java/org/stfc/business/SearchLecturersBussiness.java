@@ -63,7 +63,7 @@ public class SearchLecturersBussiness implements Business {
 	@Override
 	public BaseResponse process(String request, Gson gson) {
 		// TODO Auto-generated method stub
-		String lang = Language.VI.getValue();
+		String lang = Language.VI.getLang();
 		BaseResponse res = BaseResponse.parse(Contants.ERROR_INTERNAL, formatMessage, lang);
 		long start = System.currentTimeMillis();
 		
