@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="com.shbfinance.los_LOS-API_war_0.0.1-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>com.shbfinance.los.api.model.SupportConfig</class>
+    <class>com.shbfinance.los.api.model.SupportLog</class>
+    <class>com.shbfinance.los.api.model.Censors</class>
+    <class>com.shbfinance.los.api.model.Doccument</class>
+    <class>com.shbfinance.los.api.model.Users</class>
+    <class>com.shbfinance.los.api.model.Roles</class>
+    <class>com.shbfinance.los.api.model.RoleObject</class>
+    <class>com.shbfinance.los.api.model.Objects</class>
+    <class>com.shbfinance.los.api.model.UserRole</class>
+    <class>com.shbfinance.los.api.model.Config</class>
+    <class>com.shbfinance.los.api.model.AcctionLog</class>
+    <class>com.shbfinance.los.api.model.Payattention</class>
+    <class>com.shbfinance.los.api.model.DoccumentTemplate</class>
+    <class>com.shbfinance.los.api.product.model.Company</class>
+    <class>com.shbfinance.los.api.product.model.CatClassify</class>
+    <class>com.shbfinance.los.api.product.model.CatHistory</class>
+    <class>com.shbfinance.los.api.model.ActionLog</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@//10.0.3.60:1521/LOSPDB"/>
+      <property name="javax.persistence.jdbc.user" value="LOSSUPPORT"/>
+      <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver"/>
+      <property name="javax.persistence.jdbc.password" value="LOSSUPPORT132"/>
+    </properties>
+  </persistence-unit>
+</persistence>
