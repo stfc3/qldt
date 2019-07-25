@@ -5,12 +5,6 @@
  */
 package org.stfc.excel;
 
-import org.stfc.excel.annotation.ExcelColumn;
-import org.stfc.excel.annotation.ExcelEntity;
-import org.stfc.excel.exception.DataTypeNotSupportedException;
-import org.stfc.excel.exception.EmptyCellException;
-import org.stfc.excel.exception.InvalidCellValueException;
-import org.stfc.excel.exception.WrongFileTemplateException;
 import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
@@ -26,14 +20,12 @@ import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import net.sf.jxls.exception.ParsePropertyException;
-import net.sf.jxls.transformer.XLSTransformer;
-import org.apache.log4j.Logger;
+
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
@@ -43,6 +35,18 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.stfc.controller.CertificateController;
+import org.stfc.excel.annotation.ExcelColumn;
+import org.stfc.excel.annotation.ExcelEntity;
+import org.stfc.excel.exception.DataTypeNotSupportedException;
+import org.stfc.excel.exception.EmptyCellException;
+import org.stfc.excel.exception.InvalidCellValueException;
+import org.stfc.excel.exception.WrongFileTemplateException;
+
+import net.sf.jxls.exception.ParsePropertyException;
+import net.sf.jxls.transformer.XLSTransformer;
 
 /**
  *
@@ -50,558 +54,578 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  */
 public class ExcelUtils<T> {
 
-    private static final Logger logger = Logger.getLogger(ExcelUtils.class);
+	private static final Logger logger = LoggerFactory.getLogger(CertificateController.class);
 
-    public void write(List<T> listData, String filePathTemp, String filePathOutput) throws Exception {
-        Workbook workbook = null;
-        InputStream inputStream = null;
-        OutputStream outputStream = null;
-        try {
-            File fileInput = new File(filePathTemp);
-            inputStream = new FileInputStream(fileInput);
+	public void write(List<T> listData, String filePathTemp, String filePathOutput) throws Exception {
+		Workbook workbook = null;
+		InputStream inputStream = null;
+		OutputStream outputStream = null;
+		try {
+			File fileInput = new File(filePathTemp);
+			inputStream = new FileInputStream(fileInput);
 
-            File fileOutput = new File(filePathOutput);
-            if (!fileOutput.exists()) {
-                fileOutput.createNewFile();
-            }
-            outputStream = new FileOutputStream(fileOutput);
+			File fileOutput = new File(filePathOutput);
+			if (!fileOutput.exists()) {
+				fileOutput.createNewFile();
+			}
+			outputStream = new FileOutputStream(fileOutput);
 
-            Map<String, Object> beans = new HashMap();
-            beans.put("data", listData);
-            XLSTransformer transformer = new XLSTransformer();
-            workbook = transformer.transformXLS(inputStream, beans);
-            workbook.write(outputStream);
-        } catch (IOException | ParsePropertyException | InvalidFormatException ex) {
-            logger.error(ex.getMessage(), ex);
-        } finally {
+			Map<String, Object> beans = new HashMap();
+			beans.put("data", listData);
+			XLSTransformer transformer = new XLSTransformer();
+			workbook = transformer.transformXLS(inputStream, beans);
+			workbook.write(outputStream);
+		} catch (IOException | ParsePropertyException | InvalidFormatException ex) {
+			logger.error(ex.getMessage(), ex);
+		} finally {
 
-            if (inputStream != null) {
-                inputStream.close();
-            }
-            if (outputStream != null) {
-                outputStream.close();
-            }
-        }
+			if (inputStream != null) {
+				inputStream.close();
+			}
+			if (outputStream != null) {
+				outputStream.close();
+			}
+		}
 
-    }
-    public void write(Map<String, Object> beans, String filePathTemp, String filePathOutput) throws Exception {
-        Workbook workbook = null;
-        InputStream inputStream = null;
-        OutputStream outputStream = null;
-        try {
-            File fileInput = new File(filePathTemp);
-            inputStream = new FileInputStream(fileInput);
+	}
 
-            File fileOutput = new File(filePathOutput);
-            if (!fileOutput.exists()) {
-                fileOutput.createNewFile();
-            }
-            outputStream = new FileOutputStream(fileOutput);
+	public void write(Map<String, Object> beans, String filePathTemp, String filePathOutput) throws Exception {
+		Workbook workbook = null;
+		InputStream inputStream = null;
+		OutputStream outputStream = null;
+		try {
+			File fileInput = new File(filePathTemp);
+			inputStream = new FileInputStream(fileInput);
 
-            XLSTransformer transformer = new XLSTransformer();
-            workbook = transformer.transformXLS(inputStream, beans);
-            workbook.write(outputStream);
-        } catch (IOException | ParsePropertyException | InvalidFormatException ex) {
-            logger.error(ex.getMessage(), ex);
-        } finally {
-            if (inputStream != null) {
-                inputStream.close();
-            }
-            if (outputStream != null) {
-                outputStream.close();
-            }
-        }
+			File fileOutput = new File(filePathOutput);
+			if (!fileOutput.exists()) {
+				fileOutput.createNewFile();
+			}
+			outputStream = new FileOutputStream(fileOutput);
 
-    }
+			XLSTransformer transformer = new XLSTransformer();
+			workbook = transformer.transformXLS(inputStream, beans);
+			workbook.write(outputStream);
+		} catch (IOException | ParsePropertyException | InvalidFormatException ex) {
+			logger.error(ex.getMessage(), ex);
+		} finally {
+			if (inputStream != null) {
+				inputStream.close();
+			}
+			if (outputStream != null) {
+				outputStream.close();
+			}
+		}
 
-    private String startCol;
-    private String endCol;
+	}
 
-    public List<T> read(InputStream fileInputStream, Class pclass) throws InvalidCellValueException, EmptyCellException, Exception {
-        String signature;
-        int startRowIndex;
+	private String startCol;
+	private String endCol;
 
-        List<T> ret = new ArrayList<T>();
-        if (pclass.isAnnotationPresent(ExcelEntity.class)) {
-            Annotation ann1 = pclass.getAnnotation(ExcelEntity.class);
-            ExcelEntity entityAnn = (ExcelEntity) ann1;
+	public List<T> read(InputStream fileInputStream, Class pclass)
+			throws InvalidCellValueException, EmptyCellException, Exception {
+		String signature;
+		int startRowIndex;
 
-            signature = entityAnn.signature();
-            startRowIndex = ((ExcelEntity) ann1).startRow();
+		List<T> ret = new ArrayList<T>();
+		if (pclass.isAnnotationPresent(ExcelEntity.class)) {
+			Annotation ann1 = pclass.getAnnotation(ExcelEntity.class);
+			ExcelEntity entityAnn = (ExcelEntity) ann1;
 
-        } else {
-            throw new Exception("You must annotate class with @ExcelEntity");
-        }
+			signature = entityAnn.signature();
+			startRowIndex = ((ExcelEntity) ann1).startRow();
 
-        determineColRange(pclass);
+		} else {
+			throw new Exception("You must annotate class with @ExcelEntity");
+		}
 
-        XSSFWorkbook workbook = new XSSFWorkbook(fileInputStream);
-        XSSFSheet sheet = workbook.getSheetAt(0);
+		determineColRange(pclass);
 
-        if (!checkFileTemplate(sheet, signature)) {
-            logger.error(String.format("File constant value miss match. Cell A1 must contain this string value: %s", signature));
-            throw new WrongFileTemplateException("File does not match the template");
+		XSSFWorkbook workbook = new XSSFWorkbook(fileInputStream);
+		XSSFSheet sheet = workbook.getSheetAt(0);
 
-        }
-        Iterator<Row> rows = sheet.iterator();
-        int rowIndex = 0;
-        while (rows.hasNext()) {
-            if (rowIndex < startRowIndex - 1) {
-                rowIndex++;
-                continue;
-            }
-            if (rows.next() == null) {
-                break;
-            }
+		if (!checkFileTemplate(sheet, signature)) {
+			logger.error(String.format("File constant value miss match. Cell A1 must contain this string value: %s",
+					signature));
+			throw new WrongFileTemplateException("File does not match the template");
 
-            XSSFRow row = sheet.getRow(rowIndex);
-            if (row != null) {
-                if (!isRowEmpty(row)) {
-                    T obj = (T) pclass.newInstance();
+		}
+		Iterator<Row> rows = sheet.iterator();
+		int rowIndex = 0;
+		while (rows.hasNext()) {
+			if (rowIndex < startRowIndex - 1) {
+				rowIndex++;
+				continue;
+			}
+			if (rows.next() == null) {
+				break;
+			}
 
-                    for (Method method : pclass.getDeclaredMethods()) {
-                        if (method.isAnnotationPresent(ExcelColumn.class)) {
-                            ExcelColumn colAnn = (ExcelColumn) method.getAnnotation(ExcelColumn.class);
-                            String colName = colAnn.name();
-                            boolean nullable = colAnn.nullable();
-                            PropertyDescriptor pd = getPropertyDescriptor(method);
+			XSSFRow row = sheet.getRow(rowIndex);
+			if (row != null) {
+				if (!isRowEmpty(row)) {
+					T obj = (T) pclass.newInstance();
 
-                            readCellIntoObjectProperty(obj, sheet, rowIndex, colName, pd, nullable);
-                        }
+					for (Method method : pclass.getDeclaredMethods()) {
+						if (method.isAnnotationPresent(ExcelColumn.class)) {
+							ExcelColumn colAnn = (ExcelColumn) method.getAnnotation(ExcelColumn.class);
+							String colName = colAnn.name();
+							boolean nullable = colAnn.nullable();
+							PropertyDescriptor pd = getPropertyDescriptor(method);
 
-                    }
-                    ret.add(obj);
-                }
-            }
+							readCellIntoObjectProperty(obj, sheet, rowIndex, colName, pd, nullable);
+						}
 
-            rowIndex++;
-        }
-        return ret;
-    }
+					}
+					ret.add(obj);
+				}
+			}
 
-    public List<T> read(String filePath, Class pclass) throws InvalidCellValueException, EmptyCellException, Exception {
-        String signature;
-        int startRowIndex;
+			rowIndex++;
+		}
+		return ret;
+	}
 
-        List<T> ret = new ArrayList<T>();
-        if (pclass.isAnnotationPresent(ExcelEntity.class)) {
-            Annotation ann1 = pclass.getAnnotation(ExcelEntity.class);
-            ExcelEntity entityAnn = (ExcelEntity) ann1;
+	public List<T> read(String filePath, Class pclass) throws InvalidCellValueException, EmptyCellException, Exception {
+		String signature;
+		int startRowIndex;
 
-            signature = entityAnn.signature();
-            startRowIndex = ((ExcelEntity) ann1).startRow();
+		List<T> ret = new ArrayList<T>();
+		if (pclass.isAnnotationPresent(ExcelEntity.class)) {
+			Annotation ann1 = pclass.getAnnotation(ExcelEntity.class);
+			ExcelEntity entityAnn = (ExcelEntity) ann1;
 
-        } else {
-            throw new Exception("You must annotate class with @ExcelEntity");
-        }
+			signature = entityAnn.signature();
+			startRowIndex = ((ExcelEntity) ann1).startRow();
 
-        determineColRange(pclass);
+		} else {
+			throw new Exception("You must annotate class with @ExcelEntity");
+		}
 
-        XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream(filePath));
-        XSSFSheet sheet = workbook.getSheetAt(0);
+		determineColRange(pclass);
 
-        if (!checkFileTemplate(sheet, signature)) {
-            logger.error(String.format("File constant value miss match. Cell A1 must contain this string value: %s", signature));
-            throw new WrongFileTemplateException("File does not match the template");
-        }
-        Iterator<Row> rows = sheet.iterator();
-        int rowIndex = 0;
-        while (rows.hasNext()) {
-            if (rowIndex < startRowIndex - 1) {
-                rowIndex++;
-                continue;
-            }
-            if (rows.next() == null) {
-                break;
-            }
+		XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream(filePath));
+		XSSFSheet sheet = workbook.getSheetAt(0);
 
-            XSSFRow row = sheet.getRow(rowIndex);
-            if (row != null) {
-                if (!isRowEmpty(row)) {
-                    T obj = (T) pclass.newInstance();
+		if (!checkFileTemplate(sheet, signature)) {
+			logger.error(String.format("File constant value miss match. Cell A1 must contain this string value: %s",
+					signature));
+			throw new WrongFileTemplateException("File does not match the template");
+		}
+		Iterator<Row> rows = sheet.iterator();
+		int rowIndex = 0;
+		while (rows.hasNext()) {
+			if (rowIndex < startRowIndex - 1) {
+				rowIndex++;
+				continue;
+			}
+			if (rows.next() == null) {
+				break;
+			}
 
-                    for (Method method : pclass.getDeclaredMethods()) {
-                        if (method.isAnnotationPresent(ExcelColumn.class)) {
-                            ExcelColumn colAnn = (ExcelColumn) method.getAnnotation(ExcelColumn.class);
-                            String colName = colAnn.name();
-                            boolean nullable = colAnn.nullable();
-                            PropertyDescriptor pd = getPropertyDescriptor(method);
+			XSSFRow row = sheet.getRow(rowIndex);
+			if (row != null) {
+				if (!isRowEmpty(row)) {
+					T obj = (T) pclass.newInstance();
 
-                            readCellIntoObjectProperty(obj, sheet, rowIndex, colName, pd, nullable);
-                        }
+					for (Method method : pclass.getDeclaredMethods()) {
+						if (method.isAnnotationPresent(ExcelColumn.class)) {
+							ExcelColumn colAnn = (ExcelColumn) method.getAnnotation(ExcelColumn.class);
+							String colName = colAnn.name();
+							boolean nullable = colAnn.nullable();
+							PropertyDescriptor pd = getPropertyDescriptor(method);
 
-                    }
-                    ret.add(obj);
-                }
-            }
+							readCellIntoObjectProperty(obj, sheet, rowIndex, colName, pd, nullable);
+						}
 
-            rowIndex++;
-        }
-        return ret;
-    }
+					}
+					ret.add(obj);
+				}
+			}
 
-    private boolean isRowEmpty(XSSFRow row) {
-        int startColIndex = CellReference.convertColStringToIndex(startCol);
-        int endColIndex = CellReference.convertColStringToIndex(endCol);
-        DataFormatter dataFormatter = new DataFormatter();
+			rowIndex++;
+		}
+		return ret;
+	}
 
-        int i = startColIndex;
-        while (i <= endColIndex) {
-            XSSFCell cell = row.getCell(i);
-            if (cell != null) {
-                String cellValue = dataFormatter.formatCellValue(cell);
-                if (cellValue != null && !"".equals(cellValue.trim())) {
-                    return false;
-                }
-            }
-            i++;
-        }
+	private boolean isRowEmpty(XSSFRow row) {
+		int startColIndex = CellReference.convertColStringToIndex(startCol);
+		int endColIndex = CellReference.convertColStringToIndex(endCol);
+		DataFormatter dataFormatter = new DataFormatter();
 
-        return true;
-    }
+		int i = startColIndex;
+		while (i <= endColIndex) {
+			XSSFCell cell = row.getCell(i);
+			if (cell != null) {
+				String cellValue = dataFormatter.formatCellValue(cell);
+				if (cellValue != null && !"".equals(cellValue.trim())) {
+					return false;
+				}
+			}
+			i++;
+		}
 
-    /**
-     * Nhan dien xem vung du lieu tu cot nao den cot nao.
-     *
-     * @param clazz
-     */
-    private void determineColRange(Class clazz) {
-        for (Method method : clazz.getDeclaredMethods()) {
-            if (method.isAnnotationPresent(ExcelColumn.class)) {
-                ExcelColumn colAnn = (ExcelColumn) method.getAnnotation(ExcelColumn.class);
-                String colName = colAnn.name();
-                if (startCol == null || endCol == null) {
-                    if (startCol == null) {
-                        startCol = colName;
-                    }
-                    if (endCol == null) {
-                        endCol = colName;
-                    }
-                } else {
-                    if (colName != null) {
-                        if (colName.compareTo(startCol) < 0) {
-                            startCol = colName;
-                        }
+		return true;
+	}
 
-                        if (colName.compareTo(endCol) > 0) {
-                            endCol = colName;
-                        }
-                    }
-                }
-            }
-        }
+	/**
+	 * Nhan dien xem vung du lieu tu cot nao den cot nao.
+	 *
+	 * @param clazz
+	 */
+	private void determineColRange(Class clazz) {
+		for (Method method : clazz.getDeclaredMethods()) {
+			if (method.isAnnotationPresent(ExcelColumn.class)) {
+				ExcelColumn colAnn = (ExcelColumn) method.getAnnotation(ExcelColumn.class);
+				String colName = colAnn.name();
+				if (startCol == null || endCol == null) {
+					if (startCol == null) {
+						startCol = colName;
+					}
+					if (endCol == null) {
+						endCol = colName;
+					}
+				} else {
+					if (colName != null) {
+						if (colName.compareTo(startCol) < 0) {
+							startCol = colName;
+						}
 
-    }
+						if (colName.compareTo(endCol) > 0) {
+							endCol = colName;
+						}
+					}
+				}
+			}
+		}
 
-    private boolean checkFileTemplate(XSSFSheet sheet, String signalConstant) {
-        if (sheet != null && signalConstant != null) {
-            XSSFRow row = sheet.getRow(0);
-            if (row != null) {
-                XSSFCell cellA1 = row.getCell(0);
-                if (cellA1 != null) {
-                    DataFormatter dataFormatter = new DataFormatter();
-                    String inFileValue = dataFormatter.formatCellValue(cellA1);
-                    if (inFileValue != null) {
-                        if (signalConstant.equals(inFileValue.trim())) {
-                            return true;
-                        } else {
-                            return false;
-                        }
-                    } else {
-                        return false;
-                    }
+	}
 
-                } else {
-                    return false;
-                }
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
-    }
+	private boolean checkFileTemplate(XSSFSheet sheet, String signalConstant) {
+		if (sheet != null && signalConstant != null) {
+			XSSFRow row = sheet.getRow(0);
+			if (row != null) {
+				XSSFCell cellA1 = row.getCell(0);
+				if (cellA1 != null) {
+					DataFormatter dataFormatter = new DataFormatter();
+					String inFileValue = dataFormatter.formatCellValue(cellA1);
+					if (inFileValue != null) {
+						if (signalConstant.equals(inFileValue.trim())) {
+							return true;
+						} else {
+							return false;
+						}
+					} else {
+						return false;
+					}
 
-    private PropertyDescriptor getPropertyDescriptor(Method getter) {
-        try {
-            Class<?> clazz = getter.getDeclaringClass();
-            BeanInfo info = Introspector.getBeanInfo(clazz);
-            PropertyDescriptor[] props = info.getPropertyDescriptors();
-            for (PropertyDescriptor pd : props) {
-                if (getter.equals(pd.getReadMethod())) {
-                    return pd;
-                }
-            }
-        } catch (IntrospectionException e) {
-            logger.error("Could not get properties desciptor", e);
-        } catch (Exception e) {
-            logger.error("Could not get properties desciptor", e);
-        }
-        return null;
-    }
+				} else {
+					return false;
+				}
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
 
-    /**
-     * A long method covers all supported types, read original value from excel
-     * sheet, convert it into appropriate type and finally call setter method to
-     * set value into object's property
-     *
-     * @author ThanhNT - Nodo JSC
-     *
-     * @param obj
-     * @param sheet
-     * @param rowNum
-     * @param columnName
-     * @param pd
-     * @throws Exception
-     */
-    private void readCellIntoObjectProperty(Object obj, XSSFSheet sheet, int rowNum, String columnName,
-            PropertyDescriptor pd, boolean nullable) throws Exception {
-        if (sheet != null && pd != null) {
-            String propertyTypeName = pd.getPropertyType().getName();
-            XSSFRow row = sheet.getRow(rowNum);
-            DataFormatter dataFormatter = new DataFormatter();
-            Method setterMethod = pd.getWriteMethod();
-            if (row != null) {
-                int colIndex = CellReference.convertColStringToIndex(columnName);
-                XSSFCell cell = row.getCell(colIndex);
+	private PropertyDescriptor getPropertyDescriptor(Method getter) {
+		try {
+			Class<?> clazz = getter.getDeclaringClass();
+			BeanInfo info = Introspector.getBeanInfo(clazz);
+			PropertyDescriptor[] props = info.getPropertyDescriptors();
+			for (PropertyDescriptor pd : props) {
+				if (getter.equals(pd.getReadMethod())) {
+					return pd;
+				}
+			}
+		} catch (IntrospectionException e) {
+			logger.error("Could not get properties desciptor", e);
+		} catch (Exception e) {
+			logger.error("Could not get properties desciptor", e);
+		}
+		return null;
+	}
 
-                // Primitive types
-                String booleanTypeName = boolean.class.getName();
-                String byteTypeName = byte.class.getName();
-                String charTypeName = char.class.getName();
-                String shortTypeName = char.class.getName();
-                String intTypeName = int.class.getName();
-                String longTypeName = long.class.getName();
-                String floatTypeName = float.class.getName();
-                String doubleTypeName = double.class.getName();
-                String booleanClassTypeName = Boolean.class.getName();
-                String longClassTypeName = Long.class.getName();
-                String stringClassTypeName = String.class.getName();
-                String dateClassTypeName = Date.class.getName();
-                String bigIntClassTypeName = BigInteger.class.getName();
-                String bigDecimalClassTypeName = BigDecimal.class.getName();
-                String intClassTypeName = Integer.class.getName();
-                String doubleClassTypeName = Double.class.getName();
+	/**
+	 * A long method covers all supported types, read original value from excel
+	 * sheet, convert it into appropriate type and finally call setter method to set
+	 * value into object's property
+	 *
+	 * @author ThanhNT - Nodo JSC
+	 *
+	 * @param obj
+	 * @param sheet
+	 * @param rowNum
+	 * @param columnName
+	 * @param pd
+	 * @throws Exception
+	 */
+	private void readCellIntoObjectProperty(Object obj, XSSFSheet sheet, int rowNum, String columnName,
+			PropertyDescriptor pd, boolean nullable) throws Exception {
+		if (sheet != null && pd != null) {
+			String propertyTypeName = pd.getPropertyType().getName();
+			XSSFRow row = sheet.getRow(rowNum);
+			DataFormatter dataFormatter = new DataFormatter();
+			Method setterMethod = pd.getWriteMethod();
+			if (row != null) {
+				int colIndex = CellReference.convertColStringToIndex(columnName);
+				XSSFCell cell = row.getCell(colIndex);
 
-                if (propertyTypeName.equals(booleanTypeName)) {
-                    if (cell == null || dataFormatter.formatCellValue(cell) == null || "".equals(dataFormatter.formatCellValue(cell).trim())) {
-                        if (nullable) {
-                            setterMethod.invoke(obj, false);
-                        } else {
-                            EmptyCellException ex = new EmptyCellException(String.format("Cell %s%d is empty but value is required", columnName, rowNum + 1));
-                            ex.setColumnName(columnName);
-                            ex.setRow(rowNum);
-                            throw ex;
-                        }
-                    } else {
-                        String val = dataFormatter.formatCellValue(cell);
-                        boolean boolVal = true;
-                        if ("0".equals(val) || "f".equalsIgnoreCase(val) || "false".equalsIgnoreCase(val)) {
-                            boolVal = false;
-                        }
-                        setterMethod.invoke(obj, boolVal);
-                    }
+				// Primitive types
+				String booleanTypeName = boolean.class.getName();
+				String byteTypeName = byte.class.getName();
+				String charTypeName = char.class.getName();
+				String shortTypeName = char.class.getName();
+				String intTypeName = int.class.getName();
+				String longTypeName = long.class.getName();
+				String floatTypeName = float.class.getName();
+				String doubleTypeName = double.class.getName();
+				String booleanClassTypeName = Boolean.class.getName();
+				String longClassTypeName = Long.class.getName();
+				String stringClassTypeName = String.class.getName();
+				String dateClassTypeName = Date.class.getName();
+				String bigIntClassTypeName = BigInteger.class.getName();
+				String bigDecimalClassTypeName = BigDecimal.class.getName();
+				String intClassTypeName = Integer.class.getName();
+				String doubleClassTypeName = Double.class.getName();
 
-                } else if (propertyTypeName.equals(byteTypeName)) {
-                    throw new DataTypeNotSupportedException("byte type is not yet implemented");
-                } else if (propertyTypeName.equals(charTypeName)) {
-                    throw new DataTypeNotSupportedException("char type is not yet implemented");
-                } else if (propertyTypeName.equals(shortTypeName)) {
-                    throw new DataTypeNotSupportedException("short type is not yet implemented");
-                } else if (propertyTypeName.equals(intTypeName)) {
-                    if (cell == null || dataFormatter.formatCellValue(cell) == null || "".equals(dataFormatter.formatCellValue(cell).trim())) {
-                        if (nullable) {
-                            setterMethod.invoke(obj, 0);
-                        } else {
-                            throwEmptyCellException(rowNum, columnName);
-                        }
-                    } else {
-                        String val = dataFormatter.formatCellValue(cell).trim();
-                        try {
-                            int intVal = Integer.valueOf(val).intValue();
-                            setterMethod.invoke(obj, intVal);
-                        } catch (NumberFormatException nex) {
-                            throwInvalidCellValueException(nex, rowNum, columnName);
-                        }
+				if (propertyTypeName.equals(booleanTypeName)) {
+					if (cell == null || dataFormatter.formatCellValue(cell) == null
+							|| "".equals(dataFormatter.formatCellValue(cell).trim())) {
+						if (nullable) {
+							setterMethod.invoke(obj, false);
+						} else {
+							EmptyCellException ex = new EmptyCellException(
+									String.format("Cell %s%d is empty but value is required", columnName, rowNum + 1));
+							ex.setColumnName(columnName);
+							ex.setRow(rowNum);
+							throw ex;
+						}
+					} else {
+						String val = dataFormatter.formatCellValue(cell);
+						boolean boolVal = true;
+						if ("0".equals(val) || "f".equalsIgnoreCase(val) || "false".equalsIgnoreCase(val)) {
+							boolVal = false;
+						}
+						setterMethod.invoke(obj, boolVal);
+					}
 
-                    }
+				} else if (propertyTypeName.equals(byteTypeName)) {
+					throw new DataTypeNotSupportedException("byte type is not yet implemented");
+				} else if (propertyTypeName.equals(charTypeName)) {
+					throw new DataTypeNotSupportedException("char type is not yet implemented");
+				} else if (propertyTypeName.equals(shortTypeName)) {
+					throw new DataTypeNotSupportedException("short type is not yet implemented");
+				} else if (propertyTypeName.equals(intTypeName)) {
+					if (cell == null || dataFormatter.formatCellValue(cell) == null
+							|| "".equals(dataFormatter.formatCellValue(cell).trim())) {
+						if (nullable) {
+							setterMethod.invoke(obj, 0);
+						} else {
+							throwEmptyCellException(rowNum, columnName);
+						}
+					} else {
+						String val = dataFormatter.formatCellValue(cell).trim();
+						try {
+							int intVal = Integer.valueOf(val).intValue();
+							setterMethod.invoke(obj, intVal);
+						} catch (NumberFormatException nex) {
+							throwInvalidCellValueException(nex, rowNum, columnName);
+						}
 
-                } else if (propertyTypeName.equals(longTypeName)) {
-                    if (cell == null || dataFormatter.formatCellValue(cell) == null || "".equals(dataFormatter.formatCellValue(cell).trim())) {
-                        if (nullable) {
-                            setterMethod.invoke(obj, 0L);
-                        } else {
-                            throwEmptyCellException(rowNum, columnName);
-                        }
-                    } else {
-                        String val = dataFormatter.formatCellValue(cell).trim();
-                        Long longObjVal = Long.valueOf(val);
-                        long longVal = longObjVal.longValue();
-                        setterMethod.invoke(obj, longVal);
-                    }
-                } else if (propertyTypeName.equals(floatTypeName)) {
-                    if (cell == null || dataFormatter.formatCellValue(cell) == null || "".equals(dataFormatter.formatCellValue(cell).trim())) {
-                        if (nullable) {
-                            setterMethod.invoke(obj, 0L);
-                        } else {
-                            throwEmptyCellException(rowNum, columnName);
-                        }
-                    } else {
-                        String val = dataFormatter.formatCellValue(cell).trim();
-                        Float fVal = Float.valueOf(val);
-                        setterMethod.invoke(obj, fVal);
-                    }
+					}
 
-                } else if (propertyTypeName.equals(doubleTypeName)) {
-                    if (cell == null || dataFormatter.formatCellValue(cell) == null || "".equals(dataFormatter.formatCellValue(cell).trim())) {
-                        if (nullable) {
-                            setterMethod.invoke(obj, 0L);
-                        } else {
-                            throwEmptyCellException(rowNum, columnName);
-                        }
-                    } else {
-                        String val = dataFormatter.formatCellValue(cell).trim();
-                        Double dVal = Double.valueOf(val);
-                        setterMethod.invoke(obj, dVal);
-                    }
+				} else if (propertyTypeName.equals(longTypeName)) {
+					if (cell == null || dataFormatter.formatCellValue(cell) == null
+							|| "".equals(dataFormatter.formatCellValue(cell).trim())) {
+						if (nullable) {
+							setterMethod.invoke(obj, 0L);
+						} else {
+							throwEmptyCellException(rowNum, columnName);
+						}
+					} else {
+						String val = dataFormatter.formatCellValue(cell).trim();
+						Long longObjVal = Long.valueOf(val);
+						long longVal = longObjVal.longValue();
+						setterMethod.invoke(obj, longVal);
+					}
+				} else if (propertyTypeName.equals(floatTypeName)) {
+					if (cell == null || dataFormatter.formatCellValue(cell) == null
+							|| "".equals(dataFormatter.formatCellValue(cell).trim())) {
+						if (nullable) {
+							setterMethod.invoke(obj, 0L);
+						} else {
+							throwEmptyCellException(rowNum, columnName);
+						}
+					} else {
+						String val = dataFormatter.formatCellValue(cell).trim();
+						Float fVal = Float.valueOf(val);
+						setterMethod.invoke(obj, fVal);
+					}
 
-                } // End Primitive types
-                else if (booleanClassTypeName.equals(propertyTypeName)) {
-                    if (cell == null || dataFormatter.formatCellValue(cell) == null || "".equals(dataFormatter.formatCellValue(cell).trim())) {
-                        if (!nullable) {
-                            throwEmptyCellException(rowNum, columnName);
-                        }
-                    } else {
-                        try {
-                            String val = dataFormatter.formatCellValue(cell).trim();
-                            Boolean boolObj = new Boolean(val);
-                            setterMethod.invoke(obj, boolObj);
-                        } catch (Exception e) {
-                            throwInvalidCellValueException(e, rowNum, columnName);
-                        }
-                    }
-                } else if (longClassTypeName.equals(propertyTypeName)) {
-                    if (cell == null || dataFormatter.formatCellValue(cell) == null || "".equals(dataFormatter.formatCellValue(cell).trim())) {
-                        if (!nullable) {
-                            throwEmptyCellException(rowNum, columnName);
-                        }
-                    } else {
-                        try {
-                            String val = dataFormatter.formatCellValue(cell).trim();
-                            setterMethod.invoke(obj, Long.valueOf(val));
-                        } catch (NumberFormatException e) {
-                            throwInvalidCellValueException(e, rowNum, columnName);
-                        }
-                    }
+				} else if (propertyTypeName.equals(doubleTypeName)) {
+					if (cell == null || dataFormatter.formatCellValue(cell) == null
+							|| "".equals(dataFormatter.formatCellValue(cell).trim())) {
+						if (nullable) {
+							setterMethod.invoke(obj, 0L);
+						} else {
+							throwEmptyCellException(rowNum, columnName);
+						}
+					} else {
+						String val = dataFormatter.formatCellValue(cell).trim();
+						Double dVal = Double.valueOf(val);
+						setterMethod.invoke(obj, dVal);
+					}
 
-                } else if (stringClassTypeName.equals(propertyTypeName)) {
-                    if (cell == null || dataFormatter.formatCellValue(cell) == null || "".equals(dataFormatter.formatCellValue(cell).trim())) {
-                        if (!nullable) {
-                            throwEmptyCellException(rowNum, columnName);
-                        }
-                    } else {
-                        String val = dataFormatter.formatCellValue(cell).trim();
-                        setterMethod.invoke(obj, val);
-                    }
-                } else if (dateClassTypeName.equals(propertyTypeName)) {
-                    if (cell == null || dataFormatter.formatCellValue(cell) == null || "".equals(dataFormatter.formatCellValue(cell).trim())) {
-                        if (!nullable) {
-                            throwEmptyCellException(rowNum, columnName);
-                        }
-                    } else {
-                        try {
-                            Date date = cell.getDateCellValue();
-                            setterMethod.invoke(obj, date);
-                        } catch (Exception e) {
-                            throwInvalidCellValueException(e, rowNum, columnName);
-                        }
-                    }
+				} // End Primitive types
+				else if (booleanClassTypeName.equals(propertyTypeName)) {
+					if (cell == null || dataFormatter.formatCellValue(cell) == null
+							|| "".equals(dataFormatter.formatCellValue(cell).trim())) {
+						if (!nullable) {
+							throwEmptyCellException(rowNum, columnName);
+						}
+					} else {
+						try {
+							String val = dataFormatter.formatCellValue(cell).trim();
+							Boolean boolObj = new Boolean(val);
+							setterMethod.invoke(obj, boolObj);
+						} catch (Exception e) {
+							throwInvalidCellValueException(e, rowNum, columnName);
+						}
+					}
+				} else if (longClassTypeName.equals(propertyTypeName)) {
+					if (cell == null || dataFormatter.formatCellValue(cell) == null
+							|| "".equals(dataFormatter.formatCellValue(cell).trim())) {
+						if (!nullable) {
+							throwEmptyCellException(rowNum, columnName);
+						}
+					} else {
+						try {
+							String val = dataFormatter.formatCellValue(cell).trim();
+							setterMethod.invoke(obj, Long.valueOf(val));
+						} catch (NumberFormatException e) {
+							throwInvalidCellValueException(e, rowNum, columnName);
+						}
+					}
 
-                } else if (bigIntClassTypeName.equals(propertyTypeName)) {
-                    if (cell == null || dataFormatter.formatCellValue(cell) == null || "".equals(dataFormatter.formatCellValue(cell).trim())) {
-                        if (!nullable) {
-                            throwEmptyCellException(rowNum, columnName);
-                        }
-                    } else {
-                        try {
-                            String val = dataFormatter.formatCellValue(cell).trim();
-                            BigInteger bigInteger = new BigInteger(val);
-                            setterMethod.invoke(obj, bigInteger);
-                        } catch (Exception e) {
-                            throwInvalidCellValueException(e, rowNum, columnName);
-                        }
+				} else if (stringClassTypeName.equals(propertyTypeName)) {
+					if (cell == null || dataFormatter.formatCellValue(cell) == null
+							|| "".equals(dataFormatter.formatCellValue(cell).trim())) {
+						if (!nullable) {
+							throwEmptyCellException(rowNum, columnName);
+						}
+					} else {
+						String val = dataFormatter.formatCellValue(cell).trim();
+						setterMethod.invoke(obj, val);
+					}
+				} else if (dateClassTypeName.equals(propertyTypeName)) {
+					if (cell == null || dataFormatter.formatCellValue(cell) == null
+							|| "".equals(dataFormatter.formatCellValue(cell).trim())) {
+						if (!nullable) {
+							throwEmptyCellException(rowNum, columnName);
+						}
+					} else {
+						try {
+							Date date = cell.getDateCellValue();
+							setterMethod.invoke(obj, date);
+						} catch (Exception e) {
+							throwInvalidCellValueException(e, rowNum, columnName);
+						}
+					}
 
-                    }
+				} else if (bigIntClassTypeName.equals(propertyTypeName)) {
+					if (cell == null || dataFormatter.formatCellValue(cell) == null
+							|| "".equals(dataFormatter.formatCellValue(cell).trim())) {
+						if (!nullable) {
+							throwEmptyCellException(rowNum, columnName);
+						}
+					} else {
+						try {
+							String val = dataFormatter.formatCellValue(cell).trim();
+							BigInteger bigInteger = new BigInteger(val);
+							setterMethod.invoke(obj, bigInteger);
+						} catch (Exception e) {
+							throwInvalidCellValueException(e, rowNum, columnName);
+						}
 
-                } else if (bigDecimalClassTypeName.equals(propertyTypeName)) {
-                    if (cell == null || dataFormatter.formatCellValue(cell) == null || "".equals(dataFormatter.formatCellValue(cell).trim())) {
-                        if (!nullable) {
-                            throwEmptyCellException(rowNum, columnName);
-                        }
-                    } else {
-                        try {
-                            String val = dataFormatter.formatCellValue(cell).trim();
-                            BigDecimal bigDecimal = new BigDecimal(val);
-                            setterMethod.invoke(obj, bigDecimal);
-                        } catch (Exception e) {
-                            throwInvalidCellValueException(e, rowNum, columnName);
-                        }
-                    }
-                } else if (intClassTypeName.equals(propertyTypeName)) {
-                    if (cell == null || dataFormatter.formatCellValue(cell) == null || "".equals(dataFormatter.formatCellValue(cell).trim())) {
-                        if (!nullable) {
-                            throwEmptyCellException(rowNum, columnName);
-                        }
-                    } else {
-                        try {
-                            String val = dataFormatter.formatCellValue(cell).trim();
-                            Integer intObj = Integer.valueOf(val);
-                            setterMethod.invoke(obj, intObj);
-                        } catch (Exception e) {
-                            throwInvalidCellValueException(e, rowNum, columnName);
-                        }
-                    }
-                } else if (doubleClassTypeName.equals(propertyTypeName)) {
-                    if (cell == null || dataFormatter.formatCellValue(cell) == null || "".equals(dataFormatter.formatCellValue(cell).trim())) {
-                        if (!nullable) {
-                            throwEmptyCellException(rowNum, columnName);
-                        }
-                    } else {
-                        try {
-                            String val = dataFormatter.formatCellValue(cell).trim();
-                            Double dblObj = Double.valueOf(val);
-                            setterMethod.invoke(obj, dblObj);
-                        } catch (Exception e) {
-                            throwInvalidCellValueException(e, rowNum, columnName);
-                        }
-                    }
-                } else {
-                    throw new DataTypeNotSupportedException(String.format("%s is not supported", propertyTypeName));
-                }
-            } else {
-                throw new Exception(String.format("Row %d is null", rowNum + 1));
-            }
-        }
-    }
+					}
 
-    private void throwEmptyCellException(int rowNum, String columnName) throws EmptyCellException {
-        int humanRowNum = rowNum + 1;
-        EmptyCellException ex = new EmptyCellException(String.format("Cell %s%d is empty but value is required", columnName, humanRowNum));
-        ex.setColumnName(columnName);
-        ex.setRow(humanRowNum);
-        throw ex;
-    }
+				} else if (bigDecimalClassTypeName.equals(propertyTypeName)) {
+					if (cell == null || dataFormatter.formatCellValue(cell) == null
+							|| "".equals(dataFormatter.formatCellValue(cell).trim())) {
+						if (!nullable) {
+							throwEmptyCellException(rowNum, columnName);
+						}
+					} else {
+						try {
+							String val = dataFormatter.formatCellValue(cell).trim();
+							BigDecimal bigDecimal = new BigDecimal(val);
+							setterMethod.invoke(obj, bigDecimal);
+						} catch (Exception e) {
+							throwInvalidCellValueException(e, rowNum, columnName);
+						}
+					}
+				} else if (intClassTypeName.equals(propertyTypeName)) {
+					if (cell == null || dataFormatter.formatCellValue(cell) == null
+							|| "".equals(dataFormatter.formatCellValue(cell).trim())) {
+						if (!nullable) {
+							throwEmptyCellException(rowNum, columnName);
+						}
+					} else {
+						try {
+							String val = dataFormatter.formatCellValue(cell).trim();
+							Integer intObj = Integer.valueOf(val);
+							setterMethod.invoke(obj, intObj);
+						} catch (Exception e) {
+							throwInvalidCellValueException(e, rowNum, columnName);
+						}
+					}
+				} else if (doubleClassTypeName.equals(propertyTypeName)) {
+					if (cell == null || dataFormatter.formatCellValue(cell) == null
+							|| "".equals(dataFormatter.formatCellValue(cell).trim())) {
+						if (!nullable) {
+							throwEmptyCellException(rowNum, columnName);
+						}
+					} else {
+						try {
+							String val = dataFormatter.formatCellValue(cell).trim();
+							Double dblObj = Double.valueOf(val);
+							setterMethod.invoke(obj, dblObj);
+						} catch (Exception e) {
+							throwInvalidCellValueException(e, rowNum, columnName);
+						}
+					}
+				} else {
+					throw new DataTypeNotSupportedException(String.format("%s is not supported", propertyTypeName));
+				}
+			} else {
+				throw new Exception(String.format("Row %d is null", rowNum + 1));
+			}
+		}
+	}
 
-    private void throwInvalidCellValueException(Exception originalException, int rowNum, String columnName) throws InvalidCellValueException {
-        int humanRowNum = rowNum + 1;
-        InvalidCellValueException ex
-                = new InvalidCellValueException(String.format("Cell %s%d contains invalid value", columnName, humanRowNum), originalException);
-        ex.setRow(humanRowNum);
-        ex.setColumnName(columnName);
+	private void throwEmptyCellException(int rowNum, String columnName) throws EmptyCellException {
+		int humanRowNum = rowNum + 1;
+		EmptyCellException ex = new EmptyCellException(
+				String.format("Cell %s%d is empty but value is required", columnName, humanRowNum));
+		ex.setColumnName(columnName);
+		ex.setRow(humanRowNum);
+		throw ex;
+	}
 
-        throw ex;
-    }
+	private void throwInvalidCellValueException(Exception originalException, int rowNum, String columnName)
+			throws InvalidCellValueException {
+		int humanRowNum = rowNum + 1;
+		InvalidCellValueException ex = new InvalidCellValueException(
+				String.format("Cell %s%d contains invalid value", columnName, humanRowNum), originalException);
+		ex.setRow(humanRowNum);
+		ex.setColumnName(columnName);
 
-    public static void main(String[] args) {
-    }
+		throw ex;
+	}
+
+	public static void main(String[] args) {
+	}
 }
