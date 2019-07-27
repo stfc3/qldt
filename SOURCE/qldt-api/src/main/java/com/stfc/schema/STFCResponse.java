@@ -6,6 +6,7 @@
 package com.stfc.schema;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 
 /**
@@ -13,12 +14,17 @@ import java.io.Serializable;
  * @author dong.dv
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class STFCResponse implements Serializable{
+public class STFCResponse implements Serializable {
 
+    @JsonProperty("code")
     private String returnCode;
+    @JsonProperty("desc")
     private String returnMessage;
+    @JsonProperty("total")
+    private Integer total;
+    @JsonProperty("rows")
     private Object result;
-    
+
     public STFCResponse() {
         this.returnCode = "200";
         this.returnMessage = "Success";
@@ -38,6 +44,14 @@ public class STFCResponse implements Serializable{
 
     public void setReturnMessage(String returnMessage) {
         this.returnMessage = returnMessage;
+    }
+
+    public Integer getTotal() {
+        return total;
+    }
+
+    public void setTotal(Integer total) {
+        this.total = total;
     }
 
     public Object getResult() {

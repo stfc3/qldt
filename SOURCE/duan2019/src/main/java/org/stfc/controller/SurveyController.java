@@ -30,6 +30,7 @@ import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.stfc.business.BusinessException;
 import org.stfc.dto.Answers;
@@ -462,7 +463,8 @@ public class SurveyController {
             logger.info("START download");
 
             ExcelUtils excelUtils = new ExcelUtils();
-            String filePathTemp = context.getRealPath(Constants.EXPROT.PATH_TEMP + File.separator + Constants.EXPROT.PATH_FILE_SURVEY_TEMPLATE);
+            File fileTemplate = ResourceUtils.getFile("classpath:temp/"+Constants.EXPROT.PATH_FILE_SURVEY_TEMPLATE);
+            String filePathTemp = fileTemplate.getPath();
             String pathFolderOutput = context.getRealPath(Constants.EXPROT.PATH_REPORT);
             File folderOutput = new File(pathFolderOutput);
             if (!folderOutput.exists()) {
