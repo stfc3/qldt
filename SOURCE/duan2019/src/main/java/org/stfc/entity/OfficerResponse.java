@@ -18,7 +18,7 @@ import org.stfc.dto.Officers;
 public class OfficerResponse {
 
     private Officers officer;
-    private List<Certificate> certificates;
+    private List<CertificateView> certificates;
     private List<Courses> courses;
 
     public Officers getOfficer() {
@@ -29,11 +29,11 @@ public class OfficerResponse {
         this.officer = officer;
     }
 
-    public List<Certificate> getCertificates() {
+    public List<CertificateView> getCertificates() {
         return certificates;
     }
 
-    public void setCertificates(List<Certificate> certificates) {
+    public void setCertificates(List<CertificateView> certificates) {
         this.certificates = certificates;
     }
 

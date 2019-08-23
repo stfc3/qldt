@@ -18,6 +18,7 @@ import org.springframework.stereotype.Repository;
 import org.stfc.dto.Certificate;
 import org.stfc.dto.Courses;
 import org.stfc.dto.Officers;
+import org.stfc.entity.CertificateView;
 import org.stfc.utils.Comparator;
 import org.stfc.utils.StringUtils;
 
@@ -111,34 +112,30 @@ public class OfficersRepositoryImpl {
         return null;
     }
 
-    public List<Certificate> findCertificatesByOfficer(Long officerId, Long positionId) {
-        List<Certificate> listCertificate = new ArrayList<>();
+    public List<CertificateView> findCertificatesByOfficer(Long officerId, Long positionId) {
+        List<CertificateView> listCertificate = new ArrayList<>();
         if (!Comparator.isEqualNull(positionId)) {
-            StringBuilder sql = new StringBuilder("SELECT c.certificate_id, c.certificate_name, c.certificate_type, c.created_date, c.updated_date, c.status, 0 as learned");
-            sql.append(" FROM certificates c, position_certificate pc");
-            sql.append(" WHERE c.certificate_id = pc.certificate_id AND c.status = 1 AND pc.status = 1");
-            sql.append(" AND pc.position_id = :positionId");
-            Query query = em.createNativeQuery(sql.toString(), Certificate.class);
+            StringBuilder sql = new StringBuilder("SELECT new org.stfc.entity.CertificateView(c.certificateName, c.type, c.status, 0)");
+            sql.append(" FROM Certificate c, PositionCertificate pc");
+            sql.append(" WHERE c.id = pc.certificateId AND c.status = 1 AND pc.status = 1");
+            sql.append(" AND pc.positionId = :positionId");
+            Query query = em.createQuery(sql.toString());
             query.setParameter("positionId", positionId);
-            List<Certificate> listPositionCertificate = query.getResultList();
+            List<CertificateView> listPositionCertificate = query.getResultList();
             if (!Comparator.isEqualNullOrEmpty(listPositionCertificate)) {
                 listCertificate.addAll(listPositionCertificate);
             }
         }
         if (!Comparator.isEqualNull(officerId)) {
-            StringBuilder sql = new StringBuilder("SELECT c.certificate_id, c.certificate_name, c.certificate_type, c.created_date, c.updated_date, c.status");
-            sql.append(" FROM certificates c, officer_certificate oc");
-            sql.append(" WHERE c.certificate_id = oc.certificate_id AND c.status = 1 AND oc.status = 1");
-            sql.append(" AND oc.officer_id = :officerId");
-            Query query = em.createNativeQuery(sql.toString(), Certificate.class);
+            StringBuilder sql = new StringBuilder("SELECT new org.stfc.entity.CertificateView(c.certificateName, c.type, oc.status, 1, oc.dateCert, oc.placeCert, oc.numberCert)");
+            sql.append(" FROM Certificate c, CertificateOfficers oc");
+            sql.append(" WHERE c.id = oc.certificate AND c.status = 1 AND oc.status != 0");
+            sql.append(" AND oc.officer = :officerId");
+            Query query = em.createQuery(sql.toString());
             query.setParameter("officerId", officerId);
-            List<Certificate> listOfficerCertificate = query.getResultList();
+            List<CertificateView> listOfficerCertificate = query.getResultList();
             if (!Comparator.isEqualNullOrEmpty(listOfficerCertificate)) {
-                for (Certificate certificate : listOfficerCertificate) {
-                    certificate.setLearned(1);
-                    listCertificate.add(certificate);
-                }
-
+                listCertificate.addAll(listOfficerCertificate);
             }
         }
         return listCertificate;

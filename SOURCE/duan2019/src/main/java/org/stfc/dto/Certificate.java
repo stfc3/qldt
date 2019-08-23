@@ -42,6 +42,15 @@ public class Certificate {
     @Transient
     private int learned;
 
+    public Certificate(Long id, String certificateName, String type, int status, int learned) {
+        this.id = id;
+        this.certificateName = certificateName;
+        this.type = type;
+        this.status = status;
+        this.learned = learned;
+    }
+    
+
     /**
      * @return the id
      */
