@@ -59,7 +59,8 @@ public class Courses implements Serializable {
 
 	@Column(name = "lecturer_id", nullable = false, length = 20)
 	private Long lecturerId;
-
+	@Column(name = "status")
+	private Integer status;
 	/**
 	 * @param courseId
 	 * @param courseName
@@ -74,6 +75,20 @@ public class Courses implements Serializable {
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.lecturerId = lecturerId;
+	}
+
+	/**
+	 * @return the status
+	 */
+	public Integer getStatus() {
+		return status;
+	}
+
+	/**
+	 * @param status the status to set
+	 */
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 
 	/**

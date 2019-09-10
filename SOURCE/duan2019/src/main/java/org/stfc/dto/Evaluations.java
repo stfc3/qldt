@@ -26,13 +26,28 @@ public class Evaluations {
 	@Column(name = "course_id", nullable = false, length = 20, unique = false)
 	private Long courseId;
 	@Column(name = "course_point")
-	private int coursePoint;
+	private Integer coursePoint;
+	@Column(name = "lecturer_point")
+	private Integer leturerPoint;
 	@Column(name = "lecturer_comment")
 	private String lecturerComment;
 	@Column(name = "created_date")
 	private Date createDate;
 	@Column(name = "updated_date")
 	private Date modifiedDate;
+	
+	/**
+	 * @return the leturerPoint
+	 */
+	public Integer getLeturerPoint() {
+		return leturerPoint;
+	}
+	/**
+	 * @param leturerPoint the leturerPoint to set
+	 */
+	public void setLeturerPoint(Integer leturerPoint) {
+		this.leturerPoint = leturerPoint;
+	}
 	/**
 	 * @return the evaluationId
 	 */
@@ -60,13 +75,13 @@ public class Evaluations {
 	/**
 	 * @return the coursePoint
 	 */
-	public int getCoursePoint() {
+	public Integer getCoursePoint() {
 		return coursePoint;
 	}
 	/**
 	 * @param coursePoint the coursePoint to set
 	 */
-	public void setCoursePoint(int coursePoint) {
+	public void setCoursePoint(Integer coursePoint) {
 		this.coursePoint = coursePoint;
 	}
 	/**
