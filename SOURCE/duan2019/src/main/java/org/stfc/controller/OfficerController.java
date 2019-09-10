@@ -41,22 +41,21 @@ public class OfficerController {
 	FormatMessage formatMessage;
 
 	@RequestMapping(value = Constants.PATH.API_OFFICER, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public String getOfficerByUsername(@RequestParam String username) {
+	public String getOfficerByUsername(@RequestParam Integer userId) {
 		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
-		logger.debug("Body request: {}", gson.toJson(username));
+		logger.debug("Body request: {}", gson.toJson(userId));
 		String lang = "vi";
 		BaseResponse response = BaseResponse.parse(Constants.ERROR_INTERNAL, formatMessage, lang);
 		try {
-			Officers officer = officersRepositoryImpl.findOfficerByUsername(username);
+			Officers officer = officersRepositoryImpl.findOfficerByUsername(userId);
 			OfficerResponse officerResponse = new OfficerResponse();
 			if (Comparator.isEqualNull(officer)) {
 				response = BaseResponse.parse(Constants.ERROR_DATA_EMPTY, formatMessage, lang);
 			} else {
 				response = BaseResponse.parse(Constants.SUCCESS, formatMessage, lang);
 				officerResponse.setOfficer(officer);
-				List<Object[]> listData = officersRepositoryImpl.findCertificatesByOfficer(officer.getOfficerId());
 
-				officerResponse.setOfficerCertificates(getCertificateOfficers(listData));
+				officerResponse.setCertificates(officersRepositoryImpl.findCertificatesByOfficer(officer.getOfficerId(), officer.getPositionId()));
 				officerResponse.setCourses(officersRepositoryImpl.findCoursesByOfficer(officer.getOfficerId()));
 				response.setData(officerResponse);
 			}
@@ -67,44 +66,4 @@ public class OfficerController {
 		return gson.toJson(response);
 	}
 
-	private List<CertificateOfficers> getCertificateOfficers(List<Object[]> listData) {
-		List<CertificateOfficers> certificateOfficers = new ArrayList<CertificateOfficers>();
-		if (!Comparator.isEqualNullOrEmpty(listData)) {
-			for (Object[] obj : listData) {
-				CertificateOfficers officers = new CertificateOfficers();
-				if (!Comparator.isEqualNull(obj[0])) {
-					officers.setId(Long.valueOf(String.valueOf(obj[0])));
-				}
-				if (!Comparator.isEqualNull(obj[1])) {
-					officers.setOfficer(Long.valueOf(String.valueOf(obj[1])));
-				}
-				if (!Comparator.isEqualNull(obj[2])) {
-					officers.setNumberCert(String.valueOf(obj[2]));
-				}
-				if (!Comparator.isEqualNull(obj[3])) {
-					officers.setCertificate(Long.valueOf(String.valueOf(obj[3])));
-				}
-				if (!Comparator.isEqualNull(obj[4])) {
-					officers.setDateCert((Date) obj[4]);
-				}
-				if (!Comparator.isEqualNull(obj[5])) {
-					officers.setPlaceCert(String.valueOf(obj[5]));
-				}
-				if (!Comparator.isEqualNull(obj[6])) {
-					officers.setStatus(Integer.valueOf(String.valueOf(obj[6])));
-				}
-				if (!Comparator.isEqualNull(obj[7])) {
-					officers.setCreateDate((Date) obj[7]);
-				}
-				if (!Comparator.isEqualNull(obj[8])) {
-					officers.setModifiedDate((Date) obj[8]);
-				}
-				if (!Comparator.isEqualNull(obj[9])) {
-					officers.setCertificateName(String.valueOf(obj[9]));
-				}
-				certificateOfficers.add(officers);
-			}
-		}
-		return certificateOfficers;
-	}
 }
