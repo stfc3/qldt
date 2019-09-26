@@ -20,23 +20,20 @@ public class CertificateView {
     private Date certificateIssueDate;
     private String certificateIssuePlace;
     private String certificateNumber;
-    private int learned;
 
-    public CertificateView(String certificateName, String certificateType, int status, int learned) {
+    public CertificateView(String certificateName, String certificateType, int status) {
         this.certificateName = certificateName;
         this.certificateType = certificateType;
         this.status = status;
-        this.learned = learned;
     }
 
-    public CertificateView(String certificateName, String certificateType, int status, int learned, Date certificateIssueDate, String certificateIssuePlace, String certificateNumber) {
+    public CertificateView(String certificateName, String certificateType, int status, Date certificateIssueDate, String certificateIssuePlace, String certificateNumber) {
         this.certificateName = certificateName;
         this.certificateType = certificateType;
         this.status = status;
         this.certificateIssueDate = certificateIssueDate;
         this.certificateIssuePlace = certificateIssuePlace;
         this.certificateNumber = certificateNumber;
-        this.learned = learned;
     }
 
     
@@ -87,13 +84,4 @@ public class CertificateView {
     public void setCertificateNumber(String certificateNumber) {
         this.certificateNumber = certificateNumber;
     }
-
-    public int getLearned() {
-        return learned;
-    }
-
-    public void setLearned(int learned) {
-        this.learned = learned;
-    }
-
 }

@@ -424,7 +424,8 @@ public class SurveyController {
             surveyResults.setSurveyId(surveyId);
             surveyResults.setAnswer(surveyImportRequest.getAnswer());
             surveyResults.setCreatedDate(new Date());
-            surveyResults.setLearnDate(surveyImportRequest.getLearnDate());
+            surveyResults.setLearnFromDate(surveyImportRequest.getLearnFromDate());
+            surveyResults.setLearnToDate(surveyImportRequest.getLearnToDate());
             surveyResults = surveyResultsRepository.save(surveyResults);
 
             logger.info("surveyResultId: " + surveyResults.getSurveyResultId());
