@@ -5,14 +5,13 @@ package org.stfc.repository.impl;
 
 import java.util.List;
 
-import javax.persistence.Query;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.stfc.entity.HeaderEntity;
 import org.stfc.entity.TopCourses;
 import org.stfc.entity.TopLecturer;
 import org.stfc.utils.Comparator;
@@ -30,7 +29,7 @@ public class DashboardServices {
 	public List<TopLecturer> topLecturer() {
 		try {
 			StringBuilder builder = new StringBuilder(
-					"SELECT new org.stfc.entity.TopLecturer(e.evaluationId as evaluation, c.courseId as course, e.leturerPoint as point, e.lecturerComment as comment, ");
+					"SELECT new org.stfc.entity.TopLecturer(e.evaluationId as evaluation, c.courseId as course,c.courseName as courseName, e.leturerPoint as point, e.lecturerComment as comment, ");
 			builder.append(
 					" l.fistName as firstName, l.lastName as lastName, l.fullName as fullName, l.mobile as phone, l.deptId as department ");
 			builder.append(

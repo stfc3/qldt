@@ -97,4 +97,104 @@ public class DashboardController {
 		return gson.toJson(response);
 	}
 
+	@RequestMapping(method = { RequestMethod.GET }, value = { "/dashboard/education_program" }, headers = {
+			"Accept=application/json" }, produces = { "text/plain;charset=UTF-8" })
+	public String educationProgram() {
+		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+		BaseResponse response = BaseResponse.parse(Contants.ERROR_INTERNAL, formatMessage, Language.VI.getValue());
+		try {
+			Object[] data = services.getHeader();
+			HeaderEntity headerEntity = new HeaderEntity(Long.valueOf(String.valueOf(data[0])),
+					Long.valueOf(String.valueOf(data[1])), Long.valueOf(String.valueOf(data[2])),
+					Long.valueOf(String.valueOf(data[3])));
+			response = BaseResponse.parse(Contants.SUCCESS, formatMessage, Language.VI.getValue());
+			response.setData(headerEntity);
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error(e.getMessage(), e);
+		}
+		return gson.toJson(response);
+	}
+
+	@RequestMapping(method = { RequestMethod.GET }, value = { "/dashboard/thematic" }, headers = {
+			"Accept=application/json" }, produces = { "text/plain;charset=UTF-8" })
+	public String thematic() {
+		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+		BaseResponse response = BaseResponse.parse(Contants.ERROR_INTERNAL, formatMessage, Language.VI.getValue());
+		try {
+			Object[] data = services.getHeader();
+			HeaderEntity headerEntity = new HeaderEntity(Long.valueOf(String.valueOf(data[0])),
+					Long.valueOf(String.valueOf(data[1])), Long.valueOf(String.valueOf(data[2])),
+					Long.valueOf(String.valueOf(data[3])));
+			response = BaseResponse.parse(Contants.SUCCESS, formatMessage, Language.VI.getValue());
+			response.setData(headerEntity);
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error(e.getMessage(), e);
+		}
+		return gson.toJson(response);
+	}
+
+	@RequestMapping(method = { RequestMethod.GET }, value = { "/chart/officer" }, headers = {
+			"Accept=application/json" }, produces = { "text/plain;charset=UTF-8" })
+	public String chartOfficer() {
+		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+		BaseResponse response = BaseResponse.parse(Contants.ERROR_INTERNAL, formatMessage, Language.VI.getValue());
+		try {
+			Object[] data = services.getHeader();
+			HeaderEntity headerEntity = new HeaderEntity(Long.valueOf(String.valueOf(data[0])),
+					Long.valueOf(String.valueOf(data[1])), Long.valueOf(String.valueOf(data[2])),
+					Long.valueOf(String.valueOf(data[3])));
+			response = BaseResponse.parse(Contants.SUCCESS, formatMessage, Language.VI.getValue());
+			response.setData(headerEntity);
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error(e.getMessage(), e);
+		}
+		return gson.toJson(response);
+	}
+
+	@RequestMapping(method = { RequestMethod.GET }, value = { "/chart/courser" }, headers = {
+			"Accept=application/json" }, produces = { "text/plain;charset=UTF-8" })
+	public String chartCourser() {
+		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+		BaseResponse response = BaseResponse.parse(Contants.ERROR_INTERNAL, formatMessage, Language.VI.getValue());
+		try {
+			Object[] data = services.getHeader();
+			HeaderEntity headerEntity = new HeaderEntity(Long.valueOf(String.valueOf(data[0])),
+					Long.valueOf(String.valueOf(data[1])), Long.valueOf(String.valueOf(data[2])),
+					Long.valueOf(String.valueOf(data[3])));
+			response = BaseResponse.parse(Contants.SUCCESS, formatMessage, Language.VI.getValue());
+			response.setData(headerEntity);
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error(e.getMessage(), e);
+		}
+		return gson.toJson(response);
+	}
+
+	@RequestMapping(method = { RequestMethod.GET }, value = { "/chart/overall" }, headers = {
+			"Accept=application/json" }, produces = { "text/plain;charset=UTF-8" })
+	public String chartOverall() {
+		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+		BaseResponse response = BaseResponse.parse(Contants.ERROR_INTERNAL, formatMessage, Language.VI.getValue());
+		try {
+			Object[] data = services.getHeader();
+			HeaderEntity headerEntity = new HeaderEntity(Long.valueOf(String.valueOf(data[0])),
+					Long.valueOf(String.valueOf(data[1])), Long.valueOf(String.valueOf(data[2])),
+					Long.valueOf(String.valueOf(data[3])));
+			response = BaseResponse.parse(Contants.SUCCESS, formatMessage, Language.VI.getValue());
+			response.setData(headerEntity);
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error(e.getMessage(), e);
+		}
+		return gson.toJson(response);
+	}
+
 }

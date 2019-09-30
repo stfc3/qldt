@@ -7,13 +7,10 @@ package org.stfc.entity;
  * @author viettx
  *
  */
-//@Entity
 public class TopLecturer {
-//	@Id
-//	@GeneratedValue
-//	private Long id;
 	private Long evaluation;
 	private Long course;
+	private String courseName;
 	private Integer point;
 	private String comment;
 	private String firstName;
@@ -22,11 +19,14 @@ public class TopLecturer {
 	private String phone;
 	private Long department;
 
-	public TopLecturer(Long evaluation, Long course, Integer point, String comment, String firstName, String lastName,
-			String fullName, String phone, Long department) {
+
+
+	public TopLecturer(Long evaluation, Long course, String courseName, Integer point, String comment, String firstName,
+			String lastName, String fullName, String phone, Long department) {
 		super();
 		this.evaluation = evaluation;
 		this.course = course;
+		this.courseName = courseName;
 		this.point = point;
 		this.comment = comment;
 		this.firstName = firstName;
@@ -34,6 +34,20 @@ public class TopLecturer {
 		this.fullName = fullName;
 		this.phone = phone;
 		this.department = department;
+	}
+
+	/**
+	 * @return the courseName
+	 */
+	public String getCourseName() {
+		return courseName;
+	}
+
+	/**
+	 * @param courseName the courseName to set
+	 */
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
 	}
 
 	public Long getEvaluation() {
