@@ -21,15 +21,15 @@ import javax.persistence.Table;
 public class Departments {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "departmentd_id", nullable = false, unique = false, length = 20)
+	@Column(name = "department_id", nullable = false, unique = false, length = 20)
 	private Long id;
-	@Column(name = "departmentd_name", length = 200)
+	@Column(name = "department_name", length = 200)
 	private String name;
-	@Column(name = "departmentd_full_name", length = 200)
+	@Column(name = "department_full_name", length = 200)
 	private String fullName;
-	@Column(name = "departmentd_path", length = 200)
+	@Column(name = "department_path", length = 200)
 	private String path;
-	@Column(name = "departmentd_parent_id", length = 20)
+	@Column(name = "department_parent_id", length = 20)
 	private String parentId;
 	@Column(name = "status", length = 1)
 	private int status;

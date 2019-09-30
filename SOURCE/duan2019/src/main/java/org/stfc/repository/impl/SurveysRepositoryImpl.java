@@ -107,8 +107,8 @@ public class SurveysRepositoryImpl {
             sql.append(" FROM Surveys s, SurveyResults sr, Questions q, Officers o,  Positions p");
             sql.append(" WHERE s.surveyId = sr.surveyId AND sr.questionId = q.questionId AND sr.officerId = o.officerId AND o.positionId = p.positionId");
             sql.append(" AND sr.answer='Có'");
-            sql.append(" AND sr.learnDate >= :fromDate");
-            sql.append(" AND sr.learnDate <= :toDate");
+            sql.append(" AND sr.learnFromDate >= :fromDate");
+            sql.append(" AND sr.learnToDate <= :toDate");
             if(!Comparator.isEqualNullOrEmpty(positionType)){
             	sql.append(" AND p.positionType = :positionType");
             }

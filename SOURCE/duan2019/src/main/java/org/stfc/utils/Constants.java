@@ -38,10 +38,14 @@ public interface Constants {
         String DD_MM_YYYY_HH_MM_SS = "dd/MM/yyyy HH:mm:ss";
         String TIMEZONE_HCM = "Asia/Ho_Chi_Minh";
         String YYYY_MM_DD = "yyyy-MM-dd";
+        String YYYYMMDD = "yyyyMMdd";
     }
      public interface EXPROT {
         String PATH_TEMP="temp";
         String PATH_REPORT="report";
-        String PATH_FILE_SURVEY_TEMPLATE="Survey.xlsx";
+        String PATH_FILE_SURVEY_TEMPLATE="Survey";
+        String EXCEL_EXTENSION="xlsx";
+        String DOT=".";
+        String UNDERLINE="_";
     }
 }

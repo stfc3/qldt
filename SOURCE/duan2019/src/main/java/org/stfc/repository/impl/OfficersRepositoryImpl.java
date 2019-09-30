@@ -115,7 +115,7 @@ public class OfficersRepositoryImpl {
     public List<CertificateView> findCertificatesByOfficer(Long officerId, Long positionId) {
         List<CertificateView> listCertificate = new ArrayList<>();
         if (!Comparator.isEqualNull(positionId)) {
-            StringBuilder sql = new StringBuilder("SELECT new org.stfc.entity.CertificateView(c.certificateName, c.type, c.status, 0)");
+            StringBuilder sql = new StringBuilder("SELECT new org.stfc.entity.CertificateView(c.certificateName, c.type, 0)");
             sql.append(" FROM Certificate c, PositionCertificate pc");
             sql.append(" WHERE c.id = pc.certificateId AND c.status = 1 AND pc.status = 1");
             sql.append(" AND pc.positionId = :positionId");
@@ -127,7 +127,7 @@ public class OfficersRepositoryImpl {
             }
         }
         if (!Comparator.isEqualNull(officerId)) {
-            StringBuilder sql = new StringBuilder("SELECT new org.stfc.entity.CertificateView(c.certificateName, c.type, oc.status, 1, oc.dateCert, oc.placeCert, oc.numberCert)");
+            StringBuilder sql = new StringBuilder("SELECT new org.stfc.entity.CertificateView(c.certificateName, c.type, oc.status, oc.dateCert, oc.placeCert, oc.numberCert)");
             sql.append(" FROM Certificate c, CertificateOfficers oc");
             sql.append(" WHERE c.id = oc.certificate AND c.status = 1 AND oc.status != 0");
             sql.append(" AND oc.officer = :officerId");

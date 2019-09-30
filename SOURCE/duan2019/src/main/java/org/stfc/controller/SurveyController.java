@@ -25,6 +25,7 @@ import java.util.List;
 import javax.servlet.ServletContext;
 
 import javax.servlet.http.HttpServletRequest;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.InputStreamResource;
 
 import org.springframework.http.HttpHeaders;
@@ -423,7 +424,8 @@ public class SurveyController {
             surveyResults.setSurveyId(surveyId);
             surveyResults.setAnswer(surveyImportRequest.getAnswer());
             surveyResults.setCreatedDate(new Date());
-            surveyResults.setLearnDate(surveyImportRequest.getLearnDate());
+            surveyResults.setLearnFromDate(surveyImportRequest.getLearnFromDate());
+            surveyResults.setLearnToDate(surveyImportRequest.getLearnToDate());
             surveyResults = surveyResultsRepository.save(surveyResults);
 
             logger.info("surveyResultId: " + surveyResults.getSurveyResultId());
@@ -463,17 +465,34 @@ public class SurveyController {
             logger.info("START download");
 
             ExcelUtils excelUtils = new ExcelUtils();
-            File fileTemplate = ResourceUtils.getFile("classpath:temp/"+Constants.EXPROT.PATH_FILE_SURVEY_TEMPLATE);
-            String filePathTemp = fileTemplate.getPath();
+            StringBuilder pathFileInput = new StringBuilder("/config/temp/");
+            pathFileInput.append(Constants.EXPROT.PATH_FILE_SURVEY_TEMPLATE);
+            pathFileInput.append(Constants.EXPROT.DOT);
+            pathFileInput.append(Constants.EXPROT.EXCEL_EXTENSION);
+            ClassPathResource resourceTemplate = new ClassPathResource(pathFileInput.toString());
+            String filePathTemp = resourceTemplate.getPath();
             String pathFolderOutput = context.getRealPath(Constants.EXPROT.PATH_REPORT);
             File folderOutput = new File(pathFolderOutput);
             if (!folderOutput.exists()) {
                 folderOutput.mkdir();
             }
-            String filePathOutput = pathFolderOutput + File.separator + Constants.EXPROT.PATH_FILE_SURVEY_TEMPLATE;
+            StringBuilder filePathOutput = new StringBuilder(pathFolderOutput);
+            filePathOutput.append(File.separator);
+            filePathOutput.append(Constants.EXPROT.PATH_FILE_SURVEY_TEMPLATE);
+            filePathOutput.append(Constants.EXPROT.UNDERLINE);
+            if (!Comparator.isEqualNullOrEmpty(positionType)) {
+                filePathOutput.append(positionType);
+                filePathOutput.append(Constants.EXPROT.UNDERLINE);
+            }
+            filePathOutput.append(DateTimeUtils.convestDateToString(fromDate, Constants.DATE_FORMAT.YYYYMMDD));
+            filePathOutput.append(Constants.EXPROT.UNDERLINE);
+            filePathOutput.append(DateTimeUtils.convestDateToString(toDate, Constants.DATE_FORMAT.YYYYMMDD));
+            filePathOutput.append(Constants.EXPROT.DOT);
+            filePathOutput.append(Constants.EXPROT.EXCEL_EXTENSION);
+            
             List<ExportSurvey> listExportSurveys = surveysRepositoryImpl.exportSurvey(fromDate, toDate, positionType);
-            excelUtils.write(listExportSurveys, filePathTemp, filePathOutput);
-            File fileExport = new File(filePathOutput);
+            excelUtils.write(listExportSurveys, filePathTemp, filePathOutput.toString());
+            File fileExport = new File(filePathOutput.toString());
 
             contentType = context.getMimeType(fileExport.getAbsolutePath());
             if (contentType == null) {

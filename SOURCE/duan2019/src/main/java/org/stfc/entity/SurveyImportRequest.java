@@ -28,7 +28,7 @@ public class SurveyImportRequest {
     private String mobile;
     //email
     private String email;
-   //Loại Chuc vu
+    //Loại Chuc vu
     private String positionType;
     //Chuc vu
     private String positionName;
@@ -40,7 +40,9 @@ public class SurveyImportRequest {
     private String answer;
     //thoi gian co the hoc
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_FORMAT.DD_MM_YYYY_HH_MM_SS, timezone = Constants.DATE_FORMAT.TIMEZONE_HCM)
-    private Date learnDate;
+    private Date learnFromDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_FORMAT.DD_MM_YYYY_HH_MM_SS, timezone = Constants.DATE_FORMAT.TIMEZONE_HCM)
+    private Date learnToDate;
 
     public String getSurveyTitle() {
         return surveyTitle;
@@ -99,14 +101,14 @@ public class SurveyImportRequest {
     }
 
     public String getPositionType() {
-		return positionType;
-	}
+        return positionType;
+    }
 
-	public void setPositionType(String positionType) {
-		this.positionType = positionType;
-	}
+    public void setPositionType(String positionType) {
+        this.positionType = positionType;
+    }
 
-	public String getPositionName() {
+    public String getPositionName() {
         return positionName;
     }
 
@@ -130,28 +132,36 @@ public class SurveyImportRequest {
         this.answer = answer;
     }
 
-	public Date getLearnDate() {
-		return learnDate;
-	}
+    public Date getLearnFromDate() {
+        return learnFromDate;
+    }
 
-	public void setLearnDate(Date learnDate) {
-		this.learnDate = learnDate;
-	}
+    public void setLearnFromDate(Date learnFromDate) {
+        this.learnFromDate = learnFromDate;
+    }
 
-	public String getGender() {
-		return gender;
-	}
+    public Date getLearnToDate() {
+        return learnToDate;
+    }
 
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
+    public void setLearnToDate(Date learnToDate) {
+        this.learnToDate = learnToDate;
+    }
 
-	public String getQuestionCode() {
-		return questionCode;
-	}
+    public String getGender() {
+        return gender;
+    }
 
-	public void setQuestionCode(String questionCode) {
-		this.questionCode = questionCode;
-	}
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getQuestionCode() {
+        return questionCode;
+    }
+
+    public void setQuestionCode(String questionCode) {
+        this.questionCode = questionCode;
+    }
 
 }

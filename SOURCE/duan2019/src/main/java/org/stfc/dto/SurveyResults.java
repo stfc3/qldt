@@ -51,9 +51,12 @@ public class SurveyResults implements Serializable {
     @Column(name = "created_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
-    @Column(name = "learn_date")
+    @Column(name = "learn_from_date")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date learnDate;
+    private Date learnFromDate;
+    @Column(name = "learn_to_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date learnToDate;
 
     public SurveyResults() {
     }
@@ -110,15 +113,23 @@ public class SurveyResults implements Serializable {
         this.createdDate = createdDate;
     }
 
-    public Date getLearnDate() {
-		return learnDate;
-	}
+    public Date getLearnFromDate() {
+        return learnFromDate;
+    }
 
-	public void setLearnDate(Date learnDate) {
-		this.learnDate = learnDate;
-	}
+    public void setLearnFromDate(Date learnFromDate) {
+        this.learnFromDate = learnFromDate;
+    }
 
-	@Override
+    public Date getLearnToDate() {
+        return learnToDate;
+    }
+
+    public void setLearnToDate(Date learnToDate) {
+        this.learnToDate = learnToDate;
+    }
+
+    @Override
     public int hashCode() {
         int hash = 0;
         hash += (surveyResultId != null ? surveyResultId.hashCode() : 0);
@@ -142,5 +153,5 @@ public class SurveyResults implements Serializable {
     public String toString() {
         return "org.stfc.dto.SurveyResults[ surveyResultId=" + surveyResultId + " ]";
     }
-    
+
 }
