@@ -24,15 +24,20 @@ import org.stfc.cache.CacheInfo;
 import org.stfc.dto.Courses;
 import org.stfc.dto.Experiences;
 import org.stfc.dto.Lecturers;
+import org.stfc.dto.Teacher;
+import org.stfc.entity.ScheduleEntity;
 import org.stfc.message.BaseResponse;
 import org.stfc.message.LecturersRequest;
 import org.stfc.repository.CoursesRepository;
 import org.stfc.repository.EvaluationRepository;
 import org.stfc.repository.ExperiencesRepository;
 import org.stfc.repository.LecturersRepository;
-import org.stfc.repository.impl.LecturersCustomerRepositoryImp;
+import org.stfc.repository.TeacherRepository;
+import org.stfc.repository.impl.LecturersServices;
+import org.stfc.repository.impl.TeacherServices;
 import org.stfc.utils.Contants;
 import org.stfc.utils.FormatMessage;
+import org.stfc.utils.Language;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -50,7 +55,7 @@ public class LecturersController {
 	@Autowired
 	FormatMessage formatMessage;
 	@Autowired
-	LecturersCustomerRepositoryImp imp;
+	LecturersServices imp;
 	@Autowired
 	ExperiencesRepository experRepository;
 	@Autowired
@@ -61,6 +66,8 @@ public class LecturersController {
 	EvaluationRepository evaluationRepository;
 	@Autowired
 	SearchLecturersBussiness lecturerBusiness;
+	@Autowired
+	TeacherServices tearcherRepostory;
 
 	/**
 	 * @category Get all officers
@@ -259,4 +266,54 @@ public class LecturersController {
 		return gson.toJson(response);
 	}
 
+	@GetMapping(value = "/teachers", headers = { "Accept=application/json" }, produces = { "text/plain;charset=UTF-8" })
+	public String getTeachers() {
+		String lang = Language.VI.getValue();
+		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+		BaseResponse response = BaseResponse.parse(Contants.ERROR_INTERNAL, formatMessage, lang);
+		try {
+			List<Teacher> listTeacher = tearcherRepostory.findAllTeacher(Contants.STATUS_ACTIVE);
+			if (listTeacher == null || listTeacher.isEmpty()) {
+				throw new BusinessException(Contants.ERROR_DATA_EMPTY);
+			}
+
+			response = BaseResponse.parse(Contants.SUCCESS, formatMessage, lang);
+			response.setTotal(listTeacher.size());
+			response.setData(listTeacher);
+		} catch (BusinessException e) {
+			logger.error(e.getMessage(), e);
+			response = BaseResponse.parse(e.getMessage(), formatMessage, lang);
+			// TODO: handle exception
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error(e.getMessage(), e);
+		}
+		return gson.toJson(response);
+	}
+
+	@GetMapping(value = "/teachers/{classCode}", headers = { "Accept=application/json" }, produces = {
+			"text/plain;charset=UTF-8" })
+	public String getTeachersByClassCode(@PathVariable String classCode) {
+		String lang = Language.VI.getValue();
+		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+		BaseResponse response = BaseResponse.parse(Contants.ERROR_INTERNAL, formatMessage, lang);
+		try {
+			List<ScheduleEntity> listTeacherByClassCode = tearcherRepostory.findAllTeacherByClassCode(classCode);
+			if (listTeacherByClassCode == null || listTeacherByClassCode.isEmpty()) {
+				throw new BusinessException(Contants.ERROR_DATA_EMPTY);
+			}
+
+			response = BaseResponse.parse(Contants.SUCCESS, formatMessage, lang);
+			response.setTotal(listTeacherByClassCode.size());
+			response.setData(listTeacherByClassCode);
+		} catch (BusinessException e) {
+			logger.error(e.getMessage(), e);
+			response = BaseResponse.parse(e.getMessage(), formatMessage, lang);
+			// TODO: handle exception
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error(e.getMessage(), e);
+		}
+		return gson.toJson(response);
+	}
 }

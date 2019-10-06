@@ -25,8 +25,8 @@ import org.stfc.utils.Comparator;
  *
  */
 @Repository
-public class LecturersCustomerRepositoryImp {
-	private static final Logger logger = LoggerFactory.getLogger(LecturersCustomerRepositoryImp.class);
+public class LecturersServices {
+	private static final Logger logger = LoggerFactory.getLogger(LecturersServices.class);
 	/*
 	 * (non-Javadoc)
 	 * 

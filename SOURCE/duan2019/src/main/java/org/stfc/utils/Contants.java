@@ -15,6 +15,7 @@ public class Contants {
 	public static final String FORMAT_DATE = "dd/MM/yyyy HH:mm:ss";
 	public static final String FORMAT_TIME = "yyyyMMddhhmmss";
 	public static final String SPRING_PROFILE_PRODUCTION = "prod";
-
+	public static final int STATUS_ACTIVE = 1;
+	public static final int STATUS_LOCK = 0;
 
 }

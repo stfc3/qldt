@@ -20,7 +20,7 @@ import org.stfc.message.BaseResponse;
 import org.stfc.message.LecturersRequest;
 import org.stfc.message.LecturersResponse;
 import org.stfc.repository.LecturersRepository;
-import org.stfc.repository.impl.LecturersCustomerRepositoryImp;
+import org.stfc.repository.impl.LecturersServices;
 import org.stfc.specification.STFCSpecification;
 import org.stfc.specification.SearchOperation;
 import org.stfc.utils.Comparator;
@@ -42,7 +42,7 @@ public class SearchLecturersBussiness implements Business {
 	@Autowired
 	LecturersRepository repository;
 	@Autowired
-	LecturersCustomerRepositoryImp imp;
+	LecturersServices imp;
 
 	CacheInfo cacheInfo;
 
