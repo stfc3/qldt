@@ -24,14 +24,12 @@ import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletContext;
 
-import javax.servlet.http.HttpServletRequest;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.InputStreamResource;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.stfc.business.BusinessException;
 import org.stfc.dto.Answers;

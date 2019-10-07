@@ -26,6 +26,9 @@ public interface Constants {
         String API_SURVEY_ANSWERS_SEARCH = "/api/v1/survey/answers/search";
         
         String API_OFFICER = "/api/v1/officer";
+        
+        
+        String API_COURSE_ALL = "/api/v1/course/all";
     }
 
     public interface STATUS {
