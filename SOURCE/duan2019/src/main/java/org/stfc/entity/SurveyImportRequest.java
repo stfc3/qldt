@@ -11,6 +11,7 @@ import org.stfc.utils.Comparator;
 import org.stfc.utils.Constants;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.stfc.utils.StringUtils;
 
 /**
  *
@@ -43,6 +44,8 @@ public class SurveyImportRequest {
     private Date learnFromDate;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_FORMAT.DD_MM_YYYY_HH_MM_SS, timezone = Constants.DATE_FORMAT.TIMEZONE_HCM)
     private Date learnToDate;
+    private Long departmentId;
+    private String username;
 
     public String getSurveyTitle() {
         return surveyTitle;
@@ -162,6 +165,36 @@ public class SurveyImportRequest {
 
     public void setQuestionCode(String questionCode) {
         this.questionCode = questionCode;
+    }
+
+    public Long getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(Long departmentId) {
+        this.departmentId = departmentId;
+    }
+
+    public String getUsername() {
+        String username = null;
+        if (!Comparator.isEqualNullOrEmpty(fullName)) {
+            //convert tieng viet khong dau
+            username = StringUtils.unAccent(getFirstName().toLowerCase());
+            String lastNameNotUnicode = StringUtils.unAccent(getLastName().toLowerCase());
+            String[] arrTemp = lastNameNotUnicode.split(" ");
+            if (arrTemp.length == 1) {
+                username += arrTemp[0];
+            } else if (arrTemp.length > 1) {
+                for (String tmp : arrTemp) {
+                    username += tmp.charAt(0);
+                }
+            }
+        }
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
 }

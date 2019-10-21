@@ -16,6 +16,7 @@ import org.springframework.stereotype.Repository;
 import org.stfc.dto.Surveys;
 import org.stfc.entity.ExportSurvey;
 import org.stfc.utils.Comparator;
+import org.stfc.utils.Constants;
 import org.stfc.utils.StringUtils;
 
 /**
@@ -28,6 +29,7 @@ public class SurveysRepositoryImpl {
     private static final Logger logger = LoggerFactory.getLogger(SurveysRepositoryImpl.class);
     @Autowired
     EntityManager em;
+
     public List<Surveys> onSearch(Surveys survey) {
         StringBuilder sql = new StringBuilder("SELECT * FROM surveys u WHERE 1 = 1");
         if (!Comparator.isEqualNull(survey)) {
@@ -74,13 +76,12 @@ public class SurveysRepositoryImpl {
         }
         return query.getResultList();
     }
-    
-    
+
     public List<ExportSurvey> exportSurvey(Date fromDate, Date toDate, String positionType) {
         if (!Comparator.isEqualNull(fromDate) && !Comparator.isEqualNull(toDate)) {
-        	StringBuilder sql = new StringBuilder("SELECT new org.stfc.entity.ExportSurvey (p.positionType, p.positionName");
+            StringBuilder sql = new StringBuilder("SELECT new org.stfc.entity.ExportSurvey (p.positionType, p.positionName");
             sql.append(", SUM(CASE WHEN q.questionCode = 'ly_luan_chinh_tri_cao_cap' THEN 1 ELSE 0 END) AS llctCaoCap");
-			sql.append(", SUM(CASE WHEN q.questionCode = 'ly_luan_chinh_tri_trung_cap' THEN 1 ELSE 0 END) AS llctTrungCap");
+            sql.append(", SUM(CASE WHEN q.questionCode = 'ly_luan_chinh_tri_trung_cap' THEN 1 ELSE 0 END) AS llctTrungCap");
             sql.append(", SUM(CASE WHEN q.questionCode = 'ly_luan_chinh_tri_dang_vien_moi' THEN 1 ELSE 0 END) AS llctDangVienMoi");
             sql.append(", SUM(CASE WHEN q.questionCode = 'ly_luan_chinh_tri_doi_tuong_ket_nap' THEN 1 ELSE 0 END) AS llctKetNap");
             sql.append(", SUM(CASE WHEN q.questionCode = 'quan_ly_nha_nuoc_chuyen_vien_cao_cap' THEN 1 ELSE 0 END) AS qlnnChuyenVienCaoCap");
@@ -93,11 +94,21 @@ public class SurveysRepositoryImpl {
             sql.append(", SUM(CASE WHEN q.questionCode = 'chuyen_mon_cao_dang' THEN 1 ELSE 0 END) AS cmCaoDang");
             sql.append(", SUM(CASE WHEN q.questionCode = 'chuyen_mon_trung_cap' THEN 1 ELSE 0 END) AS cmTrungCap");
             sql.append(", SUM(CASE WHEN q.questionCode = 'chuyen_mon_so_cap' THEN 1 ELSE 0 END) AS cmSoCap");
-            sql.append(", SUM(CASE WHEN q.questionCode = 'kien_thuc_ky_nang_chuyen_nganh' THEN 1 ELSE 0 END) AS ktknChuyenNganh");
-            sql.append(", SUM(CASE WHEN q.questionCode = 'kien_thuc_ky_nang_lam_viec' THEN 1 ELSE 0 END) AS ktknLamViec");
-            sql.append(", SUM(CASE WHEN q.questionCode = 'ky_nang_lanh_dao_cap_phong' THEN 1 ELSE 0 END) AS knldCapPhong");
-            sql.append(", SUM(CASE WHEN q.questionCode = 'ky_nang_lanh_dao_cap_vu' THEN 1 ELSE 0 END) AS ktknCapVu");
-            sql.append(", SUM(CASE WHEN q.questionCode = 'ky_nang_lanh_dao_thu_truong' THEN 1 ELSE 0 END) AS knldThuTruong");
+            if (Constants.EXPORT.POSITION_TYPE_CC.equals(positionType)) {
+                sql.append(", SUM(CASE WHEN q.questionCode = 'kien_thuc_ky_nang_chuyen_nganh' THEN 1 ELSE 0 END) AS ktknChuyenNganh");
+                sql.append(", SUM(CASE WHEN q.questionCode = 'kien_thuc_ky_nang_lam_viec' THEN 1 ELSE 0 END) AS ktknLamViec");
+                sql.append(", SUM(CASE WHEN q.questionCode = 'ky_nang_lanh_dao_cap_phong' THEN 1 ELSE 0 END) AS knldCapPhong");
+                sql.append(", SUM(CASE WHEN q.questionCode = 'ky_nang_lanh_dao_cap_vu' THEN 1 ELSE 0 END) AS ktknCapVu");
+                sql.append(", SUM(CASE WHEN q.questionCode = 'ky_nang_lanh_dao_thu_truong' THEN 1 ELSE 0 END) AS knldThuTruong");
+            } else if (Constants.EXPORT.POSITION_TYPE_VC.equals(positionType)) {
+                sql.append(", SUM(CASE WHEN q.questionCode = 'chuc_danh_nghe_nghiep_hang1' THEN 1 ELSE 0 END) AS cdnnHang1");
+                sql.append(", SUM(CASE WHEN q.questionCode = 'chuc_danh_nghe_nghiep_hang2' THEN 1 ELSE 0 END) AS cdnnHang2");
+                sql.append(", SUM(CASE WHEN q.questionCode = 'chuc_danh_nghe_nghiep_hang3' THEN 1 ELSE 0 END) AS cdnnHang3");
+                sql.append(", SUM(CASE WHEN q.questionCode = 'chuc_danh_nghe_nghiep_hang4' THEN 1 ELSE 0 END) AS cdnnHang4");
+                sql.append(", SUM(CASE WHEN q.questionCode = 'chuc_vu_quan_ly_cap_phong' THEN 1 ELSE 0 END) AS cvqlCapPhong");
+                sql.append(", SUM(CASE WHEN q.questionCode = 'chuc_vu_quan_ly_cap_vu' THEN 1 ELSE 0 END) AS cvqlCapVu");
+                sql.append(", SUM(CASE WHEN q.questionCode = 'boi_duong_bat_buoc' THEN 1 ELSE 0 END) AS bdbb");
+            }
             sql.append(", SUM(CASE WHEN q.questionCode = 'quoc_phong_an_ninh' THEN 1 ELSE 0 END) AS qpan");
             sql.append(", SUM(CASE WHEN q.questionCode = 'ngoai_ngu' THEN 1 ELSE 0 END) AS ngoaiNgu");
             sql.append(", SUM(CASE WHEN q.questionCode = 'tin_hoc' THEN 1 ELSE 0 END) AS tinHoc");
@@ -109,16 +120,20 @@ public class SurveysRepositoryImpl {
             sql.append(" AND sr.answer='Có'");
             sql.append(" AND sr.learnFromDate >= :fromDate");
             sql.append(" AND sr.learnToDate <= :toDate");
-            if(!Comparator.isEqualNullOrEmpty(positionType)){
-            	sql.append(" AND p.positionType = :positionType");
+            if (!Comparator.isEqualNullOrEmpty(positionType)) {
+                sql.append(" AND p.positionType = :positionType");
             }
-            sql.append(" AND q.questionCode IN ('ly_luan_chinh_tri_cao_cap','ly_luan_chinh_tri_trung_cap','ly_luan_chinh_tri_dang_vien_moi','ly_luan_chinh_tri_doi_tuong_ket_nap','quan_ly_nha_nuoc_chuyen_vien_cao_cap','quan_ly_nha_nuoc_chuyen_vien_chinh','quan_ly_nha_nuoc_chuyen_vien','quan_ly_nha_nuoc_can_su','chuyen_mon_tien_si','chuyen_mon_thac_si','chuyen_mon_dai_hoc','chuyen_mon_cao_dang','chuyen_mon_trung_cap','chuyen_mon_so_cap','kien_thuc_ky_nang_chuyen_nganh','kien_thuc_ky_nang_lam_viec','ky_nang_lanh_dao_cap_phong','ky_nang_lanh_dao_cap_vu','ky_nang_lanh_dao_thu_truong','quoc_phong_an_ninh','ngoai_ngu','tin_hoc')");
+            if (Constants.EXPORT.POSITION_TYPE_CC.equals(positionType)) {
+                sql.append(" AND q.questionCode IN ('ly_luan_chinh_tri_cao_cap','ly_luan_chinh_tri_trung_cap','ly_luan_chinh_tri_dang_vien_moi','ly_luan_chinh_tri_doi_tuong_ket_nap','quan_ly_nha_nuoc_chuyen_vien_cao_cap','quan_ly_nha_nuoc_chuyen_vien_chinh','quan_ly_nha_nuoc_chuyen_vien','quan_ly_nha_nuoc_can_su','chuyen_mon_tien_si','chuyen_mon_thac_si','chuyen_mon_dai_hoc','chuyen_mon_cao_dang','chuyen_mon_trung_cap','chuyen_mon_so_cap','kien_thuc_ky_nang_chuyen_nganh','kien_thuc_ky_nang_lam_viec','ky_nang_lanh_dao_cap_phong','ky_nang_lanh_dao_cap_vu','ky_nang_lanh_dao_thu_truong','quoc_phong_an_ninh','ngoai_ngu','tin_hoc')");
+            } else if (Constants.EXPORT.POSITION_TYPE_VC.equals(positionType)) {
+                sql.append(" AND q.questionCode IN ('ly_luan_chinh_tri_cao_cap','ly_luan_chinh_tri_trung_cap','ly_luan_chinh_tri_dang_vien_moi','ly_luan_chinh_tri_doi_tuong_ket_nap','quan_ly_nha_nuoc_chuyen_vien_cao_cap','quan_ly_nha_nuoc_chuyen_vien_chinh','quan_ly_nha_nuoc_chuyen_vien','quan_ly_nha_nuoc_can_su','chuyen_mon_tien_si','chuyen_mon_thac_si','chuyen_mon_dai_hoc','chuyen_mon_cao_dang','chuyen_mon_trung_cap','chuyen_mon_so_cap','chuc_danh_nghe_nghiep_hang1','chuc_danh_nghe_nghiep_hang2','chuc_danh_nghe_nghiep_hang3','chuc_danh_nghe_nghiep_hang4','chuc_vu_quan_ly_cap_phong','chuc_vu_quan_ly_cap_vu','boi_duong_bat_buoc','quoc_phong_an_ninh','ngoai_ngu','tin_hoc')");
+            }
             sql.append(" GROUP BY p.positionType, p.positionName");
             Query query = em.createQuery(sql.toString());
             query.setParameter("fromDate", fromDate);
             query.setParameter("toDate", toDate);
-            if(!Comparator.isEqualNullOrEmpty(positionType)){
-            	query.setParameter("positionType", positionType);
+            if (!Comparator.isEqualNullOrEmpty(positionType)) {
+                query.setParameter("positionType", positionType);
             }
             List<ExportSurvey> listExportSurveys = query.getResultList();
             if (!Comparator.isEqualNullOrEmpty(listExportSurveys)) {

@@ -38,6 +38,7 @@ import org.stfc.dto.Positions;
 import org.stfc.dto.Questions;
 import org.stfc.dto.SurveyResults;
 import org.stfc.dto.Surveys;
+import org.stfc.dto.Users;
 import org.stfc.entity.ExportSurvey;
 import org.stfc.entity.SurveyImportRequest;
 import org.stfc.excel.ExcelUtils;
@@ -47,11 +48,14 @@ import org.stfc.repository.PositionsRepository;
 import org.stfc.repository.QuestionsRepository;
 import org.stfc.repository.SurveyResultsRepository;
 import org.stfc.repository.SurveysRepository;
+import org.stfc.repository.UsersRepository;
 import org.stfc.repository.impl.AnswersRepositoryImpl;
 import org.stfc.repository.impl.OfficersRepositoryImpl;
 import org.stfc.repository.impl.PositionsRepositoryImpl;
 import org.stfc.repository.impl.QuestionsRepositoryImpl;
+import org.stfc.repository.impl.SurveyResultsRepositoryImpl;
 import org.stfc.repository.impl.SurveysRepositoryImpl;
+import org.stfc.repository.impl.UsersRepositoryImpl;
 import org.stfc.utils.Comparator;
 import org.stfc.utils.DateTimeUtils;
 import org.stfc.utils.IntrospectorUtils;
@@ -66,6 +70,8 @@ public class SurveyController {
     private static final Logger logger = LoggerFactory.getLogger(SurveyController.class);
     @Autowired
     SurveyResultsRepository surveyResultsRepository;
+    @Autowired
+    SurveyResultsRepositoryImpl surveyResultsRepositoryImpl;
     @Autowired
     SurveysRepository surveysRepository;
     @Autowired
@@ -86,6 +92,10 @@ public class SurveyController {
     OfficersRepository officersRepository;
     @Autowired
     OfficersRepositoryImpl officersRepositoryImpl;
+    @Autowired
+    UsersRepositoryImpl usersRepositoryImpl;
+    @Autowired
+    UsersRepository usersRepository;
     @Autowired
     FormatMessage formatMessage;
     @Autowired
@@ -376,6 +386,7 @@ public class SurveyController {
                 positionId = positionInput.getPositionId();
             }
             logger.info("positionId: " + positionId);
+
             // officer
             Officers officerInput = new Officers();
             officerInput.setEmail(surveyImportRequest.getEmail());
@@ -384,6 +395,32 @@ public class SurveyController {
             if (!Comparator.isEqualNullOrEmpty(listOfficers)) {
                 officerId = listOfficers.get(0).getOfficerId();
             } else {
+                // user
+                Users userInput = new Users();
+                userInput.setUsername(surveyImportRequest.getUsername());
+                Users userExist = usersRepositoryImpl.getUserExist(surveyImportRequest.getUsername());
+                Integer userId = null;
+                userInput.setName(surveyImportRequest.getFullName());
+                userInput.setEmail(surveyImportRequest.getEmail());
+                userInput.setMobileNo(surveyImportRequest.getMobile());
+                userInput.setStatus(Constants.STATUS.STRING_ACTIVE);
+                userInput.setCreatedAt(new Date());
+                userInput.setUpdatedAt(new Date());
+                userInput.setDepartmentId(surveyImportRequest.getDepartmentId());
+                userInput.setPassword("123456");
+                if (!Comparator.isEqualNull(userExist)) {
+                    String strIndex = userExist.getUsername().replace(surveyImportRequest.getUsername(), "");
+                    Integer userIndex = 0;
+                    if (!Comparator.isEqualNullOrEmpty(strIndex)) {
+                        userIndex = Integer.valueOf(strIndex);
+                    }
+                    userIndex += 1;
+                    userInput.setUsername(surveyImportRequest.getUsername() + userIndex);
+                }
+                userInput = usersRepository.save(userInput);
+                userId = userInput.getId();
+                logger.info("userId: " + userId);
+
                 officerInput.setFirstName(surveyImportRequest.getFirstName());
                 officerInput.setLastName(surveyImportRequest.getLastName());
                 officerInput.setFullName(surveyImportRequest.getFullName());
@@ -393,6 +430,8 @@ public class SurveyController {
                 officerInput.setStatus(Constants.STATUS.ACTIVE);
                 officerInput.setCreatedDate(new Date());
                 officerInput.setUpdatedDate(new Date());
+                officerInput.setDepartmentId(surveyImportRequest.getDepartmentId());
+                officerInput.setUserId(Long.valueOf(String.valueOf(userId)));
                 officerInput = officersRepository.save(officerInput);
                 officerId = officerInput.getOfficerId();
             }
@@ -424,7 +463,10 @@ public class SurveyController {
             surveyResults.setCreatedDate(new Date());
             surveyResults.setLearnFromDate(surveyImportRequest.getLearnFromDate());
             surveyResults.setLearnToDate(surveyImportRequest.getLearnToDate());
-            surveyResults = surveyResultsRepository.save(surveyResults);
+            List<SurveyResults> listSurveyResults = surveyResultsRepositoryImpl.onSearch(surveyResults);
+            if (Comparator.isEqualNullOrEmpty(listSurveyResults)) {
+                surveyResults = surveyResultsRepository.save(surveyResults);
+            }
 
             logger.info("surveyResultId: " + surveyResults.getSurveyResultId());
         }
@@ -462,32 +504,36 @@ public class SurveyController {
         try {
             logger.info("START download");
 
+            String fileTemplate="";
+            if(Constants.EXPORT.POSITION_TYPE_CC.equals(positionType)){
+                fileTemplate=Constants.EXPORT.PATH_FILE_SURVEY_CC_TEMPLATE;
+            }else if(Constants.EXPORT.POSITION_TYPE_VC.equals(positionType)){
+                fileTemplate=Constants.EXPORT.PATH_FILE_SURVEY_VC_TEMPLATE;
+            }else if(Constants.EXPORT.POSITION_TYPE_NN.equals(positionType)){
+                fileTemplate=Constants.EXPORT.PATH_FILE_SURVEY_NN_TEMPLATE;
+            }
             ExcelUtils excelUtils = new ExcelUtils();
             StringBuilder pathFileInput = new StringBuilder("/config/temp/");
-            pathFileInput.append(Constants.EXPROT.PATH_FILE_SURVEY_TEMPLATE);
-            pathFileInput.append(Constants.EXPROT.DOT);
-            pathFileInput.append(Constants.EXPROT.EXCEL_EXTENSION);
+            pathFileInput.append(fileTemplate);
+            pathFileInput.append(Constants.EXPORT.DOT);
+            pathFileInput.append(Constants.EXPORT.EXCEL_EXTENSION);
             ClassPathResource resourceTemplate = new ClassPathResource(pathFileInput.toString());
             String filePathTemp = resourceTemplate.getPath();
-            String pathFolderOutput = context.getRealPath(Constants.EXPROT.PATH_REPORT);
+            String pathFolderOutput = context.getRealPath(Constants.EXPORT.PATH_REPORT);
             File folderOutput = new File(pathFolderOutput);
             if (!folderOutput.exists()) {
                 folderOutput.mkdir();
             }
             StringBuilder filePathOutput = new StringBuilder(pathFolderOutput);
             filePathOutput.append(File.separator);
-            filePathOutput.append(Constants.EXPROT.PATH_FILE_SURVEY_TEMPLATE);
-            filePathOutput.append(Constants.EXPROT.UNDERLINE);
-            if (!Comparator.isEqualNullOrEmpty(positionType)) {
-                filePathOutput.append(positionType);
-                filePathOutput.append(Constants.EXPROT.UNDERLINE);
-            }
+            filePathOutput.append(fileTemplate);
+            filePathOutput.append(Constants.EXPORT.UNDERLINE);
             filePathOutput.append(DateTimeUtils.convestDateToString(fromDate, Constants.DATE_FORMAT.YYYYMMDD));
-            filePathOutput.append(Constants.EXPROT.UNDERLINE);
+            filePathOutput.append(Constants.EXPORT.UNDERLINE);
             filePathOutput.append(DateTimeUtils.convestDateToString(toDate, Constants.DATE_FORMAT.YYYYMMDD));
-            filePathOutput.append(Constants.EXPROT.DOT);
-            filePathOutput.append(Constants.EXPROT.EXCEL_EXTENSION);
-            
+            filePathOutput.append(Constants.EXPORT.DOT);
+            filePathOutput.append(Constants.EXPORT.EXCEL_EXTENSION);
+
             List<ExportSurvey> listExportSurveys = surveysRepositoryImpl.exportSurvey(fromDate, toDate, positionType);
             excelUtils.write(listExportSurveys, filePathTemp, filePathOutput.toString());
             File fileExport = new File(filePathOutput.toString());

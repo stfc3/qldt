@@ -80,6 +80,8 @@ public class Users implements Serializable {
     @Column(name = "updated_at")
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
+    @Column(name = "department_id")
+    private Long departmentId;
 
     public Users() {
     }
@@ -185,6 +187,15 @@ public class Users implements Serializable {
         this.updatedAt = updatedAt;
     }
 
+    public Long getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(Long departmentId) {
+        this.departmentId = departmentId;
+    }
+    
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -209,5 +220,5 @@ public class Users implements Serializable {
     public String toString() {
         return "org.stfc.dto.Users[ id=" + id + " ]";
     }
-    
+
 }

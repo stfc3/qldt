@@ -33,6 +33,7 @@ public interface Constants {
 
     public interface STATUS {
         Integer ACTIVE = 1;
+        String STRING_ACTIVE = "ACTIVE";
     }
     public interface QUESTION_TYPE {
         Integer SINGE = 1;
@@ -43,10 +44,16 @@ public interface Constants {
         String YYYY_MM_DD = "yyyy-MM-dd";
         String YYYYMMDD = "yyyyMMdd";
     }
-     public interface EXPROT {
+     public interface EXPORT {
+         
+        String POSITION_TYPE_CC="CC"; 
+        String POSITION_TYPE_VC="VC"; 
+        String POSITION_TYPE_NN="NN"; 
         String PATH_TEMP="temp";
         String PATH_REPORT="report";
-        String PATH_FILE_SURVEY_TEMPLATE="Survey";
+        String PATH_FILE_SURVEY_CC_TEMPLATE="Survey_CC";
+        String PATH_FILE_SURVEY_VC_TEMPLATE="Survey_VC";
+        String PATH_FILE_SURVEY_NN_TEMPLATE="Survey_NN";
         String EXCEL_EXTENSION="xlsx";
         String DOT=".";
         String UNDERLINE="_";
