@@ -32,10 +32,17 @@ import org.stfc.utils.Language;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import java.math.BigInteger;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.stfc.dto.OfficerCourse;
+import org.stfc.dto.SurveyResults;
 import org.stfc.entity.CoursesView;
+import org.stfc.repository.CoursesRepository;
+import org.stfc.repository.OfficerCourceRepository;
+import org.stfc.repository.SurveyResultsRepository;
 import org.stfc.repository.impl.CoursesRepositoryImpl;
+import org.stfc.repository.impl.SurveyResultsRepositoryImpl;
 import org.stfc.utils.Constants;
 
 /**
@@ -54,6 +61,14 @@ public class CoursesController {
     FormatMessage formatMessage;
     @Autowired
     CoursesRepositoryImpl coursesRepositoryImpl;
+    @Autowired
+    CoursesRepository coursesRepository;
+    @Autowired
+    OfficerCourceRepository officerCourceRepository;
+    @Autowired
+    SurveyResultsRepositoryImpl surveyResultsRepositoryImpl;
+    @Autowired
+    SurveyResultsRepository surveyResultsRepository;
     @Autowired
     EvaluationRepository evaluationRepository;
 
@@ -134,7 +149,28 @@ public class CoursesController {
             } else {
                 courses.setModifiedDate(new Date());
             }
-            courseServices.save(courses);
+            Courses coursesOutput = coursesRepository.save(courses);
+            SurveyResults surveyResultInput=new SurveyResults();
+            surveyResultInput.setAnswer("Có");
+            surveyResultInput.setSurveyId(courses.getSurveyId());
+            surveyResultInput.setQuestionId(courses.getQuestionId());
+            List<SurveyResults> listSurveyResults=surveyResultsRepositoryImpl.onSearch(surveyResultInput);
+            //insert hoc vien vao lop hoc
+            if (!Comparator.isEqualNullOrEmpty(listSurveyResults) && !Comparator.isEqualNull(coursesOutput)) {
+                for (SurveyResults surveyResult : listSurveyResults) {
+                    OfficerCourse officerCourse = new OfficerCourse();
+                    officerCourse.setCourseId(new BigInteger(String.valueOf(coursesOutput.getCourseId())));
+                    officerCourse.setOfficerId(new BigInteger(String.valueOf(surveyResult.getOfficerId())));
+                    officerCourse.setStatus(4);
+                    officerCourse.setCreatedDate(new Date());
+                    officerCourceRepository.save(officerCourse);
+                    
+                    //update status survey_results
+                    
+                    surveyResult.setStatus(1);
+                    surveyResultsRepository.save(surveyResult);
+                }
+            }
             response = BaseResponse.parse(Contants.SUCCESS, formatMessage, lang);
         } catch (BusinessException be) {
             response = BaseResponse.parse(be.getMessage(), formatMessage, lang);
@@ -210,7 +246,7 @@ public class CoursesController {
     }
 
     @RequestMapping(value = Constants.PATH.API_COURSE_ALL, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public String exportSurvey(@RequestParam @DateTimeFormat(pattern = Constants.DATE_FORMAT.YYYY_MM_DD) Date fromDate,
+    public String findCourseAll(@RequestParam @DateTimeFormat(pattern = Constants.DATE_FORMAT.YYYY_MM_DD) Date fromDate,
             @RequestParam @DateTimeFormat(pattern = Constants.DATE_FORMAT.YYYY_MM_DD) Date toDate) {
         Gson gson = new GsonBuilder().disableHtmlEscaping().create();
         String lang = "vi";

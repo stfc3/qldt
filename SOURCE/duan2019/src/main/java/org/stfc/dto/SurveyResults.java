@@ -57,6 +57,8 @@ public class SurveyResults implements Serializable {
     @Column(name = "learn_to_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date learnToDate;
+    @Column(name = "status")
+    private Integer status;
 
     public SurveyResults() {
     }
@@ -128,6 +130,15 @@ public class SurveyResults implements Serializable {
     public void setLearnToDate(Date learnToDate) {
         this.learnToDate = learnToDate;
     }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+    
 
     @Override
     public int hashCode() {

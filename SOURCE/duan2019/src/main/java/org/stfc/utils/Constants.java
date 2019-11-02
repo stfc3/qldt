@@ -29,6 +29,7 @@ public interface Constants {
         
         
         String API_COURSE_ALL = "/api/v1/course/all";
+        String API_DEPARTMENT_STATISTIC = "/api/v1/department/statistic";
     }
 
     public interface STATUS {

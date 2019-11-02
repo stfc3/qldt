@@ -407,7 +407,7 @@ public class SurveyController {
                 userInput.setCreatedAt(new Date());
                 userInput.setUpdatedAt(new Date());
                 userInput.setDepartmentId(surveyImportRequest.getDepartmentId());
-                userInput.setPassword("123456");
+                userInput.setPassword("$2y$10$/XaW540kI6btBeDl1nf5Ou4eUYg4tn7bR5jurBoeAZVI3egs0pO2q");
                 if (!Comparator.isEqualNull(userExist)) {
                     String strIndex = userExist.getUsername().replace(surveyImportRequest.getUsername(), "");
                     Integer userIndex = 0;

@@ -45,6 +45,8 @@ public class OfficerCourse implements Serializable {
     @Column(name = "created_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
+    @Column(name = "status")
+    private Integer status;
 
     public OfficerCourse() {
     }
@@ -83,6 +85,14 @@ public class OfficerCourse implements Serializable {
 
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     @Override

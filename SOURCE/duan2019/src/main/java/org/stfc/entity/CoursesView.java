@@ -21,14 +21,19 @@ public class CoursesView {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_FORMAT.DD_MM_YYYY_HH_MM_SS, timezone = Constants.DATE_FORMAT.TIMEZONE_HCM)
     private Date endDate;
     private String lecturerName;
+    private Long surveyId;
+    private Long questionId;
 
-    public CoursesView(String courseName, int status, long totalOfficer, Date startDate, Date endDate) {
+    public CoursesView(Long surveyId, Long questionId, String courseName, int status, long totalOfficer, Date startDate, Date endDate) {
         this.courseName = courseName;
         this.status = status;
         this.totalOfficer = totalOfficer;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.surveyId = surveyId;
+        this.questionId = questionId;
     }
+
     public CoursesView(String courseName, int status, Date startDate, Date endDate, String lecturerName) {
         this.courseName = courseName;
         this.status = status;
@@ -45,8 +50,6 @@ public class CoursesView {
         this.lecturerName = lecturerName;
     }
 
-    
-    
     public String getCourseName() {
         return courseName;
     }
@@ -86,6 +89,21 @@ public class CoursesView {
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
-    
+
+    public Long getSurveyId() {
+        return surveyId;
+    }
+
+    public void setSurveyId(Long surveyId) {
+        this.surveyId = surveyId;
+    }
+
+    public Long getQuestionId() {
+        return questionId;
+    }
+
+    public void setQuestionId(Long questionId) {
+        this.questionId = questionId;
+    }
 
 }

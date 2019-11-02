@@ -30,22 +30,15 @@ public class CoursesRepositoryImpl {
 
     public List<CoursesView> findAllCourses(Date fromDate, Date toDate) {
         List<CoursesView> listCourses = new ArrayList<>();
-
-        StringBuilder sql = new StringBuilder("SELECT new org.stfc.entity.CoursesView(c.courseName, c.status, c.startDate, c.endDate, l.fullName)");
-        sql.append(" FROM Courses c LEFT OUTER JOIN Lecturers l ON c.lecturerId = l.id");
-        Query query = em.createQuery(sql.toString());
-        List<CoursesView> listCoursesOpened = query.getResultList();
-        if (!Comparator.isEqualNullOrEmpty(listCoursesOpened)) {
-            listCourses.addAll(listCoursesOpened);
-        }
         if (!Comparator.isEqualNull(fromDate) && !Comparator.isEqualNull(toDate)) {
-            StringBuilder sqlPlan = new StringBuilder("SELECT new org.stfc.entity.CoursesView(q.questionContent, 0, count(*), min(s.learnFromDate), max(s.learnToDate))");
+            StringBuilder sqlPlan = new StringBuilder("SELECT new org.stfc.entity.CoursesView(s.surveyId, s.questionId, q.questionContent, 2, count(*), min(s.learnFromDate), max(s.learnToDate))");
             sqlPlan.append(" FROM SurveyResults s, Questions q");
             sqlPlan.append(" WHERE s.questionId = q.questionId");
-            sqlPlan.append(" AND s.answer='Có'");
+            sqlPlan.append(" AND s.answer = 'Có'");
+            sqlPlan.append(" AND s.status = 0");
             sqlPlan.append(" AND s.learnFromDate >= :fromDate");
             sqlPlan.append(" AND s.learnToDate <= :toDate");
-            sqlPlan.append(" GROUP BY q.questionContent");
+            sqlPlan.append(" GROUP BY s.surveyId, s.questionId, q.questionContent");
             Query queryPlan = em.createQuery(sqlPlan.toString());
             queryPlan.setParameter("fromDate", fromDate);
             queryPlan.setParameter("toDate", toDate);
@@ -53,7 +46,18 @@ public class CoursesRepositoryImpl {
             if (!Comparator.isEqualNullOrEmpty(listCoursesPlan)) {
                 listCourses.addAll(listCoursesPlan);
             }
+
+            StringBuilder sql = new StringBuilder("SELECT new org.stfc.entity.CoursesView(c.courseName, c.status, c.startDate, c.endDate, l.fullName)");
+            sql.append(" FROM Courses c LEFT OUTER JOIN Lecturers l ON c.lecturerId = l.id WHERE c.startDate >= :fromDate AND c.endDate <= :toDate ORDER BY c.status DESC");
+            Query query = em.createQuery(sql.toString());
+            query.setParameter("fromDate", fromDate);
+            query.setParameter("toDate", toDate);
+            List<CoursesView> listCoursesOpened = query.getResultList();
+            if (!Comparator.isEqualNullOrEmpty(listCoursesOpened)) {
+                listCourses.addAll(listCoursesOpened);
+            }
         }
+
         return listCourses;
     }
 

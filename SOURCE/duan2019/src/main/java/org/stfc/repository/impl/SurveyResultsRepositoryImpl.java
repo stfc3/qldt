@@ -5,6 +5,7 @@
  */
 package org.stfc.repository.impl;
 
+import java.math.BigInteger;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -25,6 +26,7 @@ public class SurveyResultsRepositoryImpl {
     private static final Logger logger = LoggerFactory.getLogger(SurveyResultsRepositoryImpl.class);
     @Autowired
     EntityManager em;
+
     public List<SurveyResults> onSearch(SurveyResults surveyResult) {
         StringBuilder sql = new StringBuilder("SELECT * FROM survey_results u WHERE 1 = 1");
         if (!Comparator.isEqualNull(surveyResult)) {
@@ -71,7 +73,19 @@ public class SurveyResultsRepositoryImpl {
         }
         return query.getResultList();
     }
-    
-    
+
+    public List<BigInteger> getOfficer(Long surveyId, Long questionId) {
+
+        StringBuilder sql = new StringBuilder("SELECT DISTINCT s.officer_id FROM survey_results s");
+        sql.append(" WHERE s.answer = 'Có' AND s.survey_id = :surveyId AND  s.question_id = :questionId ");
+        Query query = em.createNativeQuery(sql.toString());
+        query.setParameter("surveyId", surveyId);
+        query.setParameter("questionId", questionId);
+        List<BigInteger> listOfficers = query.getResultList();
+        if (!Comparator.isEqualNullOrEmpty(listOfficers)) {
+            return listOfficers;
+        }
+        return null;
+    }
 
 }
