@@ -47,8 +47,11 @@ public class CoursesRepositoryImpl {
                 listCourses.addAll(listCoursesPlan);
             }
 
-            StringBuilder sql = new StringBuilder("SELECT new org.stfc.entity.CoursesView(c.courseName, c.status, c.startDate, c.endDate, l.fullName)");
-            sql.append(" FROM Courses c LEFT OUTER JOIN Lecturers l ON c.lecturerId = l.id WHERE c.startDate >= :fromDate AND c.endDate <= :toDate ORDER BY c.status DESC");
+            StringBuilder sql = new StringBuilder("SELECT new org.stfc.entity.CoursesView(c.courseName, c.status, c.startDate, c.endDate, l.fullName, count(*))");
+            sql.append(" FROM Courses c INNER JOIN OfficerCourse oc ON c.courseId = oc.courseId");
+            sql.append(" LEFT OUTER JOIN Lecturers l ON c.lecturerId = l.id WHERE c.startDate >= :fromDate AND c.endDate <= :toDate");
+            sql.append(" GROUP BY c.courseName, c.status, c.startDate, c.endDate, l.fullName");
+            sql.append(" ORDER BY c.status DESC");
             Query query = em.createQuery(sql.toString());
             query.setParameter("fromDate", fromDate);
             query.setParameter("toDate", toDate);

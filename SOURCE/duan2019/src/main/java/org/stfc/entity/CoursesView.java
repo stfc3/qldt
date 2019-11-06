@@ -34,12 +34,13 @@ public class CoursesView {
         this.questionId = questionId;
     }
 
-    public CoursesView(String courseName, int status, Date startDate, Date endDate, String lecturerName) {
+    public CoursesView(String courseName, int status, Date startDate, Date endDate, String lecturerName, long totalOfficer) {
         this.courseName = courseName;
         this.status = status;
         this.startDate = startDate;
         this.endDate = endDate;
         this.lecturerName = lecturerName;
+        this.totalOfficer = totalOfficer;
     }
 
     public String getLecturerName() {
