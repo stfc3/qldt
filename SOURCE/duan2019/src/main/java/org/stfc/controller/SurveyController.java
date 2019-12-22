@@ -475,12 +475,33 @@ public class SurveyController {
     @RequestMapping(value = Constants.PATH.API_SURVEY_EXPORT, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public String exportSurvey(@RequestParam @DateTimeFormat(pattern = Constants.DATE_FORMAT.YYYY_MM_DD) Date fromDate,
             @RequestParam @DateTimeFormat(pattern = Constants.DATE_FORMAT.YYYY_MM_DD) Date toDate,
-            @RequestParam(required = false) String positionType) {
+            @RequestParam(required = false) String positionType,
+            @RequestParam(required = false) Long departmentId) {
         Gson gson = new GsonBuilder().disableHtmlEscaping().create();
         String lang = "vi";
         BaseResponse response = BaseResponse.parse(Constants.ERROR_INTERNAL, formatMessage, lang);
         try {
-            List<ExportSurvey> listExportSurveys = surveysRepositoryImpl.exportSurvey(fromDate, toDate, positionType);
+            List<ExportSurvey> listExportSurveys = surveysRepositoryImpl.exportSurvey(fromDate, toDate, positionType, departmentId);
+            response = BaseResponse.parse(Constants.SUCCESS, formatMessage, lang);
+            if (!Comparator.isEqualNull(listExportSurveys)) {
+                response.setTotal(listExportSurveys.size());
+                response.setData(listExportSurveys);
+            }
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+        }
+        return gson.toJson(response);
+    }
+    @RequestMapping(value = Constants.PATH.API_COURSE_EXPORT, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public String exportCourse(@RequestParam @DateTimeFormat(pattern = Constants.DATE_FORMAT.YYYY_MM_DD) Date fromDate,
+            @RequestParam @DateTimeFormat(pattern = Constants.DATE_FORMAT.YYYY_MM_DD) Date toDate,
+            @RequestParam(required = false) String positionType,
+            @RequestParam(required = false) Long departmentId) {
+        Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+        String lang = "vi";
+        BaseResponse response = BaseResponse.parse(Constants.ERROR_INTERNAL, formatMessage, lang);
+        try {
+            List<ExportSurvey> listExportSurveys = surveysRepositoryImpl.exportCourse(fromDate, toDate, positionType, departmentId);
             response = BaseResponse.parse(Constants.SUCCESS, formatMessage, lang);
             if (!Comparator.isEqualNull(listExportSurveys)) {
                 response.setTotal(listExportSurveys.size());
@@ -495,7 +516,8 @@ public class SurveyController {
     @RequestMapping(value = Constants.PATH.API_SURVEY_EXPORT_DOWNLOAD, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<InputStreamResource> download(@RequestParam @DateTimeFormat(pattern = Constants.DATE_FORMAT.YYYY_MM_DD) Date fromDate,
             @RequestParam @DateTimeFormat(pattern = Constants.DATE_FORMAT.YYYY_MM_DD) Date toDate,
-            @RequestParam(required = false) String positionType) {
+            @RequestParam(required = false) String positionType,
+            @RequestParam(required = false) Long departmentId) {
 
         long startTime = System.currentTimeMillis();
         long processDuration = 0;
@@ -534,7 +556,7 @@ public class SurveyController {
             filePathOutput.append(Constants.EXPORT.DOT);
             filePathOutput.append(Constants.EXPORT.EXCEL_EXTENSION);
 
-            List<ExportSurvey> listExportSurveys = surveysRepositoryImpl.exportSurvey(fromDate, toDate, positionType);
+            List<ExportSurvey> listExportSurveys = surveysRepositoryImpl.exportSurvey(fromDate, toDate, positionType, departmentId);
             excelUtils.write(listExportSurveys, filePathTemp, filePathOutput.toString());
             File fileExport = new File(filePathOutput.toString());
 
@@ -557,6 +579,76 @@ public class SurveyController {
             logger.error(ex.getMessage(), ex);
             processDuration = System.currentTimeMillis() - startTime;
             logger.info("END download in " + processDuration + "ms");
+        }
+
+        return null;
+    }
+    @RequestMapping(value = Constants.PATH.API_COURSE_EXPORT_DOWNLOAD, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<InputStreamResource> downloadCourse(@RequestParam @DateTimeFormat(pattern = Constants.DATE_FORMAT.YYYY_MM_DD) Date fromDate,
+            @RequestParam @DateTimeFormat(pattern = Constants.DATE_FORMAT.YYYY_MM_DD) Date toDate,
+            @RequestParam(required = false) String positionType,
+            @RequestParam(required = false) Long departmentId) {
+
+        long startTime = System.currentTimeMillis();
+        long processDuration = 0;
+        String contentType = null;
+        InputStreamResource resource = null;
+        try {
+            logger.info("START downloadCourse");
+
+            String fileTemplate="";
+            if(Constants.EXPORT.POSITION_TYPE_CC.equals(positionType)){
+                fileTemplate=Constants.EXPORT.PATH_FILE_COURSE_CC_TEMPLATE;
+            }else if(Constants.EXPORT.POSITION_TYPE_VC.equals(positionType)){
+                fileTemplate=Constants.EXPORT.PATH_FILE_COURSE_VC_TEMPLATE;
+            }else if(Constants.EXPORT.POSITION_TYPE_NN.equals(positionType)){
+                fileTemplate=Constants.EXPORT.PATH_FILE_COURSE_NN_TEMPLATE;
+            }
+            ExcelUtils excelUtils = new ExcelUtils();
+            StringBuilder pathFileInput = new StringBuilder("/config/temp/");
+            pathFileInput.append(fileTemplate);
+            pathFileInput.append(Constants.EXPORT.DOT);
+            pathFileInput.append(Constants.EXPORT.EXCEL_EXTENSION);
+            ClassPathResource resourceTemplate = new ClassPathResource(pathFileInput.toString());
+            String filePathTemp = resourceTemplate.getPath();
+            String pathFolderOutput = context.getRealPath(Constants.EXPORT.PATH_REPORT);
+            File folderOutput = new File(pathFolderOutput);
+            if (!folderOutput.exists()) {
+                folderOutput.mkdir();
+            }
+            StringBuilder filePathOutput = new StringBuilder(pathFolderOutput);
+            filePathOutput.append(File.separator);
+            filePathOutput.append(fileTemplate);
+            filePathOutput.append(Constants.EXPORT.UNDERLINE);
+            filePathOutput.append(DateTimeUtils.convestDateToString(fromDate, Constants.DATE_FORMAT.YYYYMMDD));
+            filePathOutput.append(Constants.EXPORT.UNDERLINE);
+            filePathOutput.append(DateTimeUtils.convestDateToString(toDate, Constants.DATE_FORMAT.YYYYMMDD));
+            filePathOutput.append(Constants.EXPORT.DOT);
+            filePathOutput.append(Constants.EXPORT.EXCEL_EXTENSION);
+
+            List<ExportSurvey> listExportSurveys = surveysRepositoryImpl.exportCourse(fromDate, toDate, positionType, departmentId);
+            excelUtils.write(listExportSurveys, filePathTemp, filePathOutput.toString());
+            File fileExport = new File(filePathOutput.toString());
+
+            contentType = context.getMimeType(fileExport.getAbsolutePath());
+            if (contentType == null) {
+                contentType = "application/octet-stream";
+            }
+            logger.info("contentType: " + contentType);
+
+            resource = new InputStreamResource(new FileInputStream(fileExport));
+            processDuration = System.currentTimeMillis() - startTime;
+            logger.info("END downloadCourse in " + processDuration + "ms");
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + fileExport.getName())
+                    .contentType(MediaType.parseMediaType(contentType))
+                    .contentLength(fileExport.length())
+                    .body(resource);
+
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            processDuration = System.currentTimeMillis() - startTime;
+            logger.info("END downloadCourse in " + processDuration + "ms");
         }
 
         return null;

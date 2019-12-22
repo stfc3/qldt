@@ -18,6 +18,8 @@ public interface Constants {
         String API_SURVEY_IMPORT = "/api/v1/survey/import";
         String API_SURVEY_EXPORT = "/api/v1/survey/export";
         String API_SURVEY_EXPORT_DOWNLOAD = "/api/v1/survey/export/download";
+        String API_COURSE_EXPORT = "/api/v1/course/export";
+        String API_COURSE_EXPORT_DOWNLOAD = "/api/v1/course/export/download";
         String API_SURVEYS = "/api/v1/surveys";
         String API_SURVEYS_SEARCH = "/api/v1/surveys/search";
         String API_SURVEY_QUESTIONS = "/api/v1/survey/questions";
@@ -55,6 +57,9 @@ public interface Constants {
         String PATH_FILE_SURVEY_CC_TEMPLATE="Survey_CC";
         String PATH_FILE_SURVEY_VC_TEMPLATE="Survey_VC";
         String PATH_FILE_SURVEY_NN_TEMPLATE="Survey_NN";
+        String PATH_FILE_COURSE_CC_TEMPLATE="Course_CC";
+        String PATH_FILE_COURSE_VC_TEMPLATE="Course_VC";
+        String PATH_FILE_COURSE_NN_TEMPLATE="Course_NN";
         String EXCEL_EXTENSION="xlsx";
         String DOT=".";
         String UNDERLINE="_";

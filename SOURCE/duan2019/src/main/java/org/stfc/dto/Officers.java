@@ -83,6 +83,8 @@ public class Officers implements Serializable {
 	private String positionName;
 	@Transient
 	private String positionType;
+	@Transient
+	private String departmentName;
 
 	/**
 	 * @return the positionType
@@ -103,7 +105,7 @@ public class Officers implements Serializable {
 
 	public Officers(Long officerId, String firstName, String lastName, String fullName, String gender, String mobile,
 			String email, Long positionId, Integer status, Date createdDate, Date updatedDate, Long userId,
-			Long departmentId, String positionName, String positionType) {
+			Long departmentId, String positionName, String positionType, String departmentName) {
 		this.officerId = officerId;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -119,6 +121,7 @@ public class Officers implements Serializable {
 		this.userId = userId;
 		this.positionName = positionName;
 		this.positionType = positionType;
+		this.departmentName = departmentName;
 	}
 
 	public Officers(Long officerId) {
@@ -244,6 +247,16 @@ public class Officers implements Serializable {
 	public void setPositionName(String positionName) {
 		this.positionName = positionName;
 	}
+
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
+    }
+        
+        
 
 	@Override
 	public int hashCode() {
