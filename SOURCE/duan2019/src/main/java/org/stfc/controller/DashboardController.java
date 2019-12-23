@@ -196,5 +196,11 @@ public class DashboardController {
 		}
 		return gson.toJson(response);
 	}
+	
+	
+	@RequestMapping(method = { RequestMethod.GET }, value = { "/healthCheck" })
+	public String healthCheck() {
+		return "Service is running..... Health check OK! Thanks you.";
+	}
 
 }
