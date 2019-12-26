@@ -40,6 +40,7 @@ import org.stfc.dto.SurveyResults;
 import org.stfc.dto.Surveys;
 import org.stfc.dto.Users;
 import org.stfc.entity.ExportSurvey;
+import org.stfc.entity.ExportSurveyDetail;
 import org.stfc.entity.SurveyImportRequest;
 import org.stfc.excel.ExcelUtils;
 import org.stfc.repository.AnswersRepository;
@@ -652,5 +653,26 @@ public class SurveyController {
         }
 
         return null;
+    }
+    
+    @RequestMapping(value = Constants.PATH.API_SURVEY_EXPORT_DETAIL, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public String exportSurveyDetail(@RequestParam @DateTimeFormat(pattern = Constants.DATE_FORMAT.YYYY_MM_DD) Date fromDate,
+            @RequestParam @DateTimeFormat(pattern = Constants.DATE_FORMAT.YYYY_MM_DD) Date toDate,
+            @RequestParam(required = false) String positionType,
+            @RequestParam(required = false) Long departmentId) {
+        Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+        String lang = "vi";
+        BaseResponse response = BaseResponse.parse(Constants.ERROR_INTERNAL, formatMessage, lang);
+        try {
+            List<ExportSurveyDetail> listExportSurveys = surveysRepositoryImpl.exportSurveyDetail(fromDate, toDate, positionType, departmentId);
+            response = BaseResponse.parse(Constants.SUCCESS, formatMessage, lang);
+            if (!Comparator.isEqualNull(listExportSurveys)) {
+                response.setTotal(listExportSurveys.size());
+                response.setData(listExportSurveys);
+            }
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+        }
+        return gson.toJson(response);
     }
 }

@@ -17,6 +17,7 @@ public interface Constants {
     public interface PATH {
         String API_SURVEY_IMPORT = "/api/v1/survey/import";
         String API_SURVEY_EXPORT = "/api/v1/survey/export";
+        String API_SURVEY_EXPORT_DETAIL = "/api/v1/survey/export/detail";
         String API_SURVEY_EXPORT_DOWNLOAD = "/api/v1/survey/export/download";
         String API_COURSE_EXPORT = "/api/v1/course/export";
         String API_COURSE_EXPORT_DOWNLOAD = "/api/v1/course/export/download";
@@ -43,6 +44,7 @@ public interface Constants {
     }
     public interface DATE_FORMAT{
         String DD_MM_YYYY_HH_MM_SS = "dd/MM/yyyy HH:mm:ss";
+        String DD_MM_YYYY = "dd/MM/yyyy";
         String TIMEZONE_HCM = "Asia/Ho_Chi_Minh";
         String YYYY_MM_DD = "yyyy-MM-dd";
         String YYYYMMDD = "yyyyMMdd";

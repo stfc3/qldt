@@ -5,12 +5,24 @@
  */
 package org.stfc.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import java.util.Date;
+import org.stfc.utils.Constants;
+
 /**
  *
  * @author dmin
  */
 public class ExportSurvey {
 
+    private String fullName;
+    private String mobile;
+    private String email;
+    private String gender;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_FORMAT.DD_MM_YYYY, timezone = Constants.DATE_FORMAT.TIMEZONE_HCM)
+    private Date learnFromDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_FORMAT.DD_MM_YYYY, timezone = Constants.DATE_FORMAT.TIMEZONE_HCM)
+    private Date learnToDate;
     private String positionType;
     private String positionName;
     private Long llctCaoCap;
@@ -81,6 +93,43 @@ public class ExportSurvey {
         this.nu = nu;
     }
 
+    public ExportSurvey(String fullName, String positionName, String mobile, String email, String gender, Date learnFromDate, Date learnToDate, Long llctCaoCap, Long llctTrungCap,
+            Long llctDangVienMoi, Long llctKetNap, Long qlnnChuyenVienCaoCap, Long qlnnChuyenVienChinh,
+            Long qlnnChuyenVien, Long qlnnCanSu, Long cmTienSi, Long cmThacSi, Long cmDaiHoc, Long cmCaoDang,
+            Long cmTrungCap, Long cmSoCap, Long ktknChuyenNganh, Long ktknLamViec, Long knldCapPhong, Long knldCapVu,
+            Long knldThuTruong, Long qpan, Long ngoaiNgu, Long tinHoc) {
+        super();
+        this.fullName = fullName;
+        this.mobile = mobile;
+        this.email = email;
+        this.gender = gender;
+        this.learnFromDate = learnFromDate;
+        this.learnToDate = learnToDate;
+        this.positionName = positionName;
+        this.llctCaoCap = llctCaoCap;
+        this.llctTrungCap = llctTrungCap;
+        this.llctDangVienMoi = llctDangVienMoi;
+        this.llctKetNap = llctKetNap;
+        this.qlnnChuyenVienCaoCap = qlnnChuyenVienCaoCap;
+        this.qlnnChuyenVienChinh = qlnnChuyenVienChinh;
+        this.qlnnChuyenVien = qlnnChuyenVien;
+        this.qlnnCanSu = qlnnCanSu;
+        this.cmTienSi = cmTienSi;
+        this.cmThacSi = cmThacSi;
+        this.cmDaiHoc = cmDaiHoc;
+        this.cmCaoDang = cmCaoDang;
+        this.cmTrungCap = cmTrungCap;
+        this.cmSoCap = cmSoCap;
+        this.ktknChuyenNganh = ktknChuyenNganh;
+        this.ktknLamViec = ktknLamViec;
+        this.knldCapPhong = knldCapPhong;
+        this.knldCapVu = knldCapVu;
+        this.knldThuTruong = knldThuTruong;
+        this.qpan = qpan;
+        this.ngoaiNgu = ngoaiNgu;
+        this.tinHoc = tinHoc;
+    }
+
     public ExportSurvey(String positionType, String positionName, Long llctCaoCap, Long llctTrungCap, Long llctDangVienMoi, Long llctKetNap, Long qlnnChuyenVienCaoCap, Long qlnnChuyenVienChinh, Long qlnnChuyenVien, Long qlnnCanSu, Long cmTienSi, Long cmThacSi, Long cmDaiHoc, Long cmCaoDang, Long cmTrungCap, Long cmSoCap, Long cdnnHang1, Long cdnnHang2, Long cdnnHang3, Long cdnnHang4, Long cvqlCapPhong, Long cvqlCapVu, Long bdbb, Long qpan, Long ngoaiNgu, Long tinHoc, Long tong, Integer danToc, Long nu) {
         this.positionType = positionType;
         this.positionName = positionName;
@@ -104,6 +153,40 @@ public class ExportSurvey {
         this.tong = tong;
         this.danToc = danToc;
         this.nu = nu;
+        this.cdnnHang1 = cdnnHang1;
+        this.cdnnHang2 = cdnnHang2;
+        this.cdnnHang3 = cdnnHang3;
+        this.cdnnHang4 = cdnnHang4;
+        this.cvqlCapPhong = cvqlCapPhong;
+        this.cvqlCapVu = cvqlCapVu;
+        this.bdbb = bdbb;
+    }
+
+    public ExportSurvey(String fullName, String positionName, String mobile, String email, String gender, Date learnFromDate, Date learnToDate, Long llctCaoCap, Long llctTrungCap, Long llctDangVienMoi, Long llctKetNap, Long qlnnChuyenVienCaoCap, Long qlnnChuyenVienChinh, Long qlnnChuyenVien, Long qlnnCanSu, Long cmTienSi, Long cmThacSi, Long cmDaiHoc, Long cmCaoDang, Long cmTrungCap, Long cmSoCap, Long cdnnHang1, Long cdnnHang2, Long cdnnHang3, Long cdnnHang4, Long cvqlCapPhong, Long cvqlCapVu, Long bdbb, Long qpan, Long ngoaiNgu, Long tinHoc) {
+        this.fullName = fullName;
+        this.mobile = mobile;
+        this.email = email;
+        this.gender = gender;
+        this.learnFromDate = learnFromDate;
+        this.learnToDate = learnToDate;
+        this.positionName = positionName;
+        this.llctCaoCap = llctCaoCap;
+        this.llctTrungCap = llctTrungCap;
+        this.llctDangVienMoi = llctDangVienMoi;
+        this.llctKetNap = llctKetNap;
+        this.qlnnChuyenVienCaoCap = qlnnChuyenVienCaoCap;
+        this.qlnnChuyenVienChinh = qlnnChuyenVienChinh;
+        this.qlnnChuyenVien = qlnnChuyenVien;
+        this.qlnnCanSu = qlnnCanSu;
+        this.cmTienSi = cmTienSi;
+        this.cmThacSi = cmThacSi;
+        this.cmDaiHoc = cmDaiHoc;
+        this.cmCaoDang = cmCaoDang;
+        this.cmTrungCap = cmTrungCap;
+        this.cmSoCap = cmSoCap;
+        this.qpan = qpan;
+        this.ngoaiNgu = ngoaiNgu;
+        this.tinHoc = tinHoc;
         this.cdnnHang1 = cdnnHang1;
         this.cdnnHang2 = cdnnHang2;
         this.cdnnHang3 = cdnnHang3;
@@ -383,6 +466,54 @@ public class ExportSurvey {
 
     public void setBdbb(Long bdbb) {
         this.bdbb = bdbb;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public Date getLearnFromDate() {
+        return learnFromDate;
+    }
+
+    public void setLearnFromDate(Date learnFromDate) {
+        this.learnFromDate = learnFromDate;
+    }
+
+    public Date getLearnToDate() {
+        return learnToDate;
+    }
+
+    public void setLearnToDate(Date learnToDate) {
+        this.learnToDate = learnToDate;
     }
 
 }

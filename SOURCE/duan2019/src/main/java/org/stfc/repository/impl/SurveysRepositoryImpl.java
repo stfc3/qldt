@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.stfc.dto.Surveys;
 import org.stfc.entity.ExportSurvey;
+import org.stfc.entity.ExportSurveyDetail;
 import org.stfc.utils.Comparator;
 import org.stfc.utils.Constants;
 import org.stfc.utils.DateTimeUtils;
@@ -215,6 +216,74 @@ public class SurveysRepositoryImpl {
                 query.setParameter("departmentId", departmentId);
             }
             List<ExportSurvey> listExportSurveys = query.getResultList();
+            if (!Comparator.isEqualNullOrEmpty(listExportSurveys)) {
+                return listExportSurveys;
+            }
+        }
+        return null;
+    }
+    
+    public List<ExportSurveyDetail> exportSurveyDetail(Date fromDate, Date toDate, String positionType, Long departmentId) {
+        if (!Comparator.isEqualNull(fromDate) && !Comparator.isEqualNull(toDate)) {
+            StringBuilder sql = new StringBuilder("SELECT new org.stfc.entity.ExportSurveyDetail (o.fullName, p.positionName, o.mobile, o.email, o.gender, sr.learnFromDate, sr.learnToDate");
+            sql.append(", MAX(CASE WHEN q.questionCode = 'ly_luan_chinh_tri_cao_cap' AND sr.answer = 'Có' THEN 'Có' ELSE '' END) AS llctCaoCap");
+            sql.append(", MAX(CASE WHEN q.questionCode = 'ly_luan_chinh_tri_trung_cap' AND sr.answer = 'Có' THEN 'Có' ELSE '' END) AS llctTrungCap");
+            sql.append(", MAX(CASE WHEN q.questionCode = 'ly_luan_chinh_tri_dang_vien_moi' AND sr.answer = 'Có' THEN 'Có' ELSE '' END) AS llctDangVienMoi");
+            sql.append(", MAX(CASE WHEN q.questionCode = 'ly_luan_chinh_tri_doi_tuong_ket_nap' AND sr.answer = 'Có' THEN 'Có' ELSE '' END) AS llctKetNap");
+            sql.append(", MAX(CASE WHEN q.questionCode = 'quan_ly_nha_nuoc_chuyen_vien_cao_cap' AND sr.answer = 'Có' THEN 'Có' ELSE '' END) AS qlnnChuyenVienCaoCap");
+            sql.append(", MAX(CASE WHEN q.questionCode = 'quan_ly_nha_nuoc_chuyen_vien_chinh' AND sr.answer = 'Có' THEN 'Có' ELSE '' END) AS qlnnChuyenVienChinh");
+            sql.append(", MAX(CASE WHEN q.questionCode = 'quan_ly_nha_nuoc_chuyen_vien' AND sr.answer = 'Có' THEN 'Có' ELSE '' END) AS qlnnChuyenVien");
+            sql.append(", MAX(CASE WHEN q.questionCode = 'quan_ly_nha_nuoc_can_su' AND sr.answer = 'Có' THEN 'Có' ELSE '' END) AS qlnnCanSu");
+            sql.append(", MAX(CASE WHEN q.questionCode = 'chuyen_mon_tien_si' AND sr.answer = 'Có' THEN 'Có' ELSE '' END) AS cmTienSi");
+            sql.append(", MAX(CASE WHEN q.questionCode = 'chuyen_mon_thac_si' AND sr.answer = 'Có' THEN 'Có' ELSE '' END) AS cmThacSi");
+            sql.append(", MAX(CASE WHEN q.questionCode = 'chuyen_mon_dai_hoc' AND sr.answer = 'Có' THEN 'Có' ELSE '' END) AS cmDaiHoc");
+            sql.append(", MAX(CASE WHEN q.questionCode = 'chuyen_mon_cao_dang' AND sr.answer = 'Có' THEN 'Có' ELSE '' END) AS cmCaoDang");
+            sql.append(", MAX(CASE WHEN q.questionCode = 'chuyen_mon_trung_cap' AND sr.answer = 'Có' THEN 'Có' ELSE '' END) AS cmTrungCap");
+            sql.append(", MAX(CASE WHEN q.questionCode = 'chuyen_mon_so_cap' AND sr.answer = 'Có' THEN 'Có' ELSE '' END) AS cmSoCap");
+            if (Constants.EXPORT.POSITION_TYPE_CC.equals(positionType)) {
+                sql.append(", MAX(CASE WHEN q.questionCode = 'kien_thuc_ky_nang_chuyen_nganh' AND sr.answer = 'Có' THEN 'Có' ELSE '' END) AS ktknChuyenNganh");
+                sql.append(", MAX(CASE WHEN q.questionCode = 'kien_thuc_ky_nang_lam_viec' AND sr.answer = 'Có' THEN 'Có' ELSE '' END) AS ktknLamViec");
+                sql.append(", MAX(CASE WHEN q.questionCode = 'ky_nang_lanh_dao_cap_phong' AND sr.answer = 'Có' THEN 'Có' ELSE '' END) AS knldCapPhong");
+                sql.append(", MAX(CASE WHEN q.questionCode = 'ky_nang_lanh_dao_cap_vu' AND sr.answer = 'Có' THEN 'Có' ELSE '' END) AS ktknCapVu");
+                sql.append(", MAX(CASE WHEN q.questionCode = 'ky_nang_lanh_dao_thu_truong' AND sr.answer = 'Có' THEN 'Có' ELSE '' END) AS knldThuTruong");
+            } else if (Constants.EXPORT.POSITION_TYPE_VC.equals(positionType)) {
+                sql.append(", MAX(CASE WHEN q.questionCode = 'chuc_danh_nghe_nghiep_hang1' AND sr.answer = 'Có' THEN 'Có' ELSE '' END) AS cdnnHang1");
+                sql.append(", MAX(CASE WHEN q.questionCode = 'chuc_danh_nghe_nghiep_hang2' AND sr.answer = 'Có' THEN 'Có' ELSE '' END) AS cdnnHang2");
+                sql.append(", MAX(CASE WHEN q.questionCode = 'chuc_danh_nghe_nghiep_hang3' AND sr.answer = 'Có' THEN 'Có' ELSE '' END) AS cdnnHang3");
+                sql.append(", MAX(CASE WHEN q.questionCode = 'chuc_danh_nghe_nghiep_hang4' AND sr.answer = 'Có' THEN 'Có' ELSE '' END) AS cdnnHang4");
+                sql.append(", MAX(CASE WHEN q.questionCode = 'chuc_vu_quan_ly_cap_phong' AND sr.answer = 'Có' THEN 'Có' ELSE '' END) AS cvqlCapPhong");
+                sql.append(", MAX(CASE WHEN q.questionCode = 'chuc_vu_quan_ly_cap_vu' AND sr.answer = 'Có' THEN 'Có' ELSE '' END) AS cvqlCapVu");
+                sql.append(", MAX(CASE WHEN q.questionCode = 'boi_duong_bat_buoc' AND sr.answer = 'Có' THEN 'Có' ELSE '' END) AS bdbb");
+            }
+            sql.append(", MAX(CASE WHEN q.questionCode = 'quoc_phong_an_ninh' AND sr.answer = 'Có' THEN 'Có' ELSE '' END) AS qpan");
+            sql.append(", MAX(CASE WHEN q.questionCode = 'ngoai_ngu' AND sr.answer = 'Có' THEN 'Có' ELSE '' END) AS ngoaiNgu");
+            sql.append(", MAX(CASE WHEN q.questionCode = 'tin_hoc' AND sr.answer = 'Có' THEN 'Có' ELSE '' END) AS tinHoc)");
+            sql.append(" FROM Surveys s, SurveyResults sr, Questions q, Officers o,  Positions p");
+            sql.append(" WHERE s.surveyId = sr.surveyId AND sr.questionId = q.questionId AND sr.officerId = o.officerId AND o.positionId = p.positionId");
+            sql.append(" AND sr.learnFromDate >= DATE(:fromDate)");
+            sql.append(" AND sr.learnToDate <= DATE(:toDate)");
+            if (!Comparator.isEqualNullOrEmpty(positionType)) {
+                sql.append(" AND p.positionType = :positionType");
+            }
+            if (!Comparator.isEqualNull(departmentId)) {
+                sql.append(" AND o.departmentId = :departmentId");
+            }
+            if (Constants.EXPORT.POSITION_TYPE_CC.equals(positionType)) {
+                sql.append(" AND q.questionCode IN ('ly_luan_chinh_tri_cao_cap','ly_luan_chinh_tri_trung_cap','ly_luan_chinh_tri_dang_vien_moi','ly_luan_chinh_tri_doi_tuong_ket_nap','quan_ly_nha_nuoc_chuyen_vien_cao_cap','quan_ly_nha_nuoc_chuyen_vien_chinh','quan_ly_nha_nuoc_chuyen_vien','quan_ly_nha_nuoc_can_su','chuyen_mon_tien_si','chuyen_mon_thac_si','chuyen_mon_dai_hoc','chuyen_mon_cao_dang','chuyen_mon_trung_cap','chuyen_mon_so_cap','kien_thuc_ky_nang_chuyen_nganh','kien_thuc_ky_nang_lam_viec','ky_nang_lanh_dao_cap_phong','ky_nang_lanh_dao_cap_vu','ky_nang_lanh_dao_thu_truong','quoc_phong_an_ninh','ngoai_ngu','tin_hoc')");
+            } else if (Constants.EXPORT.POSITION_TYPE_VC.equals(positionType)) {
+                sql.append(" AND q.questionCode IN ('ly_luan_chinh_tri_cao_cap','ly_luan_chinh_tri_trung_cap','ly_luan_chinh_tri_dang_vien_moi','ly_luan_chinh_tri_doi_tuong_ket_nap','quan_ly_nha_nuoc_chuyen_vien_cao_cap','quan_ly_nha_nuoc_chuyen_vien_chinh','quan_ly_nha_nuoc_chuyen_vien','quan_ly_nha_nuoc_can_su','chuyen_mon_tien_si','chuyen_mon_thac_si','chuyen_mon_dai_hoc','chuyen_mon_cao_dang','chuyen_mon_trung_cap','chuyen_mon_so_cap','chuc_danh_nghe_nghiep_hang1','chuc_danh_nghe_nghiep_hang2','chuc_danh_nghe_nghiep_hang3','chuc_danh_nghe_nghiep_hang4','chuc_vu_quan_ly_cap_phong','chuc_vu_quan_ly_cap_vu','boi_duong_bat_buoc','quoc_phong_an_ninh','ngoai_ngu','tin_hoc')");
+            }
+            sql.append(" GROUP BY o.fullName, p.positionName, o.mobile, o.email, o.gender, sr.learnFromDate, sr.learnToDate");
+            Query query = em.createQuery(sql.toString());
+            query.setParameter("fromDate", DateTimeUtils.convestDateToString(fromDate, Constants.DATE_FORMAT.YYYY_MM_DD));
+            query.setParameter("toDate", DateTimeUtils.convestDateToString(toDate, Constants.DATE_FORMAT.YYYY_MM_DD));
+            if (!Comparator.isEqualNullOrEmpty(positionType)) {
+                query.setParameter("positionType", positionType);
+            }
+            if (!Comparator.isEqualNull(departmentId)) {
+                query.setParameter("departmentId", departmentId);
+            }
+            List<ExportSurveyDetail> listExportSurveys = query.getResultList();
             if (!Comparator.isEqualNullOrEmpty(listExportSurveys)) {
                 return listExportSurveys;
             }
