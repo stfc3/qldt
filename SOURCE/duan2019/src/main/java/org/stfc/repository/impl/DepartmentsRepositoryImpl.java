@@ -30,7 +30,7 @@ public class DepartmentsRepositoryImpl {
     public List<DepartmentsView> findDepartmentStatistic(Date fromDate, Date toDate) {
 
         
-        StringBuilder sql = new StringBuilder("SELECT DISTINCT d1.department_name, case when d2.department_id is not null then 'Đã import' else 'Chưa import' end as status");
+        StringBuilder sql = new StringBuilder("SELECT DISTINCT d1.department_name, case when d2.department_id is not null then 'Đã cập nhật dữ liệu' else 'Chưa cập nhật dữ liệu' end as status");
         sql.append(" FROM departments d1 LEFT OUTER JOIN (select d.department_id FROM  survey_results s, officers o, departments d ");
         sql.append(" where s.officer_id = o.officer_id and o.department_id = d.department_id and o.status = 1 and d.status = 1 and s.created_date >= :fromDate and s.created_date <= :toDate) d2 ");
         sql.append(" on d1.department_id= d2.department_id where d1.status=1 order by d1.department_name");
