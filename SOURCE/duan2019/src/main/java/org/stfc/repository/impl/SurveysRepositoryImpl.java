@@ -222,10 +222,10 @@ public class SurveysRepositoryImpl {
         }
         return null;
     }
-    
+
     public List<ExportSurveyDetail> exportSurveyDetail(Date fromDate, Date toDate, String positionType, Long departmentId) {
         if (!Comparator.isEqualNull(fromDate) && !Comparator.isEqualNull(toDate)) {
-            StringBuilder sql = new StringBuilder("SELECT new org.stfc.entity.ExportSurveyDetail (o.fullName, p.positionName, o.mobile, o.email, o.gender, sr.learnFromDate, sr.learnToDate");
+            StringBuilder sql = new StringBuilder("SELECT new org.stfc.entity.ExportSurveyDetail (o.fullName, p.positionName, o.mobile, o.email, o.gender, DATE_FORMAT(sr.learnFromDate,'%d/%m/%Y'), DATE_FORMAT(sr.learnToDate,'%d/%m/%Y')");
             sql.append(", MAX(CASE WHEN q.questionCode = 'ly_luan_chinh_tri_cao_cap' AND sr.answer = 'Có' THEN 'Có' ELSE '' END) AS llctCaoCap");
             sql.append(", MAX(CASE WHEN q.questionCode = 'ly_luan_chinh_tri_trung_cap' AND sr.answer = 'Có' THEN 'Có' ELSE '' END) AS llctTrungCap");
             sql.append(", MAX(CASE WHEN q.questionCode = 'ly_luan_chinh_tri_dang_vien_moi' AND sr.answer = 'Có' THEN 'Có' ELSE '' END) AS llctDangVienMoi");

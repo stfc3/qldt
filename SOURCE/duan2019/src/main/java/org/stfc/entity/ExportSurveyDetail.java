@@ -5,9 +5,7 @@
  */
 package org.stfc.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
-import org.stfc.utils.Constants;
 
 /**
  *
@@ -19,10 +17,8 @@ public class ExportSurveyDetail {
     private String mobile;
     private String email;
     private String gender;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_FORMAT.DD_MM_YYYY, timezone = Constants.DATE_FORMAT.TIMEZONE_HCM)
-    private Date learnFromDate;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_FORMAT.DD_MM_YYYY, timezone = Constants.DATE_FORMAT.TIMEZONE_HCM)
-    private Date learnToDate;
+    private String learnFromDate;
+    private String learnToDate;
     private String positionName;
     private String llctCaoCap;
     private String llctTrungCap;
@@ -54,7 +50,7 @@ public class ExportSurveyDetail {
     private String cvqlCapVu;
     private String bdbb;
 
-    public ExportSurveyDetail(String fullName, String positionName, String mobile, String email, String gender, Date learnFromDate, Date learnToDate, String llctCaoCap, String llctTrungCap,
+    public ExportSurveyDetail(String fullName, String positionName, String mobile, String email, String gender, String learnFromDate, String learnToDate, String llctCaoCap, String llctTrungCap,
             String llctDangVienMoi, String llctKetNap, String qlnnChuyenVienCaoCap, String qlnnChuyenVienChinh,
             String qlnnChuyenVien, String qlnnCanSu, String cmTienSi, String cmThacSi, String cmDaiHoc, String cmCaoDang,
             String cmTrungCap, String cmSoCap, String ktknChuyenNganh, String ktknLamViec, String knldCapPhong, String knldCapVu,
@@ -91,7 +87,7 @@ public class ExportSurveyDetail {
         this.tinHoc = tinHoc;
     }
 
-    public ExportSurveyDetail(String fullName, String positionName, String mobile, String email, String gender, Date learnFromDate, Date learnToDate, String llctCaoCap, String llctTrungCap, String llctDangVienMoi, String llctKetNap, String qlnnChuyenVienCaoCap, String qlnnChuyenVienChinh, String qlnnChuyenVien, String qlnnCanSu, String cmTienSi, String cmThacSi, String cmDaiHoc, String cmCaoDang, String cmTrungCap, String cmSoCap, String cdnnHang1, String cdnnHang2, String cdnnHang3, String cdnnHang4, String cvqlCapPhong, String cvqlCapVu, String bdbb, String qpan, String ngoaiNgu, String tinHoc) {
+    public ExportSurveyDetail(String fullName, String positionName, String mobile, String email, String gender, String learnFromDate, String learnToDate, String llctCaoCap, String llctTrungCap, String llctDangVienMoi, String llctKetNap, String qlnnChuyenVienCaoCap, String qlnnChuyenVienChinh, String qlnnChuyenVien, String qlnnCanSu, String cmTienSi, String cmThacSi, String cmDaiHoc, String cmCaoDang, String cmTrungCap, String cmSoCap, String cdnnHang1, String cdnnHang2, String cdnnHang3, String cdnnHang4, String cvqlCapPhong, String cvqlCapVu, String bdbb, String qpan, String ngoaiNgu, String tinHoc) {
         this.fullName = fullName;
         this.mobile = mobile;
         this.email = email;
@@ -397,20 +393,21 @@ public class ExportSurveyDetail {
         this.gender = gender;
     }
 
-    public Date getLearnFromDate() {
+    public String getLearnFromDate() {
         return learnFromDate;
     }
 
-    public void setLearnFromDate(Date learnFromDate) {
+    public void setLearnFromDate(String learnFromDate) {
         this.learnFromDate = learnFromDate;
     }
 
-    public Date getLearnToDate() {
+    public String getLearnToDate() {
         return learnToDate;
     }
 
-    public void setLearnToDate(Date learnToDate) {
+    public void setLearnToDate(String learnToDate) {
         this.learnToDate = learnToDate;
     }
+
 
 }
